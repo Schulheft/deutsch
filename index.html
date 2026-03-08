@@ -920,9 +920,10 @@ function renderExtraPanel(area) {
     var st = s[t.id];
     var pct = st ? st.pct : undefined;
     var lastDate = st ? fmtDate(st.ts) : '';
+    var displayTitle = t.title.replace(/\s*\(extra\)/gi, '').trim();
     html += '<div class="card tc" style="border-left-color:'+t.color+'" onclick="openStatPage(\''+t.id+'\',\''+area+'\')">' +
             '<div class="tc-emoji">'+t.emoji+'</div>' +
-            '<div class="tc-title">'+t.title+'</div>' +
+            '<div class="tc-title">'+displayTitle+'</div>' +
             '<div class="tc-meta">'+t.qs.length+' Aufgaben</div>' +
             '<div class="tc-score"><span class="dot" style="background:'+scCol(pct)+'"></span><span>'+(pct!==undefined?pct+'%':'—')+'</span></div>' +
             (lastDate?'<div class="tc-lastdate">📅 '+lastDate+'</div>':'') +
@@ -1150,7 +1151,7 @@ function renderQ() {
   document.getElementById("btn-next").style.display = "none";
   document.getElementById("swipe-hint").style.display = "none";
   var abortBtn = document.getElementById("btn-abort");
-  if(abortBtn) abortBtn.style.display = S.answers.length>0 ? "block" : "none";
+  if(abortBtn) abortBtn.style.display = "block";
   document.getElementById("act-row").style.display = "flex";
   if(q.type==="mc") renderMC(q);
   else if(q.type==="match") renderMatch(q);
@@ -1413,7 +1414,7 @@ function doNext() {
 }
 
 function abortQuiz() {
-  if(S.answers.length===0) return;
+  if(S.answers.length===0) { goBackFromQuiz(); return; }
   S.savedQs = S.qs.slice();
   S.savedIdx = S.idx+1;
   showResult(true);
