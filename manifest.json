@@ -1,7 +1,7 @@
 {
-  "name": "MSA Deutsch Quiz",
-  "short_name": "MSA Quiz",
-  "description": "Vorbereitung auf den Mittleren Schulabschluss – Deutsch",
+  "name": "Schulheft",
+  "short_name": "Schulheft",
+  "description": "Vorbereitung auf den MSA und die BBR – Deutsch",
   "start_url": "/msa-quiz/",
   "scope": "/msa-quiz/",
   "display": "standalone",
