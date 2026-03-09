@@ -1360,14 +1360,16 @@ function renderWortklick(q) {
       "font-size:1rem"
     ].join(";");
     span.onmouseenter = function() {
-      if(!this.classList.contains("wort-ok") && !this.classList.contains("wort-err"))
+      if(!this.classList.contains("wort-ok") && !this.classList.contains("wort-err")) {
         this.style.background = "#f0f5fb";
         this.style.borderColor = "var(--blue)";
+      }
     };
     span.onmouseleave = function() {
-      if(!this.classList.contains("wort-ok") && !this.classList.contains("wort-err"))
+      if(!this.classList.contains("wort-ok") && !this.classList.contains("wort-err")) {
         this.style.background = "";
         this.style.borderColor = "transparent";
+      }
     };
     span.onclick = function() { onWortClick(this, q); };
     sentenceEl.appendChild(span);
@@ -1891,7 +1893,18 @@ document.addEventListener("keydown", function(e){
 <script src="bbr-extra-aufgaben.js"></script>
 <!-- BBR-Sondermodule: separat bearbeitbare Themen -->
 <script src="bbr-rechtschreibung.js"></script>
+<!-- BBR Extra-Themen: jede Datei setzt BBR_EXTRA_THEMES – wir mergen sie -->
 <script src="bbr-extra-wieder.js"></script>
+<script>var _bbr1 = (typeof BBR_EXTRA_THEMES!=='undefined') ? BBR_EXTRA_THEMES.slice() : [];</script>
+<script src="bbr-extra-getrennt.js"></script>
+<script>var _bbr2 = (typeof BBR_EXTRA_THEMES!=='undefined') ? BBR_EXTRA_THEMES.slice() : [];</script>
+<script src="bbr-extra-wortarten.js"></script>
+<script>var _bbr3 = (typeof BBR_EXTRA_THEMES!=='undefined') ? BBR_EXTRA_THEMES.slice() : [];</script>
+<script src="bbr-extra-großschreibung.js"></script>
+<script>var _bbr4 = (typeof BBR_EXTRA_THEMES!=='undefined') ? BBR_EXTRA_THEMES.slice() : [];</script>
+<script src="bbr-extra-komma.js"></script>
+<script>var _bbr5 = (typeof BBR_EXTRA_THEMES!=='undefined') ? BBR_EXTRA_THEMES.slice() : [];</script>
+<script>BBR_EXTRA_THEMES = _bbr1.concat(_bbr2).concat(_bbr3).concat(_bbr4).concat(_bbr5);</script>
 
 <!-- ═══ INITIALISIERUNG ════════════════════════════════════════════ -->
 <script>
@@ -1909,7 +1922,11 @@ var UPDATE_SCRIPTS = [
   'msa-extra-aufgaben.js',
   'bbr-extra-aufgaben.js',
   'bbr-rechtschreibung.js',
-  'bbr-extra-wieder.js'
+  'bbr-extra-wieder.js',
+  'bbr-extra-getrennt.js',
+  'bbr-extra-wortarten.js',
+  'bbr-extra-großschreibung.js',
+  'bbr-extra-komma.js'
 ];
 
 function showToast(msg, type, duration) {
