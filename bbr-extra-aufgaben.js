@@ -9,7 +9,7 @@ var BBR_EXTRA_THEMES = [
     color: "#dc2626",
     qs: [
       // Bestehende 4 Aufgaben (hier nicht wiederholt, bleiben erhalten)
-      // ... (der Kürze halber nicht erneut aufgelistet; in der tatsächlichen Datei bleiben sie)
+      // ... (im Original vorhanden)
       // Neue 11 Aufgaben:
       {
         sub: "Anredepronomen (Höflichkeitsform)",
@@ -198,8 +198,8 @@ var BBR_EXTRA_THEMES = [
     emoji: "🧩",
     color: "#ca8a04",
     qs: [
-      // Bestehende 4 Aufgaben (bleiben)
-      // Neue 11 Aufgaben:
+      // Bestehende 4 Aufgaben (hier nicht wiederholt, bleiben erhalten)
+      // Neue 11 Aufgaben (durch 13 ergänzt):
       {
         sub: "Verb + bleiben / lassen",
         type: "cross",
@@ -359,6 +359,38 @@ var BBR_EXTRA_THEMES = [
         correct: [1, 1, 1, 1, 1],
         model: "Hausboot, Sonnenbrille, Kopfschmerzen, Schwimmhalle, Altpapier → zusammen",
         rule: "<div class=rbox>Zusammengesetzte Nomen schreibt man <span class=hl>zusammen</span>.</div>"
+      },
+      {
+        sub: "Verbindungen mit 'zusammen'",
+        type: "cross",
+        q: "Getrennt oder zusammen? (Achte auf die Bedeutung: gemeinsam = getrennt, festes Verb = zusammen)",
+        rows: [
+          "Du musst deine Schulsachen ___ (zusammen packen / zusammenpacken).",
+          "___ (Zusammen packen / Zusammenpacken) wir das!",
+          "Für die Feier müssen wir die Einkaufsliste ___ (zusammen stellen / zusammenstellen).",
+          "Die schweren Getränkekisten sollten wir ___ (zusammen tragen / zusammentragen).",
+          "Für heute Abend werde ich mir ein cooles Outfit ___ (zusammen stellen / zusammenstellen)."
+        ],
+        cols: ["getrennt", "zusammen"],
+        correct: [1, 0, 1, 0, 1],
+        model: "zusammenpacken (fest), Zusammen packen (gemeinsam), zusammenstellen (fest), zusammen tragen (gemeinsam), zusammenstellen (fest)",
+        rule: "<div class=rbox>Die Verbindung mit 'zusammen' wird getrennt geschrieben, wenn 'zusammen' durch 'gemeinsam' ersetzt werden kann (z.B. zusammen packen = gemeinsam packen). Ist dies nicht möglich, handelt es sich um ein festes Verb und es wird zusammengeschrieben (z.B. zusammenpacken = einpacken).</div>"
+      },
+      {
+        sub: "Verbindungen mit 'sein'",
+        type: "cross",
+        q: "Getrennt oder zusammen? (Als Verb immer getrennt, nur als Nomen zusammen.)",
+        rows: [
+          "Als Stewardess muss man immer ___ (freundlich sein / freundlichsein).",
+          "Das ___ (Freundlichsein / Freundlich sein) fällt ihr leicht.",
+          "Mein Bruder ist auch ___ (da sein / dasein) gewesen.",
+          "Sein ___ (Da sein / Dasein) war erfüllt.",
+          "Wann wirst du wieder ___ (da sein / dasein)?"
+        ],
+        cols: ["getrennt", "zusammen"],
+        correct: [0, 1, 0, 1, 0],
+        model: "freundlich sein (Verb), das Freundlichsein (Nomen); da sein (Verb), das Dasein (Nomen); da sein (Verb)",
+        rule: "<div class=rbox>Verbindungen mit dem Verb 'sein' werden grundsätzlich getrennt geschrieben (z.B. da sein, freundlich sein). Wenn sie jedoch als Nomen gebraucht werden (mit Artikel), schreibt man sie zusammen: das Dasein, das Freundlichsein.</div>"
       },
       {
         sub: "Gemischte Übung",
@@ -576,8 +608,8 @@ var BBR_EXTRA_THEMES = [
     emoji: "🔗",
     color: "#9333ea",
     qs: [
-      // Bestehende 6 Aufgaben (bleiben)
-      // Neue 9 Aufgaben:
+      // Bestehende 4 Aufgaben (bleiben)
+      // Neue 9 Aufgaben (durch 10 ergänzt):
       {
         sub: "Stellung der Verbzusätze (trennbare Verben)",
         type: "cross",
@@ -657,6 +689,22 @@ var BBR_EXTRA_THEMES = [
         correct: [0, 1, 0, 0, 1],
         model: "Im dass-Satz steht das Verb am Ende. Satz 2 (Fragezeichen) ist unpassend, Satz 5 falsch.",
         rule: "<div class=rbox>Im Nebensatz mit <span class=hl>dass</span> steht das finite Verb am Ende.</div>"
+      },
+      {
+        sub: "weil-Satz (Verbendstellung)",
+        type: "cross",
+        q: "Ist der Satz korrekt? (Achte auf die Verbposition im weil-Satz.)",
+        rows: [
+          "Weil er krank ist, bleibt er zu Hause.",
+          "Weil er ist krank, bleibt er zu Hause.",
+          "Ich bin müde, weil ich wenig geschlafen habe.",
+          "Ich bin müde, weil ich habe wenig geschlafen.",
+          "Er geht ins Kino, weil er den Film sehen will."
+        ],
+        cols: ["korrekt", "falsch"],
+        correct: [0, 1, 0, 1, 0],
+        model: "Im NS mit weil steht das Verb am Ende: weil er krank IST / wenig geschlafen HABE / sehen WILL",
+        rule: "<div class=rbox>Im <span class=hl>weil</span>-Satz steht das Verb am Ende (Verbendstellung).</div>"
       },
       {
         sub: "Indirekte Fragesätze",
@@ -1473,7 +1521,6 @@ var BBR_EXTRA_THEMES = [
   },
   // ─────────────────────────────────────────────────────────────
   // Thema 9: Worttrennung (extra)
-  // (Thema "Rechtschreibung" → ausgelagert in bbr-rechtschreibung.js)
   // ─────────────────────────────────────────────────────────────
   {
     id: "bbr_extra_trennung",
