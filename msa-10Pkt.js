@@ -1,7 +1,7 @@
 // ================================================================
-// MSA-UEBERARBEITUNG.JS – Textüberarbeitung (5 Übungstexte)
+// MSA-10PKT.JS – Textüberarbeitung (5 Übungstexte)
 // Aufgabentypen:
-//   "komma"   – Kommasetzung: Text anklicken, Komma einfügen
+//   "komma"   – Kommasetzung: Text anklicken, Komma einfügen (oder ganzen Satz eingeben)
 //   "rs"      – Rechtschreibung: Wort antippen + richtige Schreibweise
 //   "ausdruck"– Ausdrucksfehler (Umgangssprache/Stil): Wort wählen + korrekten Ausdruck eingeben
 //   "kasus"   – Kasusfehler: Wort wählen + korrekte Form eingeben
@@ -26,8 +26,8 @@ var MSA_UEBERARBEITUNG_THEMES = [
     type:"komma",
     q:'Setzen Sie das fehlende Komma im folgenden Satz:\n\nDie Spargelstange ist der Stängelspross der Spargelpflanze die zur Familie der Liliengewächse gehört.',
     sentence:'Die Spargelstange ist der Stängelspross der Spargelpflanze die zur Familie der Liliengewächse gehört.',
-    // Position nach "Spargelpflanze" (vor "die")
     correctPositions:[44],
+    acceptedAnswers: ['Die Spargelstange ist der Stängelspross der Spargelpflanze, die zur Familie der Liliengewächse gehört.'],
     model:'... der Spargelpflanze, die zur Familie ...',
     rule:'<div class=rbox>Vor einleitenden Relativpronomen (die, der, das, welche …) steht immer ein Komma. „die zur Familie …" ist ein Relativsatz, der durch Komma vom Hauptsatz getrennt wird.</div>'
   },
@@ -93,6 +93,7 @@ var MSA_UEBERARBEITUNG_THEMES = [
     q:'Setzen Sie die fehlenden Kommas im folgenden Satz:\n\nFrüher wurden die Spargelstangen die noch nicht zerkleinert waren relativ umständlich mit den Fingern gegessen.',
     sentence:'Früher wurden die Spargelstangen die noch nicht zerkleinert waren relativ umständlich mit den Fingern gegessen.',
     correctPositions:[33, 55],
+    acceptedAnswers: ['Früher wurden die Spargelstangen, die noch nicht zerkleinert waren, relativ umständlich mit den Fingern gegessen.'],
     model:'… die Spargelstangen, die noch nicht zerkleinert waren, relativ …',
     rule:'<div class=rbox>Der Relativsatz „die noch nicht zerkleinert waren" wird beidseitig durch Kommas vom Hauptsatz abgetrennt: Komma vor dem einleitenden Relativpronomen <span class=hl>und</span> Komma nach dem Ende des Relativsatzes.</div>'
   },
@@ -143,8 +144,7 @@ var MSA_UEBERARBEITUNG_THEMES = [
     correctWord:'Anlass',
     model:'Anlass',
     rule:'<div class=rbox>Nach der Rechtschreibreform (1996) wird „Anlass" mit <span class=hl>Doppel-s</span> geschrieben, da der vorangehende Vokal kurz ist. „Anlaß" mit ß ist veraltet. Regel: ß steht nur nach langem Vokal oder Diphthong (z.B. Straße, Fuß).</div>'
-  },
-]},
+  }]},
 
 // ================================================================
 // 2. TABELLE – Text: "Suche Ausbildungsplatz"
@@ -163,6 +163,7 @@ var MSA_UEBERARBEITUNG_THEMES = [
     q:'Setzen Sie das fehlende Komma im folgenden Satz:\n\nDer Traumberuf ist gefunden aber der Ausbildungsplatz fehlt noch.',
     sentence:'Der Traumberuf ist gefunden aber der Ausbildungsplatz fehlt noch.',
     correctPositions:[26],
+    acceptedAnswers: ['Der Traumberuf ist gefunden, aber der Ausbildungsplatz fehlt noch.'],
     model:'… gefunden, aber der Ausbildungsplatz …',
     rule:'<div class=rbox>Vor entgegenstellenden Konjunktionen wie <span class=hl>aber, doch, jedoch, sondern</span> steht ein Komma, wenn zwei Hauptsätze verbunden werden.</div>'
   },
@@ -246,6 +247,7 @@ var MSA_UEBERARBEITUNG_THEMES = [
     q:'Setzen Sie das fehlende Komma im folgenden Satz:\n\nBerufsmessen sind eine der besten Möglichkeiten sich einen Überblick über Ausbildungsbetriebe in der Region zu verschaffen.',
     sentence:'Berufsmessen sind eine der besten Möglichkeiten sich einen Überblick über Ausbildungsbetriebe in der Region zu verschaffen.',
     correctPositions:[42],
+    acceptedAnswers: ['Berufsmessen sind eine der besten Möglichkeiten, sich einen Überblick über Ausbildungsbetriebe in der Region zu verschaffen.'],
     model:'… Möglichkeiten, sich einen Überblick … zu verschaffen.',
     rule:'<div class=rbox>Vor einem erweiterten Infinitiv mit „zu" steht ein Komma, wenn er von einem Nomen abhängt (hier: Möglichkeiten, … zu verschaffen). Das Komma trennt den Infinitivsatz vom Rest ab.</div>'
   },
@@ -272,8 +274,7 @@ var MSA_UEBERARBEITUNG_THEMES = [
     correctWord:'sollten',
     model:'sollten',
     rule:'<div class=rbox>„sollten" wird mit <span class=hl>Doppel-l</span> geschrieben (Konjunktiv II von „sollen"). „solten" ist falsch.</div>'
-  },
-]},
+  }]},
 
 // ================================================================
 // 3. TABELLE – Text: "Venedig"
@@ -318,6 +319,7 @@ var MSA_UEBERARBEITUNG_THEMES = [
     q:'Setzen Sie das fehlende Komma im folgenden Satz:\n\nDer Canal Grande Venedigs großer Kanal durchfließt die Stadt in zwei großen Bogen und ist die wichtigste Verkehrsader.',
     sentence:'Der Canal Grande Venedigs großer Kanal durchfließt die Stadt in zwei großen Bogen und ist die wichtigste Verkehrsader.',
     correctPositions:[16, 37],
+    acceptedAnswers: ['Der Canal Grande, Venedigs großer Kanal, durchfließt die Stadt in zwei großen Bogen und ist die wichtigste Verkehrsader.'],
     model:'Der Canal Grande, Venedigs großer Kanal, durchfließt …',
     rule:'<div class=rbox>„Venedigs großer Kanal" ist eine erklärende Apposition (Beifügung) zu „Canal Grande". Appositionen werden beidseitig durch <span class=hl>Kommas</span> abgetrennt.</div>'
   },
@@ -338,13 +340,9 @@ var MSA_UEBERARBEITUNG_THEMES = [
     sub:"Rechtschreibung",
     type:"rs",
     q:'Korrigieren Sie den Rechtschreibfehler im folgenden Satz:\n\nAuf dem Markusplatz zaubern fantastische Bauwerke gemeinsam mit zahllosen Tauben ein ganz besonderes Ambiente.',
-    errorWord:'zahllosen',
-    correctWord:'zahllosen',
-    specialNote:'Dieser Satz enthält keinen Fehler – ACHTUNG: Der Fehler liegt in „zahlllosen" (3 l). Prüfen Sie genau!',
-    // Actually the error is "zahllosen" should stay "zahllosen" – let's use a real error from the PDF: "zahl­losen"
-    // The PDF says 505 R with solution "zahllosen" → original has "zahlllosen" (triple l) or similar
     errorWord:'zahlllosen',
     correctWord:'zahllosen',
+    specialNote:'Dieser Satz enthält keinen Fehler – ACHTUNG: Der Fehler liegt in „zahlllosen" (3 l). Prüfen Sie genau!',
     model:'zahllosen',
     rule:'<div class=rbox>„zahllos" → Plural mit Endung: „zahllosen". Das Wort hat <span class=hl>zwei l</span>, nicht drei. Komposita aus „Zahl" + „los" ergeben „zahllos".</div>'
   },
@@ -397,6 +395,7 @@ var MSA_UEBERARBEITUNG_THEMES = [
     q:'Setzen Sie das fehlende Komma im folgenden Satz:\n\nDen Abend lässt man am besten in einem exquisiten Restaurant ausklingen wo man mit regionalen Köstlichkeiten verwöhnt wird.',
     sentence:'Den Abend lässt man am besten in einem exquisiten Restaurant ausklingen wo man mit regionalen Köstlichkeiten verwöhnt wird.',
     correctPositions:[68],
+    acceptedAnswers: ['Den Abend lässt man am besten in einem exquisiten Restaurant ausklingen, wo man mit regionalen Köstlichkeiten verwöhnt wird.'],
     model:'… Restaurant ausklingen, wo man …',
     rule:'<div class=rbox>„wo man … verwöhnt wird" ist ein Relativsatz (mit „wo") und wird durch ein <span class=hl>Komma</span> vom Hauptsatz getrennt.</div>'
   },
@@ -415,8 +414,7 @@ var MSA_UEBERARBEITUNG_THEMES = [
     ],
     model:'… bedroht, weil / da diese die Bausubstanz zerstören.',
     rule:'<div class=rbox>„obwohl" drückt einen Gegensatz aus (Konzessiv). Hier wird aber der <span class=hl>Grund</span> der Bedrohung genannt. Korrekte Kausalkonjunktionen: <span class=hl>weil, da</span>.</div>'
-  },
-]},
+  }]},
 
 // ================================================================
 // 4. TABELLE – Text: "Geschenk für einen Freund"
@@ -435,6 +433,7 @@ var MSA_UEBERARBEITUNG_THEMES = [
     q:'Setzen Sie das fehlende Komma im folgenden Satz:\n\nEs ist nicht leicht ein passendes Geschenk für einen Freund zu finden.',
     sentence:'Es ist nicht leicht ein passendes Geschenk für einen Freund zu finden.',
     correctPositions:[18],
+    acceptedAnswers: ['Es ist nicht leicht, ein passendes Geschenk für einen Freund zu finden.'],
     model:'… nicht leicht, ein passendes Geschenk … zu finden.',
     rule:'<div class=rbox>Vor einem Infinitivsatz mit „zu" steht ein Komma, wenn er von einem Adjektiv (hier: „leicht") abhängt: nicht leicht, <span class=hl>[etwas] zu tun</span>.</div>'
   },
@@ -535,6 +534,7 @@ var MSA_UEBERARBEITUNG_THEMES = [
     q:'Setzen Sie das fehlende Komma im folgenden Satz:\n\nSie wirken unpersönlich bequem und einfallslos.',
     sentence:'Sie wirken unpersönlich bequem und einfallslos.',
     correctPositions:[20],
+    acceptedAnswers: ['Sie wirken unpersönlich, bequem und einfallslos.'],
     model:'Sie wirken unpersönlich, bequem und einfallslos.',
     rule:'<div class=rbox>Zwischen gleichrangigen Adjektiven in einer Aufzählung steht ein Komma (wenn kein „und" steht). „unpersönlich" und „bequem" sind hier gleichrangig und werden durch Komma getrennt; vor dem letzten Glied mit „und" entfällt das Komma.</div>'
   },
@@ -550,8 +550,7 @@ var MSA_UEBERARBEITUNG_THEMES = [
     acceptedAnswers:['etwas','etwas Besonderes'],
     model:'… etwas Besonderes einfallen …',
     rule:'<div class=rbox>„was" als Indefinitpronomen (= etwas) ist umgangssprachlich. Der standardsprachliche Ausdruck lautet: <span class=hl>etwas</span>.</div>'
-  },
-]},
+  }]},
 
 // ================================================================
 // 5. TABELLE – Text: "Ausbildung Gärtnerin/Gärtner"
@@ -570,6 +569,7 @@ var MSA_UEBERARBEITUNG_THEMES = [
     q:'Setzen Sie das fehlende Komma im folgenden Satz:\n\nDie Firma „Gartenglück" bietet einen Ausbildungsplatz zum Gärtner der Fachrichtung Landschaftsbau.',
     sentence:'Die Firma „Gartenglück" bietet einen Ausbildungsplatz zum Gärtner der Fachrichtung Landschaftsbau.',
     correctPositions:[52],
+    acceptedAnswers: ['Die Firma „Gartenglück" bietet einen Ausbildungsplatz zum Gärtner, der Fachrichtung Landschaftsbau.'],
     model:'… zum Gärtner, der Fachrichtung Landschaftsbau.',
     rule:'<div class=rbox>„der Fachrichtung Landschaftsbau" ist eine Apposition (erklärende Beifügung) zu „Gärtner" und wird durch ein <span class=hl>Komma</span> abgetrennt.</div>'
   },
@@ -629,6 +629,7 @@ var MSA_UEBERARBEITUNG_THEMES = [
     q:'Setzen Sie das fehlende Komma im folgenden Satz:\n\nDazu gehören Kopien der letzten beiden Zeugnisse der Praktikumsnachweise und ein tabellarischer Lebenslauf.',
     sentence:'Dazu gehören Kopien der letzten beiden Zeugnisse der Praktikumsnachweise und ein tabellarischer Lebenslauf.',
     correctPositions:[51],
+    acceptedAnswers: ['Dazu gehören Kopien der letzten beiden Zeugnisse, der Praktikumsnachweise und ein tabellarischer Lebenslauf.'],
     model:'… Zeugnisse, der Praktikumsnachweise und ein tabellarischer Lebenslauf.',
     rule:'<div class=rbox>„der Praktikumsnachweise" und „ein tabellarischer Lebenslauf" sind weitere Glieder der Aufzählung. Vor dem nächsten Aufzählungsglied (ohne „und") steht ein <span class=hl>Komma</span>.</div>'
   },
@@ -651,9 +652,6 @@ var MSA_UEBERARBEITUNG_THEMES = [
     sub:"Rechtschreibung",
     type:"rs",
     q:'Korrigieren Sie den Rechtschreibfehler im folgenden Satz:\n\nUnsere Ansprechpartnerinnen für die Bewerbungen sind Frau Strauch und Frau Baum.',
-    errorWord:'Ansprechpartnerinnen',
-    correctWord:'Ansprechpartnerinnen',
-    // Laut PDF: Ansprechpartnerinnen ist korrekt – echter Fehler war "Ansprechpartnerinen" (ein n)
     errorWord:'Ansprechpartnerinen',
     correctWord:'Ansprechpartnerinnen',
     model:'Ansprechpartnerinnen',
@@ -685,11 +683,9 @@ var MSA_UEBERARBEITUNG_THEMES = [
     correctWord:'Wiese',
     model:'An der Wiese 4',
     rule:'<div class=rbox>Straßennamen sind Eigennamen und werden <span class=hl>großgeschrieben</span>: An der <span class=hl>W</span>iese 4.</div>'
-  },
-]},
+  }]}
 
 ];
 
 // Alias für Integration in die bestehende App
-// Diese Themen können als MSA_EXTRA_THEMES oder direkt als eigene Kategorie eingebunden werden.
 var MSA_UEBERARBEITUNG = MSA_UEBERARBEITUNG_THEMES;

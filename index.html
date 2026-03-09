@@ -835,6 +835,7 @@ function renderCalendar() {
 // ================================ GLOBALE VARIABLEN ================================
 var S = {themeId:null, qs:[], idx:0, answers:[], answered:false, savedQs:null, savedIdx:0};
 var currentArea = 'msa';
+var currentTab = 'aufgaben';
 var gramFromArea = 'msa';
 var pendingThemeId = null;
 
@@ -859,9 +860,9 @@ function openArea(area) {
   switchAreaTab(area, 'aufgaben');
   showPage(area);
 }
-function goBackFromStat() { openArea(currentArea); }
-function goBackFromQuiz() { openArea(currentArea); }
-function goBackFromResult() { openArea(currentArea); }
+function goBackFromStat() { renderArea(currentArea); switchAreaTab(currentArea, currentTab); showPage(currentArea); }
+function goBackFromQuiz() { renderArea(currentArea); switchAreaTab(currentArea, currentTab); showPage(currentArea); }
+function goBackFromResult() { renderArea(currentArea); switchAreaTab(currentArea, currentTab); showPage(currentArea); }
 function goBackFromGram() {
   renderArea(gramFromArea);
   showPage(gramFromArea);
@@ -886,6 +887,7 @@ function renderStart() {
 
 // ================================ BEREICH (MSA/BBR) ================================
 function switchAreaTab(area, tab) {
+  currentTab = tab;
   var tabs = (area === 'msa')
     ? ['aufgaben','zehn','extra','regeln']
     : ['aufgaben','extra','regeln'];

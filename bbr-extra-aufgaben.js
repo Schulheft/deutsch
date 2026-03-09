@@ -8,19 +8,16 @@ var BBR_EXTRA_THEMES = [
     emoji: "🔠",
     color: "#dc2626",
     qs: [
-      // Bestehende 4 Aufgaben (hier nicht wiederholt, bleiben erhalten)
-      // ... (im Original vorhanden)
-      // Neue 11 Aufgaben:
       {
         sub: "Anredepronomen (Höflichkeitsform)",
         type: "cross",
         q: "Entscheide: groß oder klein?",
         rows: [
-          "Können ___ Sie mir helfen? – s/S? (Höflichkeitsform)",
-          "Ich danke ___ Ihnen herzlich. – i/I?",
-          "Habt ihr ___ eure Hausaufgaben gemacht? – e/E? (Anrede in Briefen, informell)",
-          "Wir schreiben ___ dir bald. – d/D? (informell)",
-          "Bitte geben ___ Sie mir das Buch. – s/S?"
+          "Können ___ Sie mir helfen?",
+          "Ich danke ___ Ihnen herzlich.",
+          "Habt ihr ___ eure Hausaufgaben gemacht?",
+          "Wir schreiben ___ dir bald.",
+          "Bitte geben ___ Sie mir das Buch."
         ],
         cols: ["groß", "klein"],
         correct: [0, 0, 1, 1, 0],
@@ -32,59 +29,62 @@ var BBR_EXTRA_THEMES = [
         type: "cross",
         q: "Entscheide: groß oder klein?",
         rows: [
-          "Er hat etwas ___ Neues gelernt. – n/N?",
-          "Wir wünschen dir alles ___ Gute. – g/G?",
-          "Das ist das ___ Beste, was mir passieren konnte. – b/B?",
-          "Sie liebt ___ Schönes. – s/S?",
-          "Im ___ Allgemeinen bin ich zufrieden. – a/A?"
+          "Er hat etwas ___ Neues gelernt.",
+          "Wir wünschen dir alles ___ Gute.",
+          "Das ist das ___ Beste, was mir passieren konnte.",
+          "Sie liebt ___ Schönes.",
+          "Im ___ Allgemeinen bin ich zufrieden.",
+          "Er hat ___ neue Schuhe gekauft." // neu: Adjektiv, nicht substantiviert → klein
         ],
         cols: ["groß", "klein"],
-        correct: [0, 0, 0, 0, 0],
-        model: "Neues, Gute, Beste, Schönes, Allgemeine – substantivierte Adjektive → groß",
-        rule: "<div class=rbox>Adjektive nach <span class=hl>etwas, alles, nichts, viel, wenig</span> werden als Nomen gebraucht und großgeschrieben.<br>Feste Wendungen wie <span class=hl>im Allgemeinen, im Besonderen</span> ebenfalls groß.</div>"
+        correct: [0, 0, 0, 0, 0, 1], // letzte Zeile klein
+        model: "Neues, Gute, Beste, Schönes, Allgemeine – groß; neue (Adjektiv) – klein",
+        rule: "<div class=rbox>Adjektive nach <span class=hl>etwas, alles, nichts, viel, wenig</span> werden als Nomen gebraucht und großgeschrieben.<br>Feste Wendungen wie <span class=hl>im Allgemeinen, im Besonderen</span> ebenfalls groß. Steht das Adjektiv vor einem Nomen, wird es kleingeschrieben.</div>"
       },
       {
         sub: "Substantivierte Verben",
         type: "cross",
         q: "Entscheide: groß oder klein?",
         rows: [
-          "Beim ___ Laufen fühle ich mich frei. – l/L?",
-          "Zum ___ Essen gehe ich ins Restaurant. – e/E?",
-          "Das ___ Rauchen ist hier verboten. – r/R?",
-          "Sie hörte das ___ Rufen ihres Kindes. – r/R?",
-          "Er denkt ans ___ Reisen. – r/R?"
+          "Beim ___ Laufen fühle ich mich frei.",
+          "Zum ___ Essen gehe ich ins Restaurant.",
+          "Das ___ Rauchen ist hier verboten.",
+          "Sie hörte das ___ Rufen ihres Kindes.",
+          "Er denkt ans ___ Reisen.",
+          "Er kann gut ___ laufen." // neu: Verb im Infinitiv, nicht substantiviert → klein
         ],
         cols: ["groß", "klein"],
-        correct: [0, 0, 0, 0, 0],
-        model: "Laufen, Essen, Rauchen, Rufen, Reisen – substantivierte Verben → groß",
-        rule: "<div class=rbox>Verben werden großgeschrieben, wenn sie als Nomen gebraucht werden (oft mit Artikel oder Präposition: <span class=hl>das Laufen, beim Laufen, zum Essen</span>).</div>"
+        correct: [0, 0, 0, 0, 0, 1], // letzte Zeile klein
+        model: "Laufen, Essen, Rauchen, Rufen, Reisen – groß; laufen (Verb) – klein",
+        rule: "<div class=rbox>Verben werden großgeschrieben, wenn sie als Nomen gebraucht werden (oft mit Artikel oder Präposition: <span class=hl>das Laufen, beim Laufen, zum Essen</span>). Als reine Verben bleiben sie klein.</div>"
       },
       {
         sub: "Feste Wendungen mit Nomen",
         type: "cross",
         q: "Entscheide: groß oder klein?",
         rows: [
-          "Er fährt gerne ___ Rad. – r/R?",
-          "Sie hat ___ Schuld an dem Unfall. – s/S?",
-          "Wir haben ___ Hunger. – h/H?",
-          "Ich habe ___ Angst vor Spinnen. – a/A?",
-          "Er nimmt ___ Platz. – p/P?"
+          "Er fährt gerne ___ Rad.",
+          "Sie hat ___ Schuld an dem Unfall.",
+          "Wir haben ___ Hunger.",
+          "Ich habe ___ Angst vor Spinnen.",
+          "Er nimmt ___ Platz.",
+          "Sie hat ___ großen Hunger." // neu: Adjektiv → klein
         ],
         cols: ["groß", "klein"],
-        correct: [0, 0, 0, 0, 0],
-        model: "Rad, Schuld, Hunger, Angst, Platz sind Nomen → groß",
-        rule: "<div class=rbox>In festen Wendungen wie <span class=hl>Rad fahren, Schuld haben, Hunger haben, Angst haben, Platz nehmen</span> werden die Nomen großgeschrieben.</div>"
+        correct: [0, 0, 0, 0, 0, 1], // letzte Zeile klein
+        model: "Rad, Schuld, Hunger, Angst, Platz – Nomen → groß; großen (Adjektiv) – klein",
+        rule: "<div class=rbox>In festen Wendungen wie <span class=hl>Rad fahren, Schuld haben, Hunger haben, Angst haben, Platz nehmen</span> werden die Nomen großgeschrieben. Adjektive in diesen Wendungen bleiben klein.</div>"
       },
       {
         sub: "Eigennamen und geografische Namen",
         type: "cross",
         q: "Entscheide: groß oder klein?",
         rows: [
-          "der ___ Große Wagen (Sternbild) – g/G?",
-          "das ___ Rote Meer – r/R?",
-          "die ___ Schweizer Alpen – s/S?",
-          "der ___ Pazifische Ozean – p/P?",
-          "die ___ Nordsee – n/N?"
+          "der ___ Große Wagen (Sternbild)",
+          "das ___ Rote Meer",
+          "die ___ Schweizer Alpen",
+          "der ___ Pazifische Ozean",
+          "die ___ Nordsee"
         ],
         cols: ["groß", "klein"],
         correct: [0, 0, 0, 0, 0],
@@ -96,11 +96,11 @@ var BBR_EXTRA_THEMES = [
         type: "cross",
         q: "Entscheide: groß oder klein?",
         rows: [
-          "Er hat eine ___ Eins in Mathe. – e/E?",
-          "Das Wort beginnt mit einem ___ A. – a/A?",
-          "Wir sind zu ___ dritt. – d/D?",
-          "Sie ist die ___ Erste im Ziel. – e/E?",
-          "Er bezahlte ___ bar. – b/B?"
+          "Er hat eine ___ Eins in Mathe.",
+          "Das Wort beginnt mit einem ___ A.",
+          "Wir sind zu ___ dritt.",
+          "Sie ist die ___ Erste im Ziel.",
+          "Er bezahlte ___ bar."
         ],
         cols: ["groß", "klein"],
         correct: [0, 0, 1, 0, 1],
@@ -112,11 +112,11 @@ var BBR_EXTRA_THEMES = [
         type: "cross",
         q: "Entscheide: groß oder klein?",
         rows: [
-          "Er spricht fließend ___ Deutsch. – d/D?",
-          "Das ist ein ___ deutsches Auto. – d/D?",
-          "Sie lernt ___ Englisch. – e/E?",
-          "Der ___ englische Garten ist schön. – e/E?",
-          "Wir essen gerne ___ italienisch. – i/I? (gemeint: italienisches Essen)"
+          "Er spricht fließend ___ Deutsch.",
+          "Das ist ein ___ deutsches Auto.",
+          "Sie lernt ___ Englisch.",
+          "Der ___ englische Garten ist schön.",
+          "Wir essen gerne ___ italienisch."
         ],
         cols: ["groß", "klein"],
         correct: [0, 1, 0, 1, 1],
@@ -128,11 +128,11 @@ var BBR_EXTRA_THEMES = [
         type: "cross",
         q: "Entscheide: groß oder klein?",
         rows: [
-          "Das Auto ist ___ rot. – r/R?",
-          "Sie mag die Farbe ___ Rot. – r/R?",
-          "Er fährt ein ___ rotes Auto. – r/R?",
-          "Bei ___ Rot musst du anhalten. – r/R?",
-          "Sie sieht ___ rosa aus. – r/R?"
+          "Das Auto ist ___ rot.",
+          "Sie mag die Farbe ___ Rot.",
+          "Er fährt ein ___ rotes Auto.",
+          "Bei ___ Rot musst du anhalten.",
+          "Sie sieht ___ rosa aus."
         ],
         cols: ["groß", "klein"],
         correct: [1, 0, 1, 0, 1],
@@ -144,11 +144,11 @@ var BBR_EXTRA_THEMES = [
         type: "cross",
         q: "Entscheide: groß oder klein?",
         rows: [
-          "Wir treffen uns um ___ drei. – d/D?",
-          "Um ___ halb vier ist Pause. – h/H?",
-          "Die Party beginnt um ___ acht. – a/A?",
-          "Er kommt gegen ___ Abend. – a/A?",
-          "Heute ___ Morgen war es kalt. – m/M?"
+          "Wir treffen uns um ___ drei.",
+          "Um ___ halb vier ist Pause.",
+          "Die Party beginnt um ___ acht.",
+          "Er kommt gegen ___ Abend.",
+          "Heute ___ Morgen war es kalt."
         ],
         cols: ["groß", "klein"],
         correct: [1, 1, 1, 0, 0],
@@ -160,11 +160,11 @@ var BBR_EXTRA_THEMES = [
         type: "cross",
         q: "Entscheide: groß oder klein?",
         rows: [
-          "___ Alles ist gut. – a/A? (Satzanfang)",
-          "Sie hat ___ alles versucht. – a/A?",
-          "___ Jemand klopft an die Tür. – j/J? (Satzanfang)",
-          "Ich kenne ___ niemanden hier. – n/N?",
-          "Das ist ___ etwas Besonderes. – e/E?"
+          "___ Alles ist gut. (Satzanfang)",
+          "Sie hat ___ alles versucht.",
+          "___ Jemand klopft an die Tür. (Satzanfang)",
+          "Ich kenne ___ niemanden hier.",
+          "Das ist ___ etwas Besonderes."
         ],
         cols: ["groß", "klein"],
         correct: [0, 1, 0, 1, 1],
@@ -176,11 +176,11 @@ var BBR_EXTRA_THEMES = [
         type: "cross",
         q: "Entscheide: groß oder klein?",
         rows: [
-          "Er hat ___ Recht. – r/R?",
-          "Sie ist ___ Ärztin. – ä/Ä? (Berufsbezeichnung)",
-          "Wir gehen ___ baden. – b/B? (Verb)",
-          "Das ist das ___ Gleiche. – g/G?",
-          "Er kommt ___ morgen. – m/M?"
+          "Er hat ___ Recht.",
+          "Sie ist ___ Ärztin.",
+          "Wir gehen ___ baden.",
+          "Das ist das ___ Gleiche.",
+          "Er kommt ___ morgen."
         ],
         cols: ["groß", "klein"],
         correct: [0, 0, 1, 0, 1],
@@ -198,8 +198,6 @@ var BBR_EXTRA_THEMES = [
     emoji: "🧩",
     color: "#ca8a04",
     qs: [
-      // Bestehende 4 Aufgaben (hier nicht wiederholt, bleiben erhalten)
-      // Neue 11 Aufgaben (durch 13 ergänzt):
       {
         sub: "Verb + bleiben / lassen",
         type: "cross",
@@ -273,12 +271,13 @@ var BBR_EXTRA_THEMES = [
           "Er will ___ (einkaufen)",
           "Sie wird ___ (zurückkommen)",
           "Wir werden ___ (abholen)",
-          "Kannst du ___ (mitbringen)?"
+          "Kannst du ___ (mitbringen)?",
+          "Er will ___ (auf stehen)" // neu: falsch getrennt → getrennt (0)
         ],
         cols: ["getrennt", "zusammen"],
-        correct: [1, 1, 1, 1, 1],
-        model: "aufstehen, einkaufen, zurückkommen, abholen, mitbringen → zusammen",
-        rule: "<div class=rbox>Trennbare Verben werden im Infinitiv <span class=hl>zusammen</span>geschrieben.</div>"
+        correct: [1, 1, 1, 1, 1, 0], // letzte Zeile getrennt (falsche Schreibweise)
+        model: "aufstehen, einkaufen, zurückkommen, abholen, mitbringen → zusammen; 'auf stehen' ist falsch getrennt → getrennt",
+        rule: "<div class=rbox>Trennbare Verben werden im Infinitiv <span class=hl>zusammen</span>geschrieben. Die getrennte Schreibung ist in diesem Fall falsch.</div>"
       },
       {
         sub: "Untrennbare Verben",
@@ -289,11 +288,12 @@ var BBR_EXTRA_THEMES = [
           "Sie kann ___ (verstehen)",
           "Wir müssen ___ (erzählen)",
           "Ich werde ___ (zerstören)",
-          "Das ___ (gehört) mir."
+          "Das ___ (gehört) mir.",
+          "Er will ___ (be kommen)" // neu: falsch getrennt → getrennt (0)
         ],
         cols: ["getrennt", "zusammen"],
-        correct: [1, 1, 1, 1, 1],
-        model: "bekommen, verstehen, erzählen, zerstören, gehört → untrennbare Verben → zusammen",
+        correct: [1, 1, 1, 1, 1, 0], // letzte Zeile getrennt
+        model: "bekommen, verstehen, erzählen, zerstören, gehört → untrennbare Verben → zusammen; 'be kommen' ist falsch getrennt",
         rule: "<div class=rbox>Verben mit untrennbaren Vorsilben (be-, ge-, er-, ver-, zer-, ent-, emp-, miss-) werden immer zusammengeschrieben.</div>"
       },
       {
@@ -321,11 +321,12 @@ var BBR_EXTRA_THEMES = [
           "Sie hat ___ (eingekauft)",
           "Wir sind ___ (zurückgekommen)",
           "Er hat ___ (abgeholt)",
-          "Sie hat ___ (mitgebracht)"
+          "Sie hat ___ (mitgebracht)",
+          "Er ist ___ (auf gestanden)" // neu: falsch getrennt → getrennt (0)
         ],
         cols: ["getrennt", "zusammen"],
-        correct: [1, 1, 1, 1, 1],
-        model: "aufgestanden, eingekauft, zurückgekommen, abgeholt, mitgebracht → zusammen",
+        correct: [1, 1, 1, 1, 1, 0], // letzte Zeile getrennt
+        model: "aufgestanden, eingekauft, zurückgekommen, abgeholt, mitgebracht → zusammen; 'auf gestanden' ist falsch",
         rule: "<div class=rbox>Partizipien trennbarer Verben werden mit <span class=hl>-ge-</span> zusammengeschrieben.</div>"
       },
       {
@@ -337,11 +338,12 @@ var BBR_EXTRA_THEMES = [
           "Sie versucht, ___ (einzukaufen)",
           "Wir planen, ___ (abzuholen)",
           "Er bittet, ___ (mitzubringen)",
-          "Sie hat Angst, ___ (umzufallen)"
+          "Sie hat Angst, ___ (umzufallen)",
+          "Er hofft, ___ (auf zu stehen)" // neu: falsch getrennt → getrennt (0)
         ],
         cols: ["getrennt", "zusammen"],
-        correct: [1, 1, 1, 1, 1],
-        model: "aufzustehen, einzukaufen, abzuholen, mitzubringen, umzufallen → zusammen",
+        correct: [1, 1, 1, 1, 1, 0], // letzte Zeile getrennt
+        model: "aufzustehen, einzukaufen, abzuholen, mitzubringen, umzufallen → zusammen; 'auf zu stehen' ist falsch",
         rule: "<div class=rbox>Bei trennbaren Verben steht <span class=hl>zu</span> zwischen Vorsilbe und Stamm und wird zusammengeschrieben.</div>"
       },
       {
@@ -353,11 +355,12 @@ var BBR_EXTRA_THEMES = [
           "Sie trägt eine ___ (Sonnenbrille)",
           "Er hat ___ (Kopfschmerzen)",
           "Wir gehen in die ___ (Schwimmhalle)",
-          "Das ist ___ (Altpapier)"
+          "Das ist ___ (Altpapier)",
+          "Das ist ein ___ (Haus boot)" // neu: falsch getrennt → getrennt (0)
         ],
         cols: ["getrennt", "zusammen"],
-        correct: [1, 1, 1, 1, 1],
-        model: "Hausboot, Sonnenbrille, Kopfschmerzen, Schwimmhalle, Altpapier → zusammen",
+        correct: [1, 1, 1, 1, 1, 0], // letzte Zeile getrennt
+        model: "Hausboot, Sonnenbrille, Kopfschmerzen, Schwimmhalle, Altpapier → zusammen; 'Haus boot' ist falsch",
         rule: "<div class=rbox>Zusammengesetzte Nomen schreibt man <span class=hl>zusammen</span>.</div>"
       },
       {
@@ -419,8 +422,6 @@ var BBR_EXTRA_THEMES = [
     emoji: "🔍",
     color: "#0f766e",
     qs: [
-      // Bestehende 4 Aufgaben (bleiben)
-      // Neue 11 Aufgaben:
       {
         sub: "Aufzählungen",
         type: "cross",
@@ -430,10 +431,11 @@ var BBR_EXTRA_THEMES = [
           "Sie ist klug () fleißig und hilfsbereit.",
           "Wir reisten durch Italien () Frankreich und Spanien.",
           "Er trinkt gerne Tee () Kaffee oder Kakao.",
-          "Kinder () Jugendliche und Erwachsene sind willkommen."
+          "Kinder () Jugendliche und Erwachsene sind willkommen.",
+          "Er trinkt gerne Tee, Kaffee () oder Kakao." // neu: Lücke vor 'oder' → kein Komma
         ],
         cols: ["mit Komma", "ohne Komma"],
-        correct: [0, 0, 0, 0, 0],
+        correct: [0, 0, 0, 0, 0, 1], // letzte Zeile ohne Komma
         model: "Bei Aufzählungen steht zwischen den Elementen ein Komma, nicht vor dem abschließenden 'und'/'oder'.",
         rule: "<div class=rbox>In Aufzählungen trennt man die Elemente durch <span class=hl>Kommas</span>. Vor <span class=hl>und</span> oder <span class=hl>oder</span> steht kein Komma.</div>"
       },
@@ -442,16 +444,22 @@ var BBR_EXTRA_THEMES = [
         type: "cross",
         q: "Komma ja oder nein? (markiere die Stelle mit () )",
         rows: [
-          "Herr Müller () unser Nachbar () ist sehr nett.",
-          "Ich traf Frau Schmidt () die Ärztin () im Krankenhaus.",
-          "Berlin () die Hauptstadt Deutschlands () ist eine Reise wert.",
-          "Mein Bruder () ein großer Fußballfan () geht oft ins Stadion.",
-          "Das Buch () ein Bestseller () war schnell ausgeliehen."
+          "Herr Müller () unser Nachbar ist sehr nett.", // nur eine Lücke nach Müller
+          "Herr Müller unser Nachbar () ist sehr nett.", // Lücke nach Nachbar
+          "Ich traf Frau Schmidt () die Ärztin im Krankenhaus.",
+          "Ich traf Frau Schmidt die Ärztin () im Krankenhaus.",
+          "Berlin () die Hauptstadt Deutschlands ist eine Reise wert.",
+          "Berlin die Hauptstadt Deutschlands () ist eine Reise wert.",
+          "Mein Bruder () ein großer Fußballfan geht oft ins Stadion.",
+          "Mein Bruder ein großer Fußballfan () geht oft ins Stadion.",
+          "Das Buch () ein Bestseller war schnell ausgeliehen.",
+          "Das Buch ein Bestseller () war schnell ausgeliehen.",
+          "Der Maler Rembrandt () ist berühmt." // enge Apposition → ohne Komma
         ],
         cols: ["mit Komma", "ohne Komma"],
-        correct: [0, 0, 0, 0, 0],
-        model: "Appositionen (eingeschobene Erläuterungen) werden in Kommas eingeschlossen.",
-        rule: "<div class=rbox><span class=hl>Appositionen</span> (nachgestellte oder eingeschobene Erläuterungen) werden in Kommas eingeschlossen.</div>"
+        correct: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // letzte Zeile ohne Komma
+        model: "Appositionen (eingeschobene Erläuterungen) werden in der Regel in Kommas eingeschlossen. Bei engen Appositionen (z.B. 'der Maler Rembrandt') kann das Komma entfallen.",
+        rule: "<div class=rbox><span class=hl>Appositionen</span> (nachgestellte oder eingeschobene Erläuterungen) werden meist in Kommas eingeschlossen. Bei sehr engen Beziehungen (wie bei Namen) ist das Komma optional.</div>"
       },
       {
         sub: "Infinitivgruppen mit um/anstatt/ohne",
@@ -462,12 +470,13 @@ var BBR_EXTRA_THEMES = [
           "Anstatt zu lernen () spielt er Computer.",
           "Sie geht () ohne sich zu verabschieden.",
           "Er arbeitet () um Geld zu verdienen.",
-          "Sie verließ das Haus () ohne ein Wort zu sagen."
+          "Sie verließ das Haus () ohne ein Wort zu sagen.",
+          "Er spart, um () ein Auto zu kaufen." // Lücke nach 'um' → kein Komma
         ],
         cols: ["mit Komma", "ohne Komma"],
-        correct: [0, 0, 0, 0, 0],
-        model: "Infinitivgruppen mit um/anstatt/ohne + zu werden durch Komma abgetrennt.",
-        rule: "<div class=rbox>Infinitivgruppen, die mit <span class=hl>um, anstatt, ohne</span> eingeleitet werden, werden immer durch Komma abgetrennt.</div>"
+        correct: [0, 0, 0, 0, 0, 1], // letzte Zeile ohne Komma
+        model: "Infinitivgruppen mit um/anstatt/ohne + zu werden durch Komma abgetrennt. Das Komma steht vor dem einleitenden Wort, nicht danach.",
+        rule: "<div class=rbox>Infinitivgruppen, die mit <span class=hl>um, anstatt, ohne</span> eingeleitet werden, werden immer durch Komma abgetrennt. Das Komma steht vor diesen Wörtern.</div>"
       },
       {
         sub: "Einfache Infinitivgruppen",
@@ -478,12 +487,13 @@ var BBR_EXTRA_THEMES = [
           "Sie hofft () ihn zu sehen.",
           "Ich bitte dich () zu helfen.",
           "Er hat keine Zeit () zu lesen.",
-          "Wir empfehlen () früh zu buchen."
+          "Wir empfehlen () früh zu buchen.",
+          "Er versucht, () zu kommen." // neu: mit Komma
         ],
         cols: ["mit Komma", "ohne Komma"],
-        correct: [1, 1, 1, 1, 1],
-        model: "Bei einfachen Infinitivgruppen ist das Komma freigestellt. In der Prüfung wird oft auf das Komma verzichtet.",
-        rule: "<div class=rbox>Einfache Infinitivgruppen (ohne einleitende Wörter) können, müssen aber nicht durch Komma abgetrennt werden. In vielen Prüfungen wird kein Komma verlangt.</div>"
+        correct: [1, 1, 1, 1, 1, 0], // letzte Zeile mit Komma
+        model: "Bei einfachen Infinitivgruppen ist das Komma freigestellt. In der Prüfung wird oft auf das Komma verzichtet, aber es ist auch korrekt, es zu setzen.",
+        rule: "<div class=rbox>Einfache Infinitivgruppen (ohne einleitende Wörter) können, müssen aber nicht durch Komma abgetrennt werden.</div>"
       },
       {
         sub: "Partizipgruppen",
@@ -522,14 +532,19 @@ var BBR_EXTRA_THEMES = [
         type: "cross",
         q: "Komma ja oder nein? (markiere die Stelle mit () )",
         rows: [
-          "Er ist () wie du weißt () mein bester Freund.",
-          "Das Wetter war () entgegen der Vorhersage () schön.",
-          "Sie kommt () hoffentlich () pünktlich.",
-          "Er hat () ehrlich gesagt () keine Ahnung.",
-          "Wir werden () so Gott will () gewinnen."
+          "Er ist () wie du weißt mein bester Freund.",
+          "Er ist wie du weißt () mein bester Freund.",
+          "Das Wetter war () entgegen der Vorhersage schön.",
+          "Das Wetter war entgegen der Vorhersage () schön.",
+          "Sie kommt () hoffentlich pünktlich.",
+          "Sie kommt hoffentlich () pünktlich?",
+          "Er hat () ehrlich gesagt keine Ahnung.",
+          "Er hat ehrlich gesagt () keine Ahnung.",
+          "Wir werden () so Gott will gewinnen.",
+          "Wir werden so Gott will () gewinnen."
         ],
         cols: ["mit Komma", "ohne Komma"],
-        correct: [0, 0, 0, 0, 0],
+        correct: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // alle mit Komma (Einschübe werden eingeschlossen)
         model: "Einschübe (parenthetische Elemente) werden in Kommas eingeschlossen.",
         rule: "<div class=rbox><span class=hl>Einschübe</span> wie 'wie du weißt', 'hoffentlich', 'ehrlich gesagt' werden durch Kommas vom Rest des Satzes abgetrennt.</div>"
       },
@@ -542,12 +557,22 @@ var BBR_EXTRA_THEMES = [
           "Kinder () hört mal zu!",
           "Mein Herr () können Sie mir helfen?",
           "Liebe Anna () ich schreibe dir.",
-          "Hallo () wie geht's?"
+          "Hallo () wie geht's?",
+          "Können Sie () Frau Müller () mir helfen?" // jetzt zwei separate Zeilen:
         ],
         cols: ["mit Komma", "ohne Komma"],
-        correct: [0, 0, 0, 0, 0],
-        model: "Anreden (direkte Ansprache) werden durch Komma vom Rest getrennt.",
-        rule: "<div class=rbox>Bei <span class=hl>Anreden</span> setzt man ein Komma: 'Guten Tag, Frau Müller!'</div>"
+        correct: [0, 0, 0, 0, 0, 0, 0], // 7 Zeilen (die letzte wurde aufgeteilt, siehe nächste)
+        // Achtung: wir müssen die letzte Zeile aufteilen, daher hier nur 5 Zeilen? Besser:
+        rows: [
+          "Guten Tag () Frau Müller!",
+          "Kinder () hört mal zu!",
+          "Mein Herr () können Sie mir helfen?",
+          "Liebe Anna () ich schreibe dir.",
+          "Hallo () wie geht's?",
+          "Können Sie () Frau Müller mir helfen?", // Lücke nach Sie
+          "Können Sie Frau Müller () mir helfen?" // Lücke nach Müller
+        ],
+        correct: [0, 0, 0, 0, 0, 0, 0] // alle mit Komma
       },
       {
         sub: "Ausrufe",
@@ -589,11 +614,13 @@ var BBR_EXTRA_THEMES = [
           "Ich hoffe () dass du kommst.",
           "Er ist nett () aber manchmal laut.",
           "Sie kaufte Äpfel () Birnen und Trauben.",
-          "Gestern () als es regnete () blieben wir zu Hause.",
-          "Kommst du () ja () ich komme."
+          "Gestern () als es regnete blieben wir zu Hause.",
+          "Gestern als es regnete () blieben wir zu Hause.",
+          "Kommst du () ja ich komme.",
+          "Kommst du ja () ich komme."
         ],
         cols: ["mit Komma", "ohne Komma"],
-        correct: [0, 0, 0, 0, 0],
+        correct: [0, 0, 0, 0, 0, 0, 0], // alle mit Komma (Nebensätze, aber, Aufzählung, Einschübe, Anrede)
         model: "Dass-Satz: Komma; aber: Komma; Aufzählung: Komma zwischen ersten beiden; Einschub: zwei Kommas; Anrede: Komma",
         rule: "<div class=rbox>Beachte die verschiedenen Regeln: Nebensätze, aber, Aufzählungen, Einschübe, Anreden verlangen Kommas.</div>"
       }
@@ -608,8 +635,6 @@ var BBR_EXTRA_THEMES = [
     emoji: "🔗",
     color: "#9333ea",
     qs: [
-      // Bestehende 4 Aufgaben (bleiben)
-      // Neue 9 Aufgaben (durch 10 ergänzt):
       {
         sub: "Stellung der Verbzusätze (trennbare Verben)",
         type: "cross",
@@ -781,8 +806,6 @@ var BBR_EXTRA_THEMES = [
     emoji: "🔤",
     color: "#2563eb",
     qs: [
-      // Bestehende 4 Aufgaben (bleiben)
-      // Neue 11 Aufgaben:
       {
         sub: "Artikel",
         type: "cross",
@@ -930,7 +953,7 @@ var BBR_EXTRA_THEMES = [
       {
         sub: "Gemischte Wortarten",
         type: "mc",
-        q: "Welche Wortart hat das unterstrichene Wort?\n\n(a) Er läuft schnell.\n(b) Das ist ein schöner Tag.\n(c) Ich habe ihn gesehen.\n(d) Und dann ging er.\n(e) Wegen des Regens bleiben wir zu Hause.",
+        q: "Welche Wortart hat das unterstrichene Wort?\n\n(a) Er <u>läuft</u> schnell.\n(b) Das ist ein <u>schöner</u> Tag.\n(c) Ich habe <u>ihn</u> gesehen.\n(d) <u>Und</u> dann ging er.\n(e) <u>Wegen</u> des Regens bleiben wir zu Hause.",
         o: [
           "(a) Verb, (b) Adjektiv, (c) Pronomen, (d) Konjunktion, (e) Präposition",
           "(a) Adjektiv, (b) Nomen, (c) Verb, (d) Adverb, (e) Konjunktion",
@@ -968,18 +991,16 @@ var BBR_EXTRA_THEMES = [
     emoji: "⏰",
     color: "#16a34a",
     qs: [
-      // Bestehende 4 Aufgaben (bleiben)
-      // Neue 11 Aufgaben:
       {
         sub: "Zeitform erkennen (3)",
         type: "cross",
-        q: "Bestimme die Zeitform:",
+        q: "Bestimme die Zeitform des unterstrichenen Verbs:",
         rows: [
-          "‚Er singt.'",
-          "‚Sie sang.'",
-          "‚Wir haben gesungen.'",
-          "‚Ihr werdet singen.'",
-          "‚Nachdem er gesungen hatte, ...'"
+          "Er <u>singt</u>.",
+          "Sie <u>sang</u>.",
+          "Wir <u>haben gesungen</u>.",
+          "Ihr <u>werdet singen</u>.",
+          "Nachdem er <u>gesungen hatte</u>, ..."
         ],
         cols: ["Präsens", "Präteritum", "Perfekt", "Futur I", "Plusquamperfekt"],
         correct: [0, 1, 2, 3, 4],
@@ -991,11 +1012,11 @@ var BBR_EXTRA_THEMES = [
         type: "cross",
         q: "Bestimme die Zeitform:",
         rows: [
-          "‚Er wird gesungen haben.'",
-          "‚Sie wird gekommen sein.'",
-          "‚Wir werden gearbeitet haben.'",
-          "‚Ich werde gesehen haben.'",
-          "‚Du wirst geschlafen haben.'"
+          "Er <u>wird gesungen haben</u>.",
+          "Sie <u>wird gekommen sein</u>.",
+          "Wir <u>werden gearbeitet haben</u>.",
+          "Ich <u>werde gesehen haben</u>.",
+          "Du <u>wirst geschlafen haben</u>."
         ],
         cols: ["Futur I", "Futur II", "Perfekt"],
         correct: [1, 1, 1, 1, 1],
@@ -1055,11 +1076,11 @@ var BBR_EXTRA_THEMES = [
         type: "cross",
         q: "Bestimme die Zeitform des unterstrichenen Verbs:",
         rows: [
-          "Er wird morgen kommen.",
-          "Sie hat gestern angerufen.",
-          "Wir waren schon gegangen.",
-          "Ich lese ein Buch.",
-          "Nachdem er gegessen hatte, ging er."
+          "Er <u>wird</u> morgen kommen.",
+          "Sie <u>hat</u> gestern angerufen.",
+          "Wir <u>waren</u> schon gegangen.",
+          "Ich <u>lese</u> ein Buch.",
+          "Nachdem er gegessen <u>hatte</u>, ging er."
         ],
         cols: ["Präsens", "Präteritum", "Perfekt", "Plusquamperfekt", "Futur I"],
         correct: [4, 2, 3, 0, 3],
@@ -1071,11 +1092,11 @@ var BBR_EXTRA_THEMES = [
         type: "cross",
         q: "Futur I oder Futur II?",
         rows: [
-          "Er wird kommen.",
-          "Er wird gekommen sein.",
-          "Sie wird singen.",
-          "Sie wird gesungen haben.",
-          "Wir werden arbeiten."
+          "Er <u>wird kommen</u>.",
+          "Er <u>wird gekommen sein</u>.",
+          "Sie <u>wird singen</u>.",
+          "Sie <u>wird gesungen haben</u>.",
+          "Wir <u>werden arbeiten</u>."
         ],
         cols: ["Futur I", "Futur II"],
         correct: [0, 1, 0, 1, 0],
@@ -1157,18 +1178,16 @@ var BBR_EXTRA_THEMES = [
     emoji: "📘",
     color: "#0891b2",
     qs: [
-      // Bestehende 4 Aufgaben (bleiben)
-      // Neue 11 Aufgaben:
       {
         sub: "Nominativ",
         type: "cross",
         q: "Bestimme den Fall des unterstrichenen Wortes: (wer? was?)",
         rows: [
-          "Der Hund bellt.",
-          "Ein Auto fährt.",
-          "Die Kinder spielen.",
-          "Mein Bruder ist groß.",
-          "Sie lacht."
+          "<u>Der Hund</u> bellt.",
+          "<u>Ein Auto</u> fährt.",
+          "<u>Die Kinder</u> spielen.",
+          "<u>Mein Bruder</u> ist groß.",
+          "<u>Sie</u> lacht."
         ],
         cols: ["Nominativ", "Akkusativ", "Dativ", "Genitiv"],
         correct: [0, 0, 0, 0, 0],
@@ -1180,11 +1199,11 @@ var BBR_EXTRA_THEMES = [
         type: "cross",
         q: "Bestimme den Fall des unterstrichenen Wortes: (wen? was?)",
         rows: [
-          "Ich sehe den Hund.",
-          "Er kauft ein Auto.",
-          "Sie mag die Kinder.",
-          "Wir besuchen meinen Bruder.",
-          "Hörst du mich?"
+          "Ich sehe <u>den Hund</u>.",
+          "Er kauft <u>ein Auto</u>.",
+          "Sie mag <u>die Kinder</u>.",
+          "Wir besuchen <u>meinen Bruder</u>.",
+          "Hörst du <u>mich</u>?"
         ],
         cols: ["Nominativ", "Akkusativ", "Dativ", "Genitiv"],
         correct: [1, 1, 1, 1, 1],
@@ -1196,11 +1215,11 @@ var BBR_EXTRA_THEMES = [
         type: "cross",
         q: "Bestimme den Fall des unterstrichenen Wortes: (wem?)",
         rows: [
-          "Ich helfe dem Hund.",
-          "Er gibt dem Kind ein Buch.",
-          "Sie dankt der Lehrerin.",
-          "Wir gehören dem Verein an.",
-          "Das Buch gehört mir."
+          "Ich helfe <u>dem Hund</u>.",
+          "Er gibt <u>dem Kind</u> ein Buch.",
+          "Sie dankt <u>der Lehrerin</u>.",
+          "Wir gehören <u>dem Verein</u> an.",
+          "Das Buch gehört <u>mir</u>."
         ],
         cols: ["Nominativ", "Akkusativ", "Dativ", "Genitiv"],
         correct: [2, 2, 2, 2, 2],
@@ -1212,11 +1231,11 @@ var BBR_EXTRA_THEMES = [
         type: "cross",
         q: "Bestimme den Fall des unterstrichenen Wortes: (wessen?)",
         rows: [
-          "Das Haus des Nachbarn ist groß.",
-          "Die Farbe der Blume ist rot.",
-          "Wegen des Regens bleiben wir zu Hause.",
-          "Trotz des Lärms schlief er.",
-          "Die Mutter des Kindes kommt."
+          "Das Haus <u>des Nachbarn</u> ist groß.",
+          "Die Farbe <u>der Blume</u> ist rot.",
+          "Wegen <u>des Regens</u> bleiben wir zu Hause.",
+          "Trotz <u>des Lärms</u> schlief er.",
+          "Die Mutter <u>des Kindes</u> kommt."
         ],
         cols: ["Nominativ", "Akkusativ", "Dativ", "Genitiv"],
         correct: [3, 3, 3, 3, 3],
@@ -1308,11 +1327,11 @@ var BBR_EXTRA_THEMES = [
         type: "cross",
         q: "Bestimme den Fall des unterstrichenen Wortes:",
         rows: [
-          "Ich gebe dem Kind einen Ball.",
-          "Das Auto des Nachbarn ist neu.",
-          "Er wartet auf den Bus.",
-          "Sie wohnt bei ihrer Tante.",
-          "Wegen des Sturms fiel der Strom aus."
+          "Ich gebe <u>dem Kind</u> einen Ball.",
+          "Das Auto <u>des Nachbarn</u> ist neu.",
+          "Er wartet auf <u>den Bus</u>.",
+          "Sie wohnt bei <u>ihrer Tante</u>.",
+          "Wegen <u>des Sturms</u> fiel der Strom aus."
         ],
         cols: ["Nominativ", "Akkusativ", "Dativ", "Genitiv"],
         correct: [2, 3, 1, 2, 3],
@@ -1346,8 +1365,6 @@ var BBR_EXTRA_THEMES = [
     emoji: "⚙️",
     color: "#7c3aed",
     qs: [
-      // Bestehende 4 Aufgaben (bleiben)
-      // Neue 11 Aufgaben:
       {
         sub: "Aktiv oder Passiv? (2)",
         type: "cross",
@@ -1528,8 +1545,6 @@ var BBR_EXTRA_THEMES = [
     emoji: "✂️",
     color: "#6b7280",
     qs: [
-      // Bestehende 4 Aufgaben (bleiben)
-      // Neue 11 Aufgaben:
       {
         sub: "Einfache Wörter trennen (3)",
         type: "cross",

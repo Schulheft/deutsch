@@ -1,32 +1,35 @@
 // ================================================================
-// REGELN-BBR.JS – Grammatikregeln für die BBR
+// REGELN-BBR.JS – Grammatikregeln für die BBR (überarbeitet)
 // basierend auf "BBR Grammatik Regeln.pdf"
 // Enthält: R_BBR (Kurzregeln) + GRAM_SECTIONS_BBR (Nachschlageteil)
 // ================================================================
 
 var R_BBR = {
-  dehnung: "<div class='rbox'><span class='hl'>Dehnung – kurze und lange Vokale:</span><br>• kurzer Vokal: a, e, i, o, u (Tage, Biber, Tor, Sonne)<br>• langer Vokal mit Doppelbuchstaben: aa, ee, oo (Staat, See, Moor)<br>• langer Vokal + Dehnungs-h: ah, eh, ih, oh, uh (Zahl, Mehl, ihn, wohnen, Kuh)<br>• ie = langes i (Liebe, spielen) – Ausnahme: ihm, ihr, ihnen.</div>",
-  umlaute: "<div class='rbox'><span class='hl'>Umlaute: ä/e und äu/eu</span><br>• ä/äu, wenn es ein verwandtes Wort mit a/au gibt (Hände → Hand, Bäume → Baum).<br>• e/eu, wenn kein a/au-Bezug (Menge, heute).</div>",
-  s_ss_ß: "<div class='rbox'><span class='hl'>s/ss/ß</span><br>• ß nach langem Vokal oder Diphthong: Straße, heißen, Fuß.<br>• ss nach kurzem Vokal: Fluss, Kuss, müssen.<br>• s am Wortanfang oder in bestimmten Fällen: Haus, lesen.</div>",
-  z_tz: "<div class='rbox'><span class='hl'>z/tz/zz</span><br>• z nach langem Vokal, Diphthong oder Konsonant: Kreuzung, schmelzen, Wurzel.<br>• tz nach kurzem Vokal: Katze, plötzlich, Platz.<br>• zz in Fremdwörtern: Pizza, Jazz, Puzzle.</div>",
-  x_chs_gs: "<div class='rbox'><span class='hl'>x/chs/gs</span><br>• x = ks-Laut: Axt, Text, Taxi.<br>• chs auch ks-Laut (meist deutsche Wörter): Fuchs, wachsen, wechseln.<br>• gs in bestimmten Wörtern: unterwegs, anfangs.</div>",
-  g_k: "<div class='rbox'><span class='hl'>g oder k am Ende?</span><br>• g wird weich gesprochen (Ableitung: singen → sang).<br>• k wird hart gesprochen (Ableitung: sinken → sank).</div>",
-  d_t: "<div class='rbox'><span class='hl'>d oder t am Ende?</span><br>Ableitung hilft: Ungeduld → ungeduldig; seit (Zeit) → seither; seid (ihr seid) → bleibt.</div>",
-  end_ent: "<div class='rbox'><span class='hl'>end- oder ent-?</span><br>• end- = Ende, Schluss: endlich, Endspurt.<br>• ent- = weg, gegen: enttäuscht, entfernen, entlassen.</div>",
-  gross_klein: "<div class='rbox'><span class='hl'>Großschreibung:</span> Nomen (Haus, Freude), substantivierte Adjektive/Verben (das Gute, beim Lesen), Höflichkeitspronomen (Sie, Ihr), Eigennamen.<br><span class='hl'>Kleinschreibung:</span> Adjektive, Verben, Pronomen, Artikel, Adverbien, Wochentage auf -s (montags).</div>",
-  getrennt_zusammen: "<div class='rbox'><span class='hl'>Getrennt- und Zusammenschreibung</span><br>• Substantiv + Verb (Tätigkeit) → getrennt: Klavier spielen.<br>• Adjektiv + Verb (wörtlich) → getrennt: leer machen.<br>• Zusammengesetzte Verben (neue Bedeutung) → zusammen: freisprechen, schwerfallen.<br>• wieder = erneut (wiedersehen); wider = gegen (widersprechen).</div>",
-  artikel: "<div class='rbox'><span class='hl'>Bestimmter Artikel</span> (der, die, das)<br>Nom: der, die, das, die<br>Akk: den, die, das, die<br>Dat: dem, der, dem, den<br><br><span class='hl'>Unbestimmter Artikel</span> (ein, eine)<br>Maskulin: ein (Nom), einen (Akk), einem (Dat)<br>Feminin: eine (Nom/Akk), einer (Dat)<br>Neutrum: ein (Nom/Akk), einem (Dat)</div>",
-  adjektiv: "<div class='rbox'><span class='hl'>Adjektivdeklination</span><br>• nach bestimmtem Artikel: der nette Mann, die nette Frau, das nette Kind, die netten Leute (Nom. -e, sonst -en).<br>• nach unbestimmtem Artikel: ein netter Mann, eine nette Frau, ein nettes Kind.</div>",
-  pronomen: "<div class='rbox'><span class='hl'>Personalpronomen</span><br>ich – mich – mir<br>du – dich – dir<br>er – ihn – ihm<br>sie – sie – ihr<br>es – es – ihm<br>wir – uns – uns<br>ihr – euch – euch<br>sie – sie – ihnen<br>Sie – Sie – Ihnen (Höflich)</div>",
-  zeiten: "<div class='rbox'><span class='hl'>Zeitformen</span><br>• Präsens: ich lerne<br>• Präteritum: ich lernte (schwach) / ich sang (stark)<br>• Perfekt: ich habe gelernt / ich bin gegangen (sein bei Bewegung)<br>• Futur I: ich werde lernen<br>• Konjunktiv I (indirekte Rede): er sagt, er sei/komme …</div>",
-  satzbau: "<div class='rbox'><span class='hl'>Satzbau</span><br>• Hauptsatz: Verb an Position 2.<br>• Nebensatz: Verb am Ende (weil, dass, wenn …).<br>• HS + HS: Ich lerne, denn ich habe Prüfung.<br>• NS vor HS: Weil ich lerne, bleibe ich da.<br>• HS + NS: Ich bleibe da, weil ich lerne.</div>",
-  komma: "<div class='rbox'><span class='hl'>Kommasetzung</span><br>• zwischen Haupt- und Nebensatz: Ich hoffe, dass du kommst.<br>• bei Aufzählungen: Äpfel, Birnen und Bananen.<br>• vor entgegenstellenden Konjunktionen: Er ist klein, aber stark.<br>• bei Infinitivgruppen mit um … zu, ohne … zu, anstatt … zu.<br>• bei Appositionen: Herr Meier, unser Nachbar, hilft.</div>",
-  adverb: "<div class='rbox'><span class='hl'>Adverbien</span><br>• Zeit: heute, morgen, oft, niemals<br>• Ort: hier, dort, draußen, oben<br>• Art und Weise: gern, schnell, vielleicht</div>",
-  wortbildung: "<div class='rbox'><span class='hl'>Wortbildung</span><br>• Präfixe: ver- (verstehen), vor- (vorbereiten), ent- (entdecken), wider- (widersprechen), wieder- (wiederholen)<br>• Fugenelemente: Geburtstagsfeier (-s-), Maschinenbau (-n-), Halskette (ohne)</div>",
-  antonyme: "<div class='rbox'><span class='hl'>Antonyme (Gegenteile)</span><br>warm – kalt, sauer – süß, freundlich – feindlich, Mehrheit – Minderheit, reich – arm, fröhlich – traurig, leise – laut, viele – wenige</div>",
-  homonyme: "<div class='rbox'><span class='hl'>Homonyme (gleiche Schreibweise, verschiedene Bedeutung)</span><br>Mutter (Frau / Schraube), Laster (Fahrzeug / Angewohnheit), Leiter (Chef / Gerät), Schloss (Gebäude / Vorhängeschloss), Pflaster (Wundpflaster / Straßenbelag), Hahn (Tier / Wasserhahn)</div>",
-  stilebenen: "<div class='rbox'><span class='hl'>Stilebenen</span><br>• Umgangssprache: futtern, latschen, Bude, verpulvern, klauen, Gaul<br>• Standard: essen, gehen, Zimmer, verschwenden, stehlen, Pferd<br>• Gehoben: speisen, schreiten, Gemach, vergeuden, entwenden, Ross</div>",
-  fremdwoerter: "<div class='rbox'><span class='hl'>Fremdwörter – Bedeutung</span><br>panieren (mit Paniermehl umhüllen), trainieren (üben), Spezialität (Delikatesse), Qualität (Güte), reservieren (vorbestellen), reklamieren (sich beschweren), tolerieren (akzeptieren)</div>"
+  dehnung: "<div class='rbox'><span class='hl'>Dehnung – kurze und lange Vokale:</span><br>• kurzer Vokal: a, e, i, o, u (Tage, Biber, Tor, Sonne)<br>• langer Vokal mit Doppelbuchstaben: aa, ee, oo (Staat, See, Moor)<br>• langer Vokal + Dehnungs-h: ah, eh, ih, oh, uh (Zahl, Mehl, ihn, wohnen, Kuh)<br>• ie = langes i (Liebe, spielen) – Ausnahme: ihm, ihr, ihnen.<br><span class='gram-tip'>Merke: ie ist der häufigste Weg für langes i. Nach langem Vokal oft h oder Doppelvokal.</span></div>",
+  umlaute: "<div class='rbox'><span class='hl'>Umlaute: ä/e und äu/eu</span><br>• ä/äu, wenn es ein verwandtes Wort mit a/au gibt (Hände → Hand, Bäume → Baum).<br>• e/eu, wenn kein a/au-Bezug (Menge, heute).<br><span class='gram-tip'>Bei Zweifeln nach der „Familie“ fragen: Gibt es ein Wort mit a/au? → ä/äu.</span></div>",
+  s_ss_ß: "<div class='rbox'><span class='hl'>s/ss/ß</span><br>• ß nach langem Vokal oder Diphthong: Straße, heißen, Fuß.<br>• ss nach kurzem Vokal: Fluss, Kuss, müssen.<br>• s am Wortanfang oder in bestimmten Fällen: Haus, lesen.<br><span class='gram-tip'>Nach kurzem Vokal kommt oft Doppelkonsonant (ss, tz, ck).</span></div>",
+  z_tz: "<div class='rbox'><span class='hl'>z/tz/zz</span><br>• z nach langem Vokal, Diphthong oder Konsonant: Kreuzung, schmelzen, Wurzel.<br>• tz nach kurzem Vokal: Katze, plötzlich, Platz.<br>• zz in Fremdwörtern: Pizza, Jazz, Puzzle.<br><span class='gram-tip'>Nach kurzem Vokal steht meist tz, nach langem Vokal z.</span></div>",
+  x_chs_gs: "<div class='rbox'><span class='hl'>x/chs/gs</span><br>• x = ks-Laut: Axt, Text, Taxi.<br>• chs auch ks-Laut (meist deutsche Wörter): Fuchs, wachsen, wechseln.<br>• gs in bestimmten Wörtern: unterwegs, anfangs.<br><span class='gram-tip'>Alle drei Buchstabenkombinationen klingen wie „ks“.</span></div>",
+  g_k: "<div class='rbox'><span class='hl'>g oder k am Ende?</span><br>• g wird weich gesprochen (Ableitung: singen → sang).<br>• k wird hart gesprochen (Ableitung: sinken → sank).<br><span class='gram-tip'>Verlängere das Wort: Tag – Tage (g), Werk – Werke (k).</span></div>",
+  d_t: "<div class='rbox'><span class='hl'>d oder t am Ende?</span><br>Ableitung hilft: Ungeduld → ungeduldig; seit (Zeit) → seither; seid (ihr seid) → bleibt.<br><span class='gram-tip'>Bilde die Mehrzahl oder eine andere Form: Hand – Hände (d), Mund – Münder (d), bunt – bunte (t).</span></div>",
+  end_ent: "<div class='rbox'><span class='hl'>end- oder ent-?</span><br>• end- = Ende, Schluss: endlich, Endspurt.<br>• ent- = weg, gegen: enttäuscht, entfernen, entlassen.<br><span class='gram-tip'>ent- bedeutet oft „weg“, end- bedeutet „Ende“.</span></div>",
+  gross_klein: "<div class='rbox'><span class='hl'>Großschreibung:</span> Nomen (Haus, Freude), substantivierte Adjektive/Verben (das Gute, beim Lesen), Höflichkeitspronomen (Sie, Ihr), Eigennamen.<br><span class='hl'>Kleinschreibung:</span> Adjektive, Verben, Pronomen, Artikel, Adverbien, Wochentage auf -s (montags).<br><span class='gram-tip'>Nomen erkennt man am Artikel (der, die, das).</span></div>",
+  getrennt_zusammen: "<div class='rbox'><span class='hl'>Getrennt- und Zusammenschreibung</span><br>• Substantiv + Verb (Tätigkeit) → getrennt: Klavier spielen.<br>• Adjektiv + Verb (wörtlich) → getrennt: leer machen.<br>• Zusammengesetzte Verben (neue Bedeutung) → zusammen: freisprechen, schwerfallen.<br>• wieder = erneut (wiedersehen); wider = gegen (widersprechen).<br><span class='gram-tip'>Frage: Kann man die Bedeutung wörtlich nehmen? Wenn ja, meist getrennt.</span></div>",
+  artikel: "<div class='rbox'><span class='hl'>Bestimmter Artikel</span> (der, die, das)<br>Nom: der, die, das, die<br>Akk: den, die, das, die<br>Dat: dem, der, dem, den<br><br><span class='hl'>Unbestimmter Artikel</span> (ein, eine)<br>Maskulin: ein (Nom), einen (Akk), einem (Dat)<br>Feminin: eine (Nom/Akk), einer (Dat)<br>Neutrum: ein (Nom/Akk), einem (Dat)<br><span class='gram-tip'>Der Artikel verrät das Geschlecht und den Fall.</span></div>",
+  adjektiv: "<div class='rbox'><span class='hl'>Adjektivdeklination</span><br>• nach bestimmtem Artikel: der nette Mann, die nette Frau, das nette Kind, die netten Leute (Nom. -e, sonst -en).<br>• nach unbestimmtem Artikel: ein netter Mann, eine nette Frau, ein nettes Kind.<br><span class='gram-tip'>Nach bestimmtem Artikel: Endung meist -e (Nom.) oder -en (andere Fälle). Nach unbestimmtem: -er, -e, -es.</span></div>",
+  pronomen: "<div class='rbox'><span class='hl'>Personalpronomen</span><br>ich – mich – mir<br>du – dich – dir<br>er – ihn – ihm<br>sie – sie – ihr<br>es – es – ihm<br>wir – uns – uns<br>ihr – euch – euch<br>sie – sie – ihnen<br>Sie – Sie – Ihnen (Höflich)<br><span class='gram-tip'>Merke: mir (Dativ) – mich (Akkusativ); dir – dich; ihm – ihn.</span></div>",
+  zeiten: "<div class='rbox'><span class='hl'>Zeitformen</span><br>• Präsens: ich lerne<br>• Präteritum: ich lernte (schwach) / ich sang (stark)<br>• Perfekt: ich habe gelernt / ich bin gegangen (sein bei Bewegung)<br>• Futur I: ich werde lernen<br>• Konjunktiv I (indirekte Rede): er sagt, er sei/komme …<br><span class='gram-tip'>Perfekt mit sein bei Bewegung oder Zustandsänderung (gehen, fahren, werden).</span></div>",
+  satzbau: "<div class='rbox'><span class='hl'>Satzbau</span><br>• Hauptsatz: Verb an Position 2.<br>• Nebensatz: Verb am Ende (weil, dass, wenn …).<br>• HS + HS: Ich lerne, denn ich habe Prüfung.<br>• NS vor HS: Weil ich lerne, bleibe ich da.<br>• HS + NS: Ich bleibe da, weil ich lerne.<br><span class='gram-tip'>Im Hauptsatz Verb an 2. Stelle, im Nebensatz am Ende.</span></div>",
+  komma: "<div class='rbox'><span class='hl'>Kommasetzung</span><br>• zwischen Haupt- und Nebensatz: Ich hoffe, dass du kommst.<br>• bei Aufzählungen: Äpfel, Birnen und Bananen.<br>• vor entgegenstellenden Konjunktionen: Er ist klein, aber stark.<br>• bei Infinitivgruppen mit um … zu, ohne … zu, anstatt … zu.<br>• bei Appositionen: Herr Meier, unser Nachbar, hilft.<br>• bei nachgestellten Erläuterungen: Er kommt morgen, nämlich um 10 Uhr.<br><span class='gram-tip'>Vor ‚dass‘, ‚weil‘, ‚obwohl‘ usw. immer Komma.</span></div>",
+  adverb: "<div class='rbox'><span class='hl'>Adverbien</span><br>• Zeit: heute, morgen, oft, niemals<br>• Ort: hier, dort, draußen, oben<br>• Art und Weise: gern, schnell, vielleicht<br><span class='gram-tip'>Adverbien sind unveränderlich.</span></div>",
+  wortbildung: "<div class='rbox'><span class='hl'>Wortbildung</span><br>• Präfixe: ver- (verstehen), vor- (vorbereiten), ent- (entdecken), wider- (widersprechen), wieder- (wiederholen)<br>• Fugenelemente: Geburtstagsfeier (-s-), Maschinenbau (-n-), Halskette (ohne)<br><span class='gram-tip'>Vorsilben verändern die Bedeutung des Grundworts.</span></div>",
+  antonyme: "<div class='rbox'><span class='hl'>Antonyme (Gegenteile)</span><br>warm – kalt, sauer – süß, freundlich – feindlich, Mehrheit – Minderheit, reich – arm, fröhlich – traurig, leise – laut, viele – wenige<br><span class='gram-tip'>Gegenteile helfen beim Wortverständnis.</span></div>",
+  homonyme: "<div class='rbox'><span class='hl'>Homonyme (gleiche Schreibweise, verschiedene Bedeutung)</span><br>Mutter (Frau / Schraube), Laster (Fahrzeug / Angewohnheit), Leiter (Chef / Gerät), Schloss (Gebäude / Vorhängeschloss), Pflaster (Wundpflaster / Straßenbelag), Hahn (Tier / Wasserhahn)<br><span class='gram-tip'>Gleiches Wort, verschiedene Bedeutung – auf den Kontext achten!</span></div>",
+  stilebenen: "<div class='rbox'><span class='hl'>Stilebenen</span><br>• Umgangssprache: futtern, latschen, Bude, verpulvern, klauen, Gaul<br>• Standard: essen, gehen, Zimmer, verschwenden, stehlen, Pferd<br>• Gehoben: speisen, schreiten, Gemach, vergeuden, entwenden, Ross<br><span class='gram-tip'>Wähle die passende Stilebene je nach Situation (Alltag, Schule, feierlich).</span></div>",
+  fremdwoerter: "<div class='rbox'><span class='hl'>Fremdwörter – Bedeutung</span><br>panieren (mit Paniermehl umhüllen), trainieren (üben), Spezialität (Delikatesse), Qualität (Güte), reservieren (vorbestellen), reklamieren (sich beschweren), tolerieren (akzeptieren)<br><span class='gram-tip'>Fremdwörter haben oft eine deutsche Entsprechung (z.B. Computer – Rechner).</span></div>",
+  // Neue Kurzregeln
+  das_dass: "<div class='rbox'><span class='hl'>das oder dass?</span><br>• <em>das</em> = Artikel, Relativpronomen, Demonstrativpronomen (ersetzbar durch <em>welches</em> oder <em>dieses</em>).<br>• <em>dass</em> = Konjunktion (leitet Nebensatz ein, nicht ersetzbar).<br>Beispiel: Das Buch, <em>das</em> ich lese … → Ich weiß, <em>dass</em> er kommt.<br><span class='gram-tip'>Kannst du „welches“ sagen? → das; sonst → dass.</span></div>",
+  seit_seid: "<div class='rbox'><span class='hl'>seit oder seid?</span><br>• <em>seit</em> = Zeit (seit gestern, seitdem) → Ableitung: seither.<br>• <em>seid</em> = 2. Person Plural von <em>sein</em> (ihr seid) → Probe: bleibt „seid“.<br><span class='gram-tip'>„Seit“ mit t = Zeit, „seid“ mit d = von „sein“ (ihr).</span></div>"
 };
 
 // ================================ GRAMMATIKREGELN FÜR BBR ================================
@@ -88,6 +91,7 @@ var GRAM_SECTIONS_BBR = [
             <tr><td>chs</td><td>= ks-Laut (meist deutsche Wörter)</td><td>Fuchs, wachsen, wechseln</td></tr>
             <tr><td>gs</td><td>in bestimmten Wörtern</td><td>unterwegs, anfangs</td></tr>
           </table>
+          <div class="gram-tip">Nach kurzem Vokal kommt oft Doppelkonsonant (tz, ss, ck).</div>
         `
       },
       {
@@ -99,13 +103,15 @@ var GRAM_SECTIONS_BBR = [
           <div class="gram-highlight">
             <span class="hl">g oder k?</span><br>
             • g wird weich gesprochen (Ableitung: singen → sang, Bug → biegen)<br>
-            • k wird hart gesprochen (Ableitung: sinken → sank, Schrank → schränken)
+            • k wird hart gesprochen (Ableitung: sinken → sank, Schrank → schränken)<br>
+            <span class="gram-tip">Verlängere das Wort: Tag – Tage (g), Werk – Werke (k).</span>
           </div>
           <div class="gram-highlight">
             <span class="hl">d oder t?</span><br>
             • Ungeduld → ungeduldig<br>
             • seit (Zeit) → seither<br>
-            • seid (ihr seid) → bleibt seid (keine Ableitung)
+            • seid (ihr seid) → bleibt seid (keine Ableitung)<br>
+            <span class="gram-tip">Bilde die Mehrzahl: Hand – Hände (d), Mund – Münder (d), bunt – bunte (t).</span>
           </div>
         `
       },
@@ -120,6 +126,7 @@ var GRAM_SECTIONS_BBR = [
             <tr><td>ent-</td><td>weg, gegen, entfernen</td><td>enttäuscht, entfernen, entlassen, entdecken</td></tr>
           </table>
           <div class="gram-example">ent- ≠ end-: entlaufen (weglaufen) – endlos (ohne Ende)</div>
+          <div class="gram-tip">ent- bedeutet oft „weg“, end- bedeutet „Ende“.</div>
         `
       },
       {
@@ -137,7 +144,7 @@ var GRAM_SECTIONS_BBR = [
             <tr><td>Adjektive, Verben, Pronomen, Artikel, Adverbien</td><td>schön, laufen, ich, der, draußen</td></tr>
             <tr><td>Wochentage mit -s (Adverbien)</td><td>montags, donnerstags</td></tr>
           </table>
-          <div class="gram-tip">Achtung: „der/die/das“ als Artikel sind klein, aber wenn sie als Nomen gebraucht werden: der Einzige, das Gleiche.</div>
+          <div class="gram-tip">Achtung: „der/die/das“ als Artikel sind klein, aber wenn sie als Nomen gebraucht werden: der Einzige, das Gleiche.<br>Nomen erkennt man am Artikel (der, die, das).</div>
         `
       },
       {
@@ -157,6 +164,39 @@ var GRAM_SECTIONS_BBR = [
             • wider = gegen: widersprechen, Widerstand, widerwillig<br>
             <span class="hl">Eselsbrücke:</span> „Wieder“ hat ein „e“ wie „erneut“, „wider“ hat ein „i“ wie „gegen“.
           </div>
+          <div class="gram-tip">Frage: Kann man die Bedeutung wörtlich nehmen? Wenn ja, meist getrennt.</div>
+        `
+      },
+      // Neue Karte: das oder dass
+      {
+        title: "das oder dass?",
+        badge: "Rechtschreibung",
+        badgeColor: "#2563eb",
+        content: `
+          <p class="gram-text">Die Unterscheidung von <em>das</em> und <em>dass</em> bereitet oft Schwierigkeiten.</p>
+          <table class="gram-table">
+            <tr><th></th><th>das</th><th>dass</th></tr>
+            <tr><td>Wortart</td><td>Artikel, Relativpronomen, Demonstrativpronomen</td><td>Konjunktion</td></tr>
+            <tr><td>Probe</td><td>ersetzbar durch <em>welches</em> oder <em>dieses</em></td><td>nicht ersetzbar</td></tr>
+            <tr><td>Beispiel</td><td>Das Buch, <em>das</em> ich lese, ist spannend.<br><em>Das</em> (dieses) Buch ist neu.</td><td>Ich weiß, <em>dass</em> er kommt.</td></tr>
+          </table>
+          <div class="gram-tip">Merke: Kannst du „welches“ sagen? → das; sonst → dass.</div>
+        `
+      },
+      // Neue Karte: seit oder seid
+      {
+        title: "seit oder seid?",
+        badge: "Rechtschreibung",
+        badgeColor: "#2563eb",
+        content: `
+          <p class="gram-text">Die beiden Wörter klingen gleich, haben aber unterschiedliche Bedeutung.</p>
+          <table class="gram-table">
+            <tr><th></th><th>seit</th><th>seid</th></tr>
+            <tr><td>Bedeutung</td><td>Zeitangabe (seit gestern, seitdem)</td><td>2. Person Plural von <em>sein</em> (ihr seid)</td></tr>
+            <tr><td>Probe</td><td>durch „seither“ ersetzbar</td><td>bleibt „seid“ (kann nicht ersetzt werden)</td></tr>
+            <tr><td>Beispiel</td><td>Ich warte <em>seit</em> einer Stunde.</td><td>Ihr <em>seid</em> meine Freunde.</td></tr>
+          </table>
+          <div class="gram-tip">„Seit“ mit t = Zeit, „seid“ mit d = von „sein“ (ihr).</div>
         `
       }
     ]
@@ -190,6 +230,7 @@ var GRAM_SECTIONS_BBR = [
             <tr><td>Dativ</td><td>einem</td><td>einer</td><td>einem</td></tr>
           </table>
           <div class="gram-example">Ich sehe den Lehrer (Akk. mask.). Wir helfen dem Freund (Dat. mask.). Er sucht einen Job (Akk. mask. unbestimmt).</div>
+          <div class="gram-tip">Der Artikel verrät das Geschlecht und den Fall.</div>
         `
       },
       {
@@ -197,7 +238,7 @@ var GRAM_SECTIONS_BBR = [
         badge: "Grammatik",
         badgeColor: "#16a34a",
         content: `
-          <p class="gram-text">Adjektive passen sich an das Nomen an. Die Endung hängt vom Artikel ab.</p>
+          <p class="gram-text">Adjektive passen sich an das Nomen an. Die Endung hängt vom Artikel ab (Beugung/Deklination).</p>
           <p class="gram-text"><span class="hl">Nach bestimmtem Artikel (schwache Deklination)</span></p>
           <table class="gram-table">
             <tr><th>Fall</th><th>Maskulin</th><th>Feminin</th><th>Neutrum</th><th>Plural</th></tr>
@@ -214,6 +255,7 @@ var GRAM_SECTIONS_BBR = [
             <tr><td>Dativ</td><td>einem -en</td><td>einer -en</td><td>einem -en</td></tr>
           </table>
           <div class="gram-example">ein netter Mann, eine nette Frau, ein nettes Kind.</div>
+          <div class="gram-tip">Nach bestimmtem Artikel: Endung meist -e (Nom.) oder -en (andere Fälle). Nach unbestimmtem: -er, -e, -es.</div>
         `
       },
       {
@@ -234,6 +276,7 @@ var GRAM_SECTIONS_BBR = [
             <tr><td>Höflich</td><td>Sie</td><td>Sie</td><td>Ihnen</td></tr>
           </table>
           <div class="gram-example">Das Fenster ist kaputt. Es muss repariert werden.<br>Die Kinder sind da. Sie haben Hunger.<br>Ich gebe dir das Buch.</div>
+          <div class="gram-tip">Merke: mir (Dativ) – mich (Akkusativ); dir – dich; ihm – ihn.</div>
         `
       },
       {
@@ -266,7 +309,7 @@ var GRAM_SECTIONS_BBR = [
             <tr><td>Hauptsatz (HS)</td><td>Position 2</td><td>Ich lerne Deutsch.</td></tr>
             <tr><td>Nebensatz (NS)</td><td>am Ende</td><td>…, weil ich Deutsch lerne.</td></tr>
           </table>
-          <p class="gram-text"><span class="hl">Wichtige Konjunktionen:</span></p>
+          <p class="gram-text"><span class="hl">Wichtige Konjunktionen (Nebensatzeinleiter):</span></p>
           <ul style="margin-left:20px; font-size:0.85rem;">
             <li>Grund: weil, da</li>
             <li>Gegensatz: obwohl</li>
@@ -281,6 +324,7 @@ var GRAM_SECTIONS_BBR = [
             NS vor HS: Weil ich lernen muss, bleibe ich zu Hause.<br>
             HS + NS: Ich bleibe zu Hause, weil ich lernen muss.
           </div>
+          <div class="gram-tip">Im Hauptsatz Verb an 2. Stelle, im Nebensatz am Ende.</div>
         `
       },
       {
@@ -295,8 +339,9 @@ var GRAM_SECTIONS_BBR = [
             <tr><td>Vor entgegenstellenden Konjunktionen (aber, sondern)</td><td>Er ist klein, aber stark.</td></tr>
             <tr><td>Infinitivgruppen mit um … zu, ohne … zu, anstatt … zu</td><td>Er ging, ohne etwas zu sagen.</td></tr>
             <tr><td>Appositionen (Einschübe)</td><td>Herr Meier, unser Nachbar, hilft uns.</td></tr>
+            <tr><td>Nachgestellte Erläuterungen</td><td>Er kommt morgen, nämlich um 10 Uhr.</td></tr>
           </table>
-          <div class="gram-tip">Vor „dass“ gehört immer ein Komma!</div>
+          <div class="gram-tip">Vor „dass“, „weil“, „obwohl“ usw. immer Komma. Auch vor Wörtern wie „nämlich“, „insbesondere“ bei nachgestellten Erläuterungen.</div>
         `
       },
       {
@@ -311,6 +356,7 @@ var GRAM_SECTIONS_BBR = [
             <tr><td>Art und Weise</td><td>Wie?</td><td>gern, schnell, besonders, vielleicht</td></tr>
           </table>
           <div class="gram-example">Morgen gehe ich draußen spielen. Normalerweise bin ich gern in der Schule.</div>
+          <div class="gram-tip">Adverbien sind unveränderlich – sie passen sich nicht an Fall oder Geschlecht an.</div>
         `
       },
       {
@@ -318,7 +364,7 @@ var GRAM_SECTIONS_BBR = [
         badge: "Grammatik",
         badgeColor: "#16a34a",
         content: `
-          <p class="gram-text"><span class="hl">Präfixe (Vorsilben)</span></p>
+          <p class="gram-text"><span class="hl">Präfixe (Vorsilben)</span> – sie verändern die Bedeutung des Grundworts.</p>
           <ul style="margin-left:20px; font-size:0.85rem;">
             <li>ver-: Veränderung (verstehen, verreisen, verbessern)</li>
             <li>vor-: räumlich/zeitlich vor (vorbereiten, vorstellen)</li>
@@ -333,6 +379,7 @@ var GRAM_SECTIONS_BBR = [
             <li>ohne Fugenelement: Kellertür, Taschentuch, Spielplatz</li>
           </ul>
           <div class="gram-example">Geburtstag + Feier = Geburtstagsfeier (mit -s-); Hals + Kette = Halskette (ohne).</div>
+          <div class="gram-tip">Vorsilben verändern die Bedeutung – lerne sie als Bausteine.</div>
         `
       }
     ]
@@ -362,6 +409,7 @@ var GRAM_SECTIONS_BBR = [
             <tr><td>leise</td><td>laut</td></tr>
             <tr><td>viele</td><td>wenige</td></tr>
           </table>
+          <div class="gram-tip">Gegenteile helfen beim Wortverständnis – oft kann man sich ein Wort durch sein Gegenteil besser merken.</div>
         `
       },
       {
@@ -378,7 +426,7 @@ var GRAM_SECTIONS_BBR = [
             <tr><td>Pflaster</td><td>das Heftpflaster für Wunden</td><td>der Straßenbelag</td></tr>
             <tr><td>Hahn</td><td>das Tier (männliches Huhn)</td><td>der Wasserhahn</td></tr>
           </table>
-          <div class="gram-tip">Immer auf den Kontext achten!</div>
+          <div class="gram-tip">Gleiches Wort, verschiedene Bedeutung – auf den Kontext achten! (z.B. „Der Hahn kräht“ vs. „Der Hahn tropft“).</div>
         `
       },
       {
@@ -396,6 +444,7 @@ var GRAM_SECTIONS_BBR = [
             <tr><td>Gaul</td><td>Pferd</td><td>Ross</td></tr>
           </table>
           <p class="gram-text">Verwendung:<br>• Umgangssprache: im Alltag, mit Freunden.<br>• Standard: in Schule, Beruf, offiziellen Texten.<br>• Gehoben: in Literatur, festlichen Reden.</p>
+          <div class="gram-tip">Wähle die passende Stilebene je nach Situation – was im Freundeskreis ok ist, kann im Aufsatz unpassend sein.</div>
         `
       },
       {
@@ -413,6 +462,24 @@ var GRAM_SECTIONS_BBR = [
             <tr><td>reklamieren</td><td>sich beschweren, Umtausch fordern</td></tr>
             <tr><td>tolerieren</td><td>gelten lassen, akzeptieren</td></tr>
           </table>
+          <div class="gram-tip">Fremdwörter haben oft eine deutsche Entsprechung (z.B. Computer – Rechner). Lerne sie im Zusammenhang.</div>
+        `
+      },
+      // Neue Karte: Synonyme
+      {
+        title: "Synonyme – bedeutungsähnliche Wörter",
+        badge: "Wortschatz",
+        badgeColor: "#d97706",
+        content: `
+          <p class="gram-text">Synonyme haben eine ähnliche, aber nie völlig gleiche Bedeutung. Die Wahl hängt vom Kontext und der Stilebene ab.</p>
+          <table class="gram-table">
+            <tr><th>Wort</th><th>Synonyme</th></tr>
+            <tr><td>schön</td><td>hübsch, attraktiv, ansehnlich, reizend</td></tr>
+            <tr><td>gehen</td><td>laufen, schreiten, spazieren, eilen</td></tr>
+            <tr><td>sagen</td><td>sprechen, äußern, mitteilen, erzählen</td></tr>
+            <tr><td>klug</td><td>intelligent, schlau, gescheit</td></tr>
+          </table>
+          <div class="gram-tip">Achte auf die Konnotation (positive/negative Färbung)! „Schlank“ und „dünn“ sind nicht immer austauschbar.</div>
         `
       }
     ]
