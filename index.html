@@ -429,15 +429,20 @@ body{font-family:"DM Sans",sans-serif;background:var(--paper);color:var(--ink);m
         <span class="nav-tab-label">MSA-Aufgaben</span>
         <span class="nav-tab-sub">Reguläre Themen</span>
       </div>
-      <div class="nav-tab" id="msa-tab-regeln" onclick="switchAreaTab('msa','regeln')">
-        <span class="nav-tab-icon">📖</span>
-        <span class="nav-tab-label">Regeln</span>
-        <span class="nav-tab-sub">Nachschlagen</span>
+      <div class="nav-tab" id="msa-tab-zehn" onclick="switchAreaTab('msa','zehn')">
+        <span class="nav-tab-icon">📋</span>
+        <span class="nav-tab-label">10-Punkte-Tabelle</span>
+        <span class="nav-tab-sub">Textüberarbeitung</span>
       </div>
       <div class="nav-tab" id="msa-tab-extra" onclick="switchAreaTab('msa','extra')">
         <span class="nav-tab-icon">✨</span>
         <span class="nav-tab-label">Weitere Übungsaufgaben</span>
         <span class="nav-tab-sub">Zusätzlich</span>
+      </div>
+      <div class="nav-tab" id="msa-tab-regeln" onclick="switchAreaTab('msa','regeln')">
+        <span class="nav-tab-icon">📖</span>
+        <span class="nav-tab-label">Regeln</span>
+        <span class="nav-tab-sub">Nachschlagen</span>
       </div>
     </div>
     <div id="msa-panel-aufgaben">
@@ -450,9 +455,15 @@ body{font-family:"DM Sans",sans-serif;background:var(--paper);color:var(--ink);m
       </div>
       <div id="theme-grid"></div>
     </div>
-    <div id="msa-panel-regeln" style="display:none">
-      <p style="font-size:.85rem;opacity:.5;margin-bottom:14px">Wähle ein Thema oder suche direkt.</p>
-      <div class="gram-nav" id="gram-nav-msa"></div>
+    <div id="msa-panel-zehn" style="display:none">
+      <div class="legend">
+        <span><span class="dot" style="background:#d1d5db"></span>Nicht geübt</span>
+        <span><span class="dot" style="background:#ef4444"></span>&lt;60%</span>
+        <span><span class="dot" style="background:#f97316"></span>60–79%</span>
+        <span><span class="dot" style="background:#eab308"></span>80–89%</span>
+        <span><span class="dot" style="background:#16a34a"></span>90%+</span>
+      </div>
+      <div id="msa-zehn-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;"></div>
     </div>
     <div id="msa-panel-extra" style="display:none">
       <div class="legend">
@@ -463,6 +474,10 @@ body{font-family:"DM Sans",sans-serif;background:var(--paper);color:var(--ink);m
         <span><span class="dot" style="background:#16a34a"></span>90%+</span>
       </div>
       <div id="msa-extra-grid"></div>
+    </div>
+    <div id="msa-panel-regeln" style="display:none">
+      <p style="font-size:.85rem;opacity:.5;margin-bottom:14px">Wähle ein Thema oder suche direkt.</p>
+      <div class="gram-nav" id="gram-nav-msa"></div>
     </div>
     <div style="margin-top:24px">
       <button onclick="goStart()" class="btn btn-ol">← Zurück</button>
@@ -839,7 +854,7 @@ function goStart() {
 }
 function openArea(area) {
   currentArea = area;
-  renderArea(area);
+  try { renderArea(area); } catch(e) { console.warn('renderArea error:', e); }
   switchAreaTab(area, 'aufgaben');
   showPage(area);
 }
@@ -870,7 +885,10 @@ function renderStart() {
 
 // ================================ BEREICH (MSA/BBR) ================================
 function switchAreaTab(area, tab) {
-  ['aufgaben','regeln','extra'].forEach(function(t) {
+  var tabs = (area === 'msa')
+    ? ['aufgaben','zehn','extra','regeln']
+    : ['aufgaben','regeln','extra'];
+  tabs.forEach(function(t) {
     var tabEl = document.getElementById(area+'-tab-'+t);
     var panelEl = document.getElementById(area+'-panel-'+t);
     if(tabEl) tabEl.classList.toggle('active-tab', t===tab);
@@ -883,10 +901,13 @@ function switchAreaTab(area, tab) {
   if(tab==='extra') {
     renderExtraPanel(area);
   }
+  if(tab==='zehn') {
+    renderZehnPanel();
+  }
 }
 
 function renderArea(area) {
-  var themes = (area==='msa') ? MSA_THEMES : BBR_THEMES;
+  var themes = (area==='msa') ? (window.MSA_THEMES || []) : (window.BBR_THEMES || []);
   var gridId = (area==='msa') ? 'theme-grid' : 'bbr-grid';
   var s = sc();
   var html = '';
@@ -905,13 +926,36 @@ function renderArea(area) {
   document.getElementById(gridId).innerHTML = html;
 }
 
+function renderZehnPanel() {
+  var themes = (typeof MSA_UEBERARBEITUNG_THEMES !== 'undefined') ? MSA_UEBERARBEITUNG_THEMES : [];
+  var grid = document.getElementById('msa-zehn-grid');
+  if(!grid) return;
+  var s = sc();
+  var html = '';
+  themes.forEach(function(t) {
+    var st = s[t.id];
+    var pct = st ? st.pct : undefined;
+    var lastDate = st ? fmtDate(st.ts) : '';
+    html += '<div class="card tc" style="border-left-color:'+t.color+'" onclick="openStatPage(\''+t.id+'\',\'msa\')">' +
+            '<div class="tc-emoji">'+t.emoji+'</div>' +
+            '<div class="tc-title">'+t.title+'</div>' +
+            '<div class="tc-meta">'+t.qs.length+' Aufgaben</div>' +
+            '<div class="tc-score"><span class="dot" style="background:'+scCol(pct)+'"></span><span>'+(pct!==undefined?pct+'%':'—')+'</span></div>' +
+            (lastDate?'<div class="tc-lastdate">📅 '+lastDate+'</div>':'') +
+            '</div>';
+  });
+  if(html === '') {
+    html = '<div class="coming-soon"><div class="coming-soon-icon">📋</div><h3>Keine Tabellen vorhanden</h3><p>Die msa-ueberarbeitung.js Datei wird benötigt.</p></div>';
+  }
+  grid.innerHTML = html;
+}
+
 function renderExtraPanel(area) {
   var extraThemes;
   if (area === 'msa') {
-    extraThemes = (typeof MSA_EXTRA_THEMES !== 'undefined') ? MSA_EXTRA_THEMES : 
+    // Nur MSA_EXTRA_THEMES – Ueberarbeitung hat eigenen Tab
+    extraThemes = (typeof MSA_EXTRA_THEMES !== 'undefined') ? MSA_EXTRA_THEMES :
                   (typeof EXTRA_THEMES !== 'undefined') ? EXTRA_THEMES : [];
-    if(typeof MSA_UEBERARBEITUNG_THEMES !== 'undefined')
-      extraThemes = extraThemes.concat(MSA_UEBERARBEITUNG_THEMES);
   } else {
     extraThemes = (typeof BBR_EXTRA_THEMES !== 'undefined') ? BBR_EXTRA_THEMES : [];
   }
@@ -1037,8 +1081,8 @@ function scCol(p) {
 function openStatPage(themeId, area) {
   currentArea = area || currentArea;
   var allThemes = (currentArea==='msa') 
-    ? MSA_THEMES.concat(MSA_EXTRA_THEMES||EXTRA_THEMES||[]).concat(typeof MSA_UEBERARBEITUNG_THEMES!=='undefined'?MSA_UEBERARBEITUNG_THEMES:[]) 
-    : BBR_THEMES.concat(BBR_EXTRA_THEMES || []).concat(BBR_RECHTSCHREIBUNG_THEMES || []).concat(BBR_WIEDER_THEMES || []);
+    ? (window.MSA_THEMES||[]).concat(MSA_EXTRA_THEMES||EXTRA_THEMES||[]).concat(typeof MSA_UEBERARBEITUNG_THEMES!=='undefined'?MSA_UEBERARBEITUNG_THEMES:[]) 
+    : (window.BBR_THEMES||[]).concat(BBR_EXTRA_THEMES || []).concat(BBR_RECHTSCHREIBUNG_THEMES || []).concat(BBR_WIEDER_THEMES || []);
   var theme = allThemes.filter(function(t){ return t.id===themeId; })[0];
   if(!theme) return;
   pendingThemeId = themeId;
@@ -1120,8 +1164,8 @@ function startFromStat() {
 // ================================ QUIZ-START ================================
 function startTheme(id) {
   var allThemes = (currentArea==='msa') 
-    ? MSA_THEMES.concat(MSA_EXTRA_THEMES||EXTRA_THEMES||[]).concat(typeof MSA_UEBERARBEITUNG_THEMES!=='undefined'?MSA_UEBERARBEITUNG_THEMES:[]) 
-    : BBR_THEMES.concat(BBR_EXTRA_THEMES || []).concat(BBR_RECHTSCHREIBUNG_THEMES || []).concat(BBR_WIEDER_THEMES || []);
+    ? (window.MSA_THEMES||[]).concat(MSA_EXTRA_THEMES||EXTRA_THEMES||[]).concat(typeof MSA_UEBERARBEITUNG_THEMES!=='undefined'?MSA_UEBERARBEITUNG_THEMES:[]) 
+    : (window.BBR_THEMES||[]).concat(BBR_EXTRA_THEMES || []).concat(BBR_RECHTSCHREIBUNG_THEMES || []).concat(BBR_WIEDER_THEMES || []);
   var theme = allThemes.filter(function(t){ return t.id===id; })[0];
   if(!theme) return;
   S.themeId = id;
@@ -1890,10 +1934,11 @@ document.addEventListener("keydown", function(e){
 <script src="bbr-aufgaben.js"></script>
 <script src="msa-extra-aufgaben.js"></script>
 <script src="msa-ueberarbeitung.js"></script>
+<!-- BBR Extra-Themen: jede Datei überschreibt BBR_EXTRA_THEMES – wir sichern nach jeder Datei -->
 <script src="bbr-extra-aufgaben.js"></script>
+<script>var _bbr0 = (typeof BBR_EXTRA_THEMES!=='undefined') ? BBR_EXTRA_THEMES.slice() : [];</script>
 <!-- BBR-Sondermodule: separat bearbeitbare Themen -->
 <script src="bbr-rechtschreibung.js"></script>
-<!-- BBR Extra-Themen: jede Datei setzt BBR_EXTRA_THEMES – wir mergen sie -->
 <script src="bbr-extra-wieder.js"></script>
 <script>var _bbr1 = (typeof BBR_EXTRA_THEMES!=='undefined') ? BBR_EXTRA_THEMES.slice() : [];</script>
 <script src="bbr-extra-getrennt.js"></script>
@@ -1904,7 +1949,14 @@ document.addEventListener("keydown", function(e){
 <script>var _bbr4 = (typeof BBR_EXTRA_THEMES!=='undefined') ? BBR_EXTRA_THEMES.slice() : [];</script>
 <script src="bbr-extra-komma.js"></script>
 <script>var _bbr5 = (typeof BBR_EXTRA_THEMES!=='undefined') ? BBR_EXTRA_THEMES.slice() : [];</script>
-<script>BBR_EXTRA_THEMES = _bbr1.concat(_bbr2).concat(_bbr3).concat(_bbr4).concat(_bbr5);</script>
+<script>
+// Alle Module zusammenführen, Duplikate per id entfernen (erste Instanz gewinnt)
+(function(){
+  var all = _bbr0.concat(_bbr1).concat(_bbr2).concat(_bbr3).concat(_bbr4).concat(_bbr5);
+  var seen = {};
+  BBR_EXTRA_THEMES = all.filter(function(t){ if(seen[t.id]) return false; seen[t.id]=true; return true; });
+})();
+</script>
 
 <!-- ═══ INITIALISIERUNG ════════════════════════════════════════════ -->
 <script>
