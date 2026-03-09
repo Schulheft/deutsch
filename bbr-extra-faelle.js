@@ -1,3 +1,6 @@
+// ═══════════════════════════════════════════════════════════════
+// bbr-extra-faelle.js  –  Fälle (Kasus) (9. Klasse)
+// ═══════════════════════════════════════════════════════════════
 var BBR_EXTRA_THEMES = [
   {
     id: "bbr_extra_faelle",
@@ -5,166 +8,142 @@ var BBR_EXTRA_THEMES = [
     emoji: "📘",
     color: "#0891b2",
     qs: [
-      {
-        sub: "Nominativ (Wer? Was?)",
-        type: "cross",
-        q: "Bestimme den Fall des unterstrichenen Wortes:",
-        rows: [
-          "<u>Der Hund</u> bellt.",
-          "<u>Ein Auto</u> fährt.",
-          "<u>Die Kinder</u> spielen.",
-          "<u>Mein Bruder</u> ist groß.",
-          "<u>Sie</u> lacht."
+      { sub:"Kasus bestimmen", type:"mc",
+        q:"„Der Hund bellt.“ – Welchen Fall hat ‚der Hund'?",
+        o:["Akkusativ","Dativ","Nominativ","Genitiv"],
+        c:2, model:"Der Hund ist das Subjekt → Nominativ (Wer bellt?).",
+        rule:"<div class=rbox>Der <span class=hl>Nominativ</span> antwortet auf ‚Wer oder was?' und ist das Subjekt.</div>" },
+      { sub:"Kasus bestimmen", type:"mc",
+        q:"„Ich sehe den Hund.“ – Welchen Fall hat ‚den Hund'?",
+        o:["Nominativ","Dativ","Akkusativ","Genitiv"],
+        c:2, model:"Ich sehe wen/was? → den Hund → Akkusativ.",
+        rule:"<div class=rbox>Der <span class=hl>Akkusativ</span> antwortet auf ‚Wen oder was?' → direktes Objekt.</div>" },
+      { sub:"Kasus bestimmen", type:"mc",
+        q:"„Ich helfe dem Kind.“ – Welchen Fall hat ‚dem Kind'?",
+        o:["Nominativ","Akkusativ","Genitiv","Dativ"],
+        c:3, model:"Ich helfe wem? → dem Kind → Dativ.",
+        rule:"<div class=rbox>Der <span class=hl>Dativ</span> antwortet auf ‚Wem?' → indirektes Objekt.</div>" },
+      { sub:"Kasus bestimmen", type:"mc",
+        q:"„Das Haus des Nachbarn ist groß.“ – Welchen Fall hat ‚des Nachbarn'?",
+        o:["Nominativ","Akkusativ","Dativ","Genitiv"],
+        c:3, model:"das Haus wessen? → des Nachbarn → Genitiv.",
+        rule:"<div class=rbox>Der <span class=hl>Genitiv</span> antwortet auf ‚Wessen?' → Besitz/Zugehörigkeit.</div>" },
+      // ── Richtige Form wählen ──────────────────────────────────
+      { sub:"Richtige Form", type:"cross", isSingle:true,
+        q:"„Ich gebe ___ Kind einen Ball.“ – Dativ oder Akkusativ?\n(dem / den)",
+        rows:["dem / den"], cols:["dem (Dativ)","den (Akkusativ)"], correct:[0],
+        model:"geben → wem? dem Kind → Dativ.",
+        rule:"<div class=rbox>Ich gebe wem? → <span class=hl>dem Kind</span> (Dativ).</div>" },
+      { sub:"Richtige Form", type:"cross", isSingle:true,
+        q:"„Sie sieht ___ Mann auf der Straße.“ – Akkusativ?\n(den / dem)",
+        rows:["den / dem"], cols:["den (Akkusativ)","dem (Dativ)"], correct:[0],
+        model:"sehen → wen? den Mann → Akkusativ.",
+        rule:"<div class=rbox>Ich sehe wen? → <span class=hl>den Mann</span> (Akkusativ).</div>" },
+      { sub:"Richtige Form", type:"cross", isSingle:true,
+        q:"„Das ist das Buch ___ Lehrerin.“ – Genitiv?\n(der / die)",
+        rows:["der / die"], cols:["der (Genitiv: die → der)","die (Nominativ)"], correct:[0],
+        model:"das Buch wessen? → der Lehrerin → Genitiv (feminine Nomen: die → der).",
+        rule:"<div class=rbox>Genitiv feminin: <span class=hl>die → der</span> (das Buch der Lehrerin).</div>" },
+      // ── Präpositionen mit Akkusativ ───────────────────────────
+      { sub:"Präposition mit Akkusativ", type:"mc",
+        q:"Welche Präposition verlangt immer den Akkusativ?",
+        o:["mit","wegen","für","trotz"],
+        c:2, model:"für verlangt Akkusativ: für den Mann.",
+        rule:"<div class=rbox>Präpositionen mit Akkusativ: <span class=hl>für, durch, gegen, ohne, um</span>.</div>" },
+      { sub:"Präposition + Kasus", type:"cross", isSingle:true,
+        q:"„Er kauft das Geschenk für ___.“ – welche Form?\n(seinen Vater / seinem Vater)",
+        rows:["seinen Vater / seinem Vater"], cols:["Akkusativ (seinen Vater)","Dativ (seinem Vater)"], correct:[0],
+        model:"für verlangt Akkusativ → seinen Vater.",
+        rule:"<div class=rbox><span class=hl>für</span> + Akkusativ: für seinen Vater.</div>" },
+      { sub:"Präposition + Kasus", type:"cross", isSingle:true,
+        q:"„Sie fährt mit ___.“ – welche Form?\n(ihrem Bruder / ihren Bruder)",
+        rows:["ihrem Bruder / ihren Bruder"], cols:["Dativ (ihrem Bruder)","Akkusativ (ihren Bruder)"], correct:[0],
+        model:"mit verlangt Dativ → ihrem Bruder.",
+        rule:"<div class=rbox><span class=hl>mit</span> + Dativ: mit ihrem Bruder.</div>" },
+      // ── Wechselpräpositionen ──────────────────────────────────
+      { sub:"Wechselpräposition – wohin? / wo?", type:"cross", isSingle:true,
+        q:"„Er geht in ___ Park.“ (wohin? = Bewegung)\n(den / dem)",
+        rows:["den / dem"], cols:["den (Akkusativ: wohin?)","dem (Dativ: wo?)"], correct:[0],
+        model:"wohin? Bewegung → Akkusativ → in den Park.",
+        rule:"<div class=rbox>Wechselpräpositionen: wohin? → <span class=hl>Akkusativ</span>; wo? → <span class=hl>Dativ</span>.</div>" },
+      { sub:"Wechselpräposition – wohin? / wo?", type:"cross", isSingle:true,
+        q:"„Er spielt in ___ Park.“ (wo? = kein Ortswechsel)\n(den / dem)",
+        rows:["den / dem"], cols:["den (Akkusativ: wohin?)","dem (Dativ: wo?)"], correct:[1],
+        model:"wo? kein Ortswechsel → Dativ → in dem Park.",
+        rule:"<div class=rbox>Ort (wo?) → <span class=hl>Dativ</span>: in dem Park.</div>" },
+      { sub:"Wechselpräposition – wohin? / wo?", type:"cross", isSingle:true,
+        q:"„Sie legt das Buch auf ___ Tisch.“ (wohin?)\n(den / dem)",
+        rows:["den / dem"], cols:["den (Akkusativ: wohin?)","dem (Dativ: wo?)"], correct:[0],
+        model:"wohin? legen → Akkusativ → auf den Tisch.",
+        rule:"<div class=rbox>Legen/stellen/hängen (Bewegung wohin?) → <span class=hl>Akkusativ</span>.</div>" },
+      { sub:"Wechselpräposition – wohin? / wo?", type:"cross", isSingle:true,
+        q:"„Das Buch liegt auf ___ Tisch.“ (wo?)\n(den / dem)",
+        rows:["den / dem"], cols:["den (Akkusativ: wohin?)","dem (Dativ: wo?)"], correct:[1],
+        model:"wo? liegen → Dativ → auf dem Tisch.",
+        rule:"<div class=rbox>Liegen/stehen/hängen (Ort wo?) → <span class=hl>Dativ</span>.</div>" },
+      // ── Verben mit bestimmtem Kasus ───────────────────────────
+      { sub:"Verb + Kasus", type:"cross", isSingle:true,
+        q:"„Sie dankt ___ Mutter.“ – Akkusativ oder Dativ?\n(ihrer / ihre)",
+        rows:["ihrer Mutter / ihre Mutter"], cols:["Dativ (ihrer Mutter)","Akkusativ (ihre Mutter)"], correct:[0],
+        model:"danken verlangt Dativ → ihrer Mutter.",
+        rule:"<div class=rbox>Verben wie <span class=hl>danken, helfen, gehören, glauben</span> verlangen den Dativ.</div>" },
+      { sub:"Verb + Kasus", type:"cross", isSingle:true,
+        q:"„Er fragt ___ Lehrer.“ – Akkusativ oder Dativ?\n(den / dem)",
+        rows:["den Lehrer / dem Lehrer"], cols:["Akkusativ (den Lehrer)","Dativ (dem Lehrer)"], correct:[0],
+        model:"fragen verlangt Akkusativ → den Lehrer.",
+        rule:"<div class=rbox>Verben wie <span class=hl>fragen, sehen, hören, lieben</span> verlangen den Akkusativ.</div>" },
+      // ── Präpositionen mit Genitiv ─────────────────────────────
+      { sub:"Präposition mit Genitiv", type:"mc",
+        q:"Welche Präposition verlangt den Genitiv?",
+        o:["mit","auf","wegen","gegen"],
+        c:2, model:"wegen verlangt Genitiv: wegen des Regens.",
+        rule:"<div class=rbox>Präpositionen mit Genitiv: <span class=hl>wegen, trotz, während, statt, innerhalb</span>.</div>" },
+      { sub:"Präposition + Genitiv", type:"cross", isSingle:true,
+        q:"„___ des Sturms fiel der Strom aus.“ – welche Form?\n(Wegen / Weil)",
+        rows:["Wegen / Weil"], cols:["Wegen (Präposition + Genitiv)","Weil (Konjunktion + Nebensatz)"], correct:[0],
+        model:"Wegen des Sturms → Präposition + Genitiv.",
+        rule:"<div class=rbox><span class=hl>wegen</span> + Genitiv: wegen des Sturms.</div>" },
+      // ── Gemischte Aufgaben ────────────────────────────────────
+      { sub:"Kasus bestimmen", type:"mc",
+        q:"„Das Buch gehört meinem Bruder.“ – Welchen Fall hat ‚meinem Bruder'?",
+        o:["Nominativ","Akkusativ","Dativ","Genitiv"],
+        c:2, model:"gehören verlangt Dativ → meinem Bruder.",
+        rule:"<div class=rbox>Das Verb <span class=hl>gehören</span> verlangt den Dativ.</div>" },
+      { sub:"Fehler finden", type:"mc",
+        q:"Welcher Satz enthält einen Kasusfehler?",
+        o:["Ich helfe dem Kind.","Er dankt seiner Mutter.","Wir besuchen unseren Freund.","Sie hilft ihren Vater."],
+        c:3, model:"helfen + Dativ → ihrem Vater (nicht ihren = Akkusativ).",
+        rule:"<div class=rbox><span class=hl>helfen</span> verlangt Dativ: ihrem Vater.</div>" },
+      { sub:"Zuordnung", type:"match",
+        q:"Ordne die Frage dem Kasus zu.",
+        pairs:[
+          ["Wer? Was?",    "Nominativ"],
+          ["Wen? Was?",    "Akkusativ"],
+          ["Wem?",         "Dativ"],
+          ["Wessen?",      "Genitiv"]
         ],
-        cols: ["Nominativ", "Akkusativ", "Dativ", "Genitiv"],
-        correct: [0, 0, 0, 0, 0],
-        model: "Alle unterstrichenen Wörter sind Subjekte im Nominativ.",
-        rule: "<div class=rbox>Der <span class=hl>Nominativ</span> antwortet auf 'Wer oder was?' und ist meist das Subjekt.</div>"
-      },
-      {
-        sub: "Akkusativ (Wen? Was?)",
-        type: "cross",
-        q: "Bestimme den Fall des unterstrichenen Wortes:",
-        rows: [
-          "Ich sehe <u>den Hund</u>.",
-          "Er kauft <u>ein Auto</u>.",
-          "Sie mag <u>die Kinder</u>.",
-          "Wir besuchen <u>meinen Bruder</u>.",
-          "Hörst du <u>mich</u>?"
-        ],
-        cols: ["Nominativ", "Akkusativ", "Dativ", "Genitiv"],
-        correct: [1, 1, 1, 1, 1],
-        model: "Alle unterstrichenen Wörter sind Akkusativobjekte.",
-        rule: "<div class=rbox>Der <span class=hl>Akkusativ</span> antwortet auf 'Wen oder was?' und ist oft das direkte Objekt.</div>"
-      },
-      {
-        sub: "Dativ (Wem?)",
-        type: "cross",
-        q: "Bestimme den Fall des unterstrichenen Wortes:",
-        rows: [
-          "Ich helfe <u>dem Hund</u>.",
-          "Er gibt <u>dem Kind</u> ein Buch.",
-          "Sie dankt <u>der Lehrerin</u>.",
-          "Wir gehören <u>dem Verein</u> an.",
-          "Das Buch gehört <u>mir</u>."
-        ],
-        cols: ["Nominativ", "Akkusativ", "Dativ", "Genitiv"],
-        correct: [2, 2, 2, 2, 2],
-        model: "Alle unterstrichenen Wörter sind Dativobjekte.",
-        rule: "<div class=rbox>Der <span class=hl>Dativ</span> antwortet auf 'Wem?' und ist oft das indirekte Objekt.</div>"
-      },
-      {
-        sub: "Genitiv (Wessen?)",
-        type: "cross",
-        q: "Bestimme den Fall des unterstrichenen Wortes:",
-        rows: [
-          "Das Haus <u>des Nachbarn</u> ist groß.",
-          "Die Farbe <u>der Blume</u> ist rot.",
-          "Wegen <u>des Regens</u> bleiben wir zu Hause.",
-          "Trotz <u>des Lärms</u> schlief er.",
-          "Die Mutter <u>des Kindes</u> kommt."
-        ],
-        cols: ["Nominativ", "Akkusativ", "Dativ", "Genitiv"],
-        correct: [3, 3, 3, 3, 3],
-        model: "Alle unterstrichenen Wörter sind Genitivattribute oder folgen auf Genitivpräpositionen.",
-        rule: "<div class=rbox>Der <span class=hl>Genitiv</span> antwortet auf 'Wessen?' und zeigt Besitz oder Zugehörigkeit an.</div>"
-      },
-      {
-        sub: "Präpositionen mit Akkusativ",
-        type: "cross",
-        q: "Welcher Fall folgt auf die Präposition?",
-        rows: [
-          "für ___ (der Freund)",
-          "durch ___ (das Fenster)",
-          "gegen ___ (der Baum)",
-          "ohne ___ (die Brille)",
-          "um ___ (der See)"
-        ],
-        cols: ["Nominativ", "Akkusativ", "Dativ", "Genitiv"],
-        correct: [1, 1, 1, 1, 1],
-        model: "für, durch, gegen, ohne, um verlangen Akkusativ.",
-        rule: "<div class=rbox>Präpositionen mit Akkusativ: <span class=hl>für, durch, gegen, ohne, um</span>.</div>"
-      },
-      {
-        sub: "Präpositionen mit Dativ",
-        type: "cross",
-        q: "Welcher Fall folgt auf die Präposition?",
-        rows: [
-          "mit ___ (der Hund)",
-          "nach ___ (die Schule)",
-          "von ___ (der Vater)",
-          "aus ___ (das Haus)",
-          "bei ___ (der Freund)"
-        ],
-        cols: ["Nominativ", "Akkusativ", "Dativ", "Genitiv"],
-        correct: [2, 2, 2, 2, 2],
-        model: "mit, nach, von, aus, bei verlangen Dativ.",
-        rule: "<div class=rbox>Präpositionen mit Dativ: <span class=hl>mit, nach, von, aus, bei, seit, zu, außer</span>.</div>"
-      },
-      {
-        sub: "Präpositionen mit Genitiv",
-        type: "cross",
-        q: "Welcher Fall folgt auf die Präposition?",
-        rows: [
-          "trotz ___ (der Regen)",
-          "wegen ___ (der Stau)",
-          "während ___ (die Vorstellung)",
-          "statt ___ (das Buch)",
-          "innerhalb ___ (die Stadt)"
-        ],
-        cols: ["Nominativ", "Akkusativ", "Dativ", "Genitiv"],
-        correct: [3, 3, 3, 3, 3],
-        model: "trotz, wegen, während, statt, innerhalb verlangen Genitiv.",
-        rule: "<div class=rbox>Präpositionen mit Genitiv: <span class=hl>trotz, wegen, während, statt, innerhalb, außerhalb</span>.</div>"
-      },
-      {
-        sub: "Wechselpräpositionen (Dativ oder Akkusativ?)",
-        type: "cross",
-        q: "Akkusativ (wohin?) oder Dativ (wo?)?",
-        rows: [
-          "Er geht in ___ (der Park). (wohin?)",
-          "Er spielt in ___ (der Park). (wo?)",
-          "Sie legt das Buch auf ___ (der Tisch). (wohin?)",
-          "Das Buch liegt auf ___ (der Tisch). (wo?)",
-          "Wir stellen das Auto vor ___ (das Haus). (wohin?)"
-        ],
-        cols: ["Akkusativ", "Dativ"],
-        correct: [0, 1, 0, 1, 0],
-        model: "Wohin? → Akkusativ; Wo? → Dativ.",
-        rule: "<div class=rbox>Wechselpräpositionen (in, an, auf, unter, über, vor, hinter, neben, zwischen): bei Bewegung (wohin?) → <span class=hl>Akkusativ</span>, bei Ort (wo?) → <span class=hl>Dativ</span>.</div>"
-      },
-      {
-        sub: "Verben mit Dativ oder Akkusativ",
-        type: "cross",
-        q: "Welcher Fall folgt auf das Verb?",
-        rows: [
-          "Ich helfe ___ (der Freund).",
-          "Er fragt ___ (der Lehrer).",
-          "Sie dankt ___ (die Mutter).",
-          "Wir sehen ___ (das Kind).",
-          "Das Buch gehört ___ (der Mann)."
-        ],
-        cols: ["Akkusativ", "Dativ"],
-        correct: [1, 0, 1, 0, 1],
-        model: "helfen, danken, gehören → Dativ; fragen, sehen → Akkusativ.",
-        rule: "<div class=rbox>Bestimmte Verben verlangen immer einen bestimmten Fall: <span class=hl>helfen, danken, gehören</span> + Dativ; <span class=hl>fragen, sehen, hören</span> + Akkusativ.</div>"
-      },
-      {
-        sub: "Gemischte Übung",
-        type: "cross",
-        q: "Bestimme den Fall des unterstrichenen Wortes:",
-        rows: [
-          "Ich gebe <u>dem Kind</u> einen Ball.",
-          "Das Auto <u>des Nachbarn</u> ist neu.",
-          "Er wartet auf <u>den Bus</u>.",
-          "Sie wohnt bei <u>ihrer Tante</u>.",
-          "Wegen <u>des Sturms</u> fiel der Strom aus."
-        ],
-        cols: ["Nominativ", "Akkusativ", "Dativ", "Genitiv"],
-        correct: [2, 3, 1, 2, 3],
-        model: "dem Kind=Dativ, des Nachbarn=Genitiv, den Bus=Akkusativ, ihrer Tante=Dativ, des Sturms=Genitiv.",
-        rule: "<div class=rbox>Übung zu allen vier Fällen.</div>"
-      }
+        model:"Nominativ=Wer/Was, Akkusativ=Wen/Was, Dativ=Wem, Genitiv=Wessen.",
+        rule:"<div class=rbox>Kasusproben: Nom → Wer?, Akk → Wen?, Dat → Wem?, Gen → Wessen?</div>" },
+      { sub:"Anwendung", type:"mc",
+        q:"„Er wohnt bei ___ Tante.“ – welche Form?\n(seiner / seine / seinen / seines)",
+        o:["seiner Tante","seine Tante","seinen Tante","seines Tante"],
+        c:0, model:"bei + Dativ; Tante (feminin) → bei seiner Tante.",
+        rule:"<div class=rbox><span class=hl>bei</span> + Dativ: bei seiner Tante (feminin: seiner).</div>" },
+      { sub:"Anwendung", type:"mc",
+        q:"„Trotz ___ Regens blieben wir draußen.“ – welche Form?",
+        o:["den Regen","dem Regen","des Regens","der Regen"],
+        c:2, model:"trotz + Genitiv → des Regens.",
+        rule:"<div class=rbox><span class=hl>trotz</span> + Genitiv: trotz des Regens.</div>" },
+      { sub:"Kasus im Satz", type:"mc",
+        q:"„Der Lehrer erklärt den Schülern die Aufgabe.“ – Welchen Fall hat ‚den Schülern'?",
+        o:["Nominativ","Akkusativ","Dativ","Genitiv"],
+        c:2, model:"erklären → jemandem (wem?) → den Schülern → Dativ.",
+        rule:"<div class=rbox>erklären + Dativ (wem?) + Akkusativ (was?).</div>" },
+      { sub:"Kasus im Satz", type:"mc",
+        q:"„Wegen des schlechten Wetters blieben wir zu Hause.“ – Welchen Fall hat ‚des schlechten Wetters'?",
+        o:["Nominativ","Akkusativ","Dativ","Genitiv"],
+        c:3, model:"wegen verlangt Genitiv → des schlechten Wetters.",
+        rule:"<div class=rbox><span class=hl>wegen</span> + Genitiv.</div>" }
     ]
   }
 ];

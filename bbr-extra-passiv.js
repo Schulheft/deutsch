@@ -1,3 +1,6 @@
+// ═══════════════════════════════════════════════════════════════
+// bbr-extra-passiv.js  –  Aktiv und Passiv (9. Klasse)
+// ═══════════════════════════════════════════════════════════════
 var BBR_EXTRA_THEMES = [
   {
     id: "bbr_extra_passiv",
@@ -5,148 +8,146 @@ var BBR_EXTRA_THEMES = [
     emoji: "⚙️",
     color: "#7c3aed",
     qs: [
-      {
-        sub: "Aktiv oder Passiv erkennen",
-        type: "cross",
-        q: "Aktiv oder Passiv?",
-        rows: [
-          "Der Brief wird geschrieben.",
-          "Die Kinder spielen im Garten.",
-          "Das Haus wurde gebaut.",
-          "Er hat das Buch gelesen.",
-          "Das Lied ist gesungen worden."
+      { sub:"Aktiv oder Passiv?", type:"cross", isSingle:true,
+        q:"„Der Brief wird geschrieben.“ – Aktiv oder Passiv?",
+        rows:["Aktiv / Passiv"], cols:["Aktiv","Passiv"], correct:[1],
+        model:"wird + Partizip II → Passiv.",
+        rule:"<div class=rbox>Passiv erkennt man an der Form von <span class=hl>werden + Partizip II</span>.</div>" },
+      { sub:"Aktiv oder Passiv?", type:"cross", isSingle:true,
+        q:"„Die Kinder spielen im Garten.“ – Aktiv oder Passiv?",
+        rows:["Aktiv / Passiv"], cols:["Aktiv","Passiv"], correct:[0],
+        model:"spielen → normales Verb → Aktiv.",
+        rule:"<div class=rbox>Im Aktiv führt das Subjekt die Handlung aus.</div>" },
+      { sub:"Aktiv oder Passiv?", type:"cross", isSingle:true,
+        q:"„Das Haus wurde gebaut.“ – Aktiv oder Passiv?",
+        rows:["Aktiv / Passiv"], cols:["Aktiv","Passiv"], correct:[1],
+        model:"wurde + Partizip II → Passiv (Präteritum).",
+        rule:"<div class=rbox>Passiv Präteritum: <span class=hl>wurde + Partizip II</span>.</div>" },
+      { sub:"Aktiv oder Passiv?", type:"cross", isSingle:true,
+        q:"„Er hat das Buch gelesen.“ – Aktiv oder Passiv?",
+        rows:["Aktiv / Passiv"], cols:["Aktiv","Passiv"], correct:[0],
+        model:"hat gelesen → Perfekt Aktiv (nicht Passiv).",
+        rule:"<div class=rbox>Perfekt Aktiv: haben/sein + Partizip II. Passiv: werden + Partizip II.</div>" },
+      // ── Passiv bilden ─────────────────────────────────────────
+      { sub:"Passiv Präsens", type:"mc",
+        q:"„Der Mechaniker repariert das Auto.“ – Wie lautet der Passivsatz?",
+        o:["Das Auto repariert wird vom Mechaniker.","Das Auto wird vom Mechaniker repariert.","Das Auto wurde vom Mechaniker repariert.","Das Auto ist repariert vom Mechaniker."],
+        c:1, model:"Passiv Präsens: Das Auto wird (vom Mechaniker) repariert.",
+        rule:"<div class=rbox>Passiv Präsens: <span class=hl>werden (Präsens) + Partizip II</span>.</div>" },
+      { sub:"Passiv Präteritum", type:"mc",
+        q:"„Die Polizei verhaftete den Täter.“ – Wie lautet der Passivsatz?",
+        o:["Der Täter wird von der Polizei verhaftet.","Der Täter war von der Polizei verhaftet.","Der Täter wurde von der Polizei verhaftet.","Der Täter ist von der Polizei verhaftet worden."],
+        c:2, model:"Präteritum → Passiv Präteritum: wurde verhaftet.",
+        rule:"<div class=rbox>Passiv Präteritum: <span class=hl>wurde + Partizip II</span>.</div>" },
+      // ── Passiv mit Modalverb ──────────────────────────────────
+      { sub:"Passiv mit Modalverb", type:"mc",
+        q:"„Man muss den Brief schreiben.“ – Wie lautet der Passivsatz mit Modalverb?",
+        o:["Der Brief muss geschrieben sein.","Der Brief muss geschrieben werden.","Der Brief wird geschrieben müssen.","Der Brief muss werden geschrieben."],
+        c:1, model:"Passiv + Modalverb: Modalverb + Partizip II + werden (Infinitiv).",
+        rule:"<div class=rbox>Passiv mit Modalverb: <span class=hl>Modalverb + Partizip II + werden</span>.</div>" },
+      { sub:"Passiv mit Modalverb", type:"mc",
+        q:"Welcher Satz ist ein korrekter Passivsatz mit Modalverb?",
+        o:["Die Aufgabe soll gemacht sein.","Die Aufgabe soll gemacht werden.","Die Aufgabe soll werden gemacht.","Die Aufgabe wird soll gemacht."],
+        c:1, model:"soll gemacht werden → korrekt.",
+        rule:"<div class=rbox>Passiv mit Modalverb: <span class=hl>soll/muss/kann + Partizip II + werden</span>.</div>" },
+      // ── Vorgangs- vs. Zustandspassiv ─────────────────────────
+      { sub:"Vorgangs- oder Zustandspassiv?", type:"cross", isSingle:true,
+        q:"„Das Fenster wird geöffnet.“ – Vorgangs- oder Zustandspassiv?",
+        rows:["Vorgangspassiv / Zustandspassiv"], cols:["Vorgangspassiv (werden)","Zustandspassiv (sein)"], correct:[0],
+        model:"wird geöffnet → Vorgang findet statt → Vorgangspassiv.",
+        rule:"<div class=rbox>Vorgangspassiv: <span class=hl>werden + Partizip II</span> (Vorgang). Zustandspassiv: <span class=hl>sein + Partizip II</span> (Zustand).</div>" },
+      { sub:"Vorgangs- oder Zustandspassiv?", type:"cross", isSingle:true,
+        q:"„Das Fenster ist geöffnet.“ – Vorgangs- oder Zustandspassiv?",
+        rows:["Vorgangspassiv / Zustandspassiv"], cols:["Vorgangspassiv (werden)","Zustandspassiv (sein)"], correct:[1],
+        model:"ist geöffnet → Zustand → Zustandspassiv.",
+        rule:"<div class=rbox>Zustandspassiv: <span class=hl>sein + Partizip II</span> (beschreibt Zustand).</div>" },
+      // ── von-Ergänzung ─────────────────────────────────────────
+      { sub:"Täter im Passiv", type:"mc",
+        q:"Wie wird der Täter/das Agens im Passivsatz eingeführt?",
+        o:["mit + Akkusativ","von + Dativ","durch + Akkusativ","über + Dativ"],
+        c:1, model:"Täter im Passiv: von + Dativ (vom Mechaniker).",
+        rule:"<div class=rbox>Täter im Passiv: <span class=hl>von + Dativ</span> (von der Polizei, vom Arzt).</div>" },
+      // ── Passiv Zeitformen ─────────────────────────────────────
+      { sub:"Passiv-Zeitform", type:"mc",
+        q:"„Das Haus ist gebaut worden.“ – Welche Passivform ist das?",
+        o:["Passiv Präsens","Passiv Präteritum","Passiv Perfekt","Passiv Plusquamperfekt"],
+        c:2, model:"ist + Partizip II + worden → Passiv Perfekt.",
+        rule:"<div class=rbox>Passiv Perfekt: <span class=hl>ist/sind + Partizip II + worden</span>.</div>" },
+      { sub:"Passiv-Zeitform", type:"mc",
+        q:"„Das Haus war gebaut worden.“ – Welche Passivform ist das?",
+        o:["Passiv Präsens","Passiv Präteritum","Passiv Perfekt","Passiv Plusquamperfekt"],
+        c:3, model:"war + Partizip II + worden → Passiv Plusquamperfekt.",
+        rule:"<div class=rbox>Passiv Plusquamperfekt: <span class=hl>war/waren + Partizip II + worden</span>.</div>" },
+      // ── Unpersönliches Passiv ─────────────────────────────────
+      { sub:"Unpersönliches Passiv", type:"mc",
+        q:"„Es wird getanzt.“ – Was für ein Passiv ist das?",
+        o:["Persönliches Passiv","Unpersönliches Passiv","Zustandspassiv","Passiv Perfekt"],
+        c:1, model:"Es wird getanzt → kein personenbezogenes Subjekt → unpersönliches Passiv.",
+        rule:"<div class=rbox>Unpersönliches Passiv: kein Handelnder genannt, oft mit Platzhalter ‚es': <span class=hl>Es wird gearbeitet.</span></div>" },
+      // ── Umwandlung Aktiv→Passiv ───────────────────────────────
+      { sub:"Umwandlung Aktiv→Passiv", type:"mc",
+        q:"„Der Hund beißt den Mann.“ – Welcher Passivsatz ist korrekt?",
+        o:["Der Mann beißt vom Hund.","Der Mann wird vom Hund gebissen.","Der Hund wird vom Mann gebissen.","Den Mann beißt der Hund wird."],
+        c:1, model:"Akkusativobjekt (den Mann) → Subjekt (der Mann); Täter: vom Hund.",
+        rule:"<div class=rbox>Aktiv → Passiv: Akkusativobjekt wird Subjekt; Täter: <span class=hl>von + Dativ</span>.</div>" },
+      { sub:"Umwandlung Aktiv→Passiv", type:"mc",
+        q:"„Die Ärztin behandelt die Patientin.“ – Wie lautet der korrekte Passivsatz?",
+        o:["Die Patientin behandelt von der Ärztin wird.","Die Patientin wird von der Ärztin behandelt.","Die Patientin wurde von der Ärztin behandeln.","Von der Ärztin die Patientin behandelt wird."],
+        c:1, model:"die Patientin (Akk.) → Subjekt; von der Ärztin (Täter); Passiv Präsens.",
+        rule:"<div class=rbox>Passiv Präsens: <span class=hl>wird + Partizip II</span>; Täter: von + Dativ.</div>" },
+      // ── Warum Passiv? ─────────────────────────────────────────
+      { sub:"Funktion des Passivs", type:"mc",
+        q:"Warum benutzt man das Passiv?",
+        o:["Um den Handelnden in den Vordergrund zu stellen.","Um den Vorgang oder das Ergebnis zu betonen, nicht den Handelnden.","Um die Vergangenheit auszudrücken.","Um Fragen zu stellen."],
+        c:1, model:"Passiv betont den Vorgang, nicht den Täter.",
+        rule:"<div class=rbox>Das Passiv betont den <span class=hl>Vorgang oder das Ergebnis</span>, nicht den Handelnden.</div>" },
+      // ── Zuordnung ─────────────────────────────────────────────
+      { sub:"Zuordnung", type:"match",
+        q:"Ordne die Passivform der Bildungsregel zu.",
+        pairs:[
+          ["Passiv Präsens",    "wird + Partizip II"],
+          ["Passiv Präteritum", "wurde + Partizip II"],
+          ["Passiv Perfekt",    "ist + Partizip II + worden"],
+          ["Zustandspassiv",    "ist + Partizip II (ohne worden)"]
         ],
-        cols: ["Aktiv", "Passiv"],
-        correct: [1, 0, 1, 0, 1],
-        model: "wird geschrieben, wurde gebaut, ist gesungen worden = Passiv; spielen, hat gelesen = Aktiv.",
-        rule: "<div class=rbox>Passiv erkennt man an der Form von <span class=hl>werden + Partizip II</span>.</div>"
-      },
-      {
-        sub: "Passiv mit Modalverben",
-        type: "cross",
-        q: "Ist der Passivsatz korrekt?",
-        rows: [
-          "Der Brief muss geschrieben werden.",
-          "Das Haus kann gebaut werden.",
-          "Die Aufgabe soll gemacht werden.",
-          "Das Buch muss gelesen werden.",
-          "Die Kinder müssen abgeholt werden."
-        ],
-        cols: ["korrekt", "falsch"],
-        correct: [0, 0, 0, 0, 0],
-        model: "Alle Sätze sind korrekte Passivsätze mit Modalverb.",
-        rule: "<div class=rbox>Im Passiv mit Modalverb: Modalverb + Partizip II + <span class=hl>werden</span> (Infinitiv).</div>"
-      },
-      {
-        sub: "Zustandspassiv vs Vorgangspassiv",
-        type: "cross",
-        q: "Zustandspassiv (sein + Partizip) oder Vorgangspassiv (werden + Partizip)?",
-        rows: [
-          "Die Tür ist geöffnet.",
-          "Das Fenster wird geöffnet.",
-          "Das Auto ist repariert.",
-          "Der Brief ist geschrieben worden.",
-          "Das Haus ist gebaut."
-        ],
-        cols: ["Zustandspassiv", "Vorgangspassiv"],
-        correct: [0, 1, 0, 1, 0],
-        model: "ist geöffnet, ist repariert, ist gebaut = Zustandspassiv; wird geöffnet, ist geschrieben worden = Vorgangspassiv.",
-        rule: "<div class=rbox>Zustandspassiv (sein + Partizip II) beschreibt einen Zustand. Vorgangspassiv (werden + Partizip II) beschreibt einen Vorgang.</div>"
-      },
-      {
-        sub: "Unpersönliches Passiv",
-        type: "cross",
-        q: "Liegt ein unpersönliches Passiv vor?",
-        rows: [
-          "Es wird getanzt.",
-          "Hier wird gearbeitet.",
-          "Es wird gelacht.",
-          "Er wird gelobt.",
-          "Es wurde gesungen."
-        ],
-        cols: ["ja (unpersönlich)", "nein (persönlich)"],
-        correct: [0, 0, 0, 1, 0],
-        model: "Sätze ohne personenbezogenes Subjekt sind unpersönliches Passiv. 'Er wird gelobt' ist persönlich.",
-        rule: "<div class=rbox>Unpersönliches Passiv wird verwendet, wenn kein Handelnder genannt wird. Es steht oft 'es' an Position 1 (als Platzhalter).</div>"
-      },
-      {
-        sub: "Passiv-Zeitformen bestimmen",
-        type: "cross",
-        q: "Welche Passiv-Zeitform liegt vor?",
-        rows: [
-          "Das Haus wird gebaut.",
-          "Das Haus wurde gebaut.",
-          "Das Haus ist gebaut worden.",
-          "Das Haus war gebaut worden.",
-          "Das Haus wird gebaut werden."
-        ],
-        cols: ["Präsens Passiv", "Präteritum Passiv", "Perfekt Passiv", "Plusquamperfekt Passiv", "Futur I Passiv"],
-        correct: [0, 1, 2, 3, 4],
-        model: "wird gebaut=Präsens, wurde gebaut=Präteritum, ist gebaut worden=Perfekt, war gebaut worden=Plusquamperfekt, wird gebaut werden=Futur I.",
-        rule: "<div class=rbox>Passiv wird mit 'werden' in der entsprechenden Zeitform und Partizip II gebildet.</div>"
-      },
-      {
-        sub: "Aktiv → Passiv Umwandlung",
-        type: "cross",
-        q: "Ist die Umwandlung korrekt?",
-        rows: [
-          "Aktiv: Der Hund beißt den Mann. → Passiv: Der Mann wird vom Hund gebissen.",
-          "Aktiv: Die Mutter kocht das Essen. → Passiv: Das Essen wird von der Mutter gekocht.",
-          "Aktiv: Man sagt, er ist klug. → Passiv: Es wird gesagt, dass er klug ist.",
-          "Aktiv: Sie reparierte das Auto. → Passiv: Das Auto wurde von ihr repariert.",
-          "Aktiv: Das Kind liest das Buch. → Passiv: Das Buch wird von dem Kind gelesen."
-        ],
-        cols: ["korrekt", "falsch"],
-        correct: [0, 0, 0, 0, 0],
-        model: "Alle Umwandlungen sind korrekt.",
-        rule: "<div class=rbox>Bei der Umwandlung wird das Akkusativobjekt zum Subjekt. Der Täter wird mit <span class=hl>von + Dativ</span> eingeführt.</div>"
-      },
-      {
-        sub: "Passiv Präteritum vs Perfekt",
-        type: "cross",
-        q: "Präteritum Passiv oder Perfekt Passiv?",
-        rows: [
-          "Das Haus wurde gebaut.",
-          "Das Haus ist gebaut worden.",
-          "Die Tür wurde geöffnet.",
-          "Die Tür ist geöffnet worden.",
-          "Das Lied wurde gesungen."
-        ],
-        cols: ["Präteritum Passiv", "Perfekt Passiv"],
-        correct: [0, 1, 0, 1, 0],
-        model: "wurde gebaut=Prät., ist gebaut worden=Perf., wurde geöffnet=Prät., ist geöffnet worden=Perf., wurde gesungen=Prät.",
-        rule: "<div class=rbox>Präteritum Passiv: <span class=hl>wurde + Partizip II</span>; Perfekt Passiv: <span class=hl>ist + Partizip II + worden</span>.</div>"
-      },
-      {
-        sub: "Passiv im Futur",
-        type: "cross",
-        q: "Futur I Passiv oder Futur II Passiv?",
-        rows: [
-          "Das Haus wird gebaut werden.",
-          "Das Haus wird gebaut worden sein.",
-          "Die Aufgabe wird gelöst werden.",
-          "Die Aufgabe wird gelöst worden sein.",
-          "Der Brief wird geschrieben werden."
-        ],
-        cols: ["Futur I Passiv", "Futur II Passiv"],
-        correct: [0, 1, 0, 1, 0],
-        model: "Futur I: wird + Partizip II + werden; Futur II: wird + Partizip II + worden sein.",
-        rule: "<div class=rbox>Futur I Passiv: <span class=hl>werden (konj.) + Partizip II + werden (Inf.)</span>; Futur II Passiv: <span class=hl>werden (konj.) + Partizip II + worden sein</span>.</div>"
-      },
-      {
-        sub: "Gemischte Übung",
-        type: "mc",
-        q: "Welche Sätze stehen im Passiv?\n\n(A) Der Hund wird gebürstet.\n(B) Die Katze schläft.\n(C) Das Haus wurde gestrichen.\n(D) Er hat das Buch gelesen.\n(E) Es wird getanzt.",
-        o: [
-          "A, C und E",
-          "A, B und C",
-          "nur A und C",
-          "alle außer B"
-        ],
-        c: 0,
-        model: "A (wird gebürstet), C (wurde gestrichen), E (wird getanzt) sind Passiv. B und D sind Aktiv.",
-        rule: "<div class=rbox>Passiv erkennt man an <span class=hl>werden + Partizip II</span>.</div>"
-      }
+        model:"Präsens: wird; Präteritum: wurde; Perfekt: ist … worden; Zustandspassiv: ist … (ohne worden).",
+        rule:"<div class=rbox>Passiv-Zeitformen im Überblick.</div>" },
+      // ── Fehler finden ─────────────────────────────────────────
+      { sub:"Fehler finden", type:"mc",
+        q:"Welcher Satz enthält einen Fehler?",
+        o:["Der Brief wird geschrieben.","Das Haus wurde gebaut.","Das Lied ist gesungen worden.","Er wird vom Arzt behandeln."],
+        c:3, model:"Er wird … behandeln → falsch: Es muss behandelt heißen (Partizip II, nicht Infinitiv).",
+        rule:"<div class=rbox>Passiv: <span class=hl>wird + Partizip II</span> (nicht Infinitiv): Er wird behandelt.</div>" },
+      { sub:"Fehler finden", type:"mc",
+        q:"Welcher Satz ist korrekt?",
+        o:["Es werden getanzt.","Es wird getanzt.","Es ist getanzt.","Es tanzt worden."],
+        c:1, model:"Unpersönliches Passiv: Es wird getanzt.",
+        rule:"<div class=rbox>Unpersönliches Passiv: <span class=hl>Es wird + Partizip II</span>.</div>" },
+      { sub:"Anwendung", type:"mc",
+        q:"Forme in Passiv um:\n„Man backt hier frisches Brot.“",
+        o:["Frisches Brot wird hier gebacken.","Frisches Brot ist hier backen.","Hier backt frisches Brot.","Frisches Brot wurde hier backt."],
+        c:0, model:"frisches Brot (Akk.) → Subjekt; wird gebacken.",
+        rule:"<div class=rbox>Akk.-Objekt → Subjekt; <span class=hl>wird + Partizip II</span>.</div>" },
+      { sub:"Passiv erkennen", type:"mc",
+        q:"„Das Lied ist gesungen worden.“ – Welche Passivform ist das?",
+        o:["Passiv Präsens","Passiv Präteritum","Passiv Perfekt","Zustandspassiv"],
+        c:2, model:"ist + gesungen + worden → Passiv Perfekt.",
+        rule:"<div class=rbox>Passiv Perfekt: <span class=hl>ist/sind + Partizip II + worden</span>.</div>" },
+      { sub:"Passiv oder Aktiv Perfekt?", type:"mc",
+        q:"Was ist der Unterschied zwischen ‚Die Tür ist geöffnet' und ‚Die Tür ist geöffnet worden'?",
+        o:["Kein Unterschied, beide bedeuten dasselbe.","‚ist geöffnet' = Zustandspassiv (Ergebnis); ‚ist geöffnet worden' = Vorgangspassiv Perfekt.","‚ist geöffnet worden' = Aktiv Perfekt.","‚ist geöffnet' = Passiv Präteritum."],
+        c:1, model:"Zustandspassiv: ist geöffnet (Zustand); Vorgangspassiv Perfekt: ist geöffnet worden (Vorgang abgeschlossen).",
+        rule:"<div class=rbox>Zustandspassiv: <span class=hl>ist + Partizip II</span>; Vorgangspassiv Perfekt: <span class=hl>ist + Partizip II + worden</span>.</div>" },
+      { sub:"Passiv mit Angabe des Mittels", type:"mc",
+        q:"„Das Buch wurde mit einem Stempel markiert.“ – Womit wird das Mittel eingeleitet?",
+        o:["von + Dativ","durch + Akkusativ","mit + Dativ","über + Akkusativ"],
+        c:2, model:"Mit einem Stempel → Mittel/Werkzeug im Passiv: mit + Dativ.",
+        rule:"<div class=rbox>Mittel/Werkzeug im Passiv: <span class=hl>mit + Dativ</span> (mit einem Stempel); Handelnder/Täter: von + Dativ.</div>" },
+      { sub:"Anwendung Passiv", type:"mc",
+        q:"Wie bildet man aus „Man sagt, er ist klug.“ einen Passivsatz?",
+        o:["Er ist klug sagen.","Es wird gesagt, dass er klug ist.","Er wird klug gesagt.","Es sagt er wird klug sein."],
+        c:1, model:"unpersönliches Passiv: Es wird gesagt, dass …",
+        rule:"<div class=rbox>Unpersönliches Passiv mit ‚man': <span class=hl>Es wird gesagt, dass …</span></div>" }
     ]
   }
 ];

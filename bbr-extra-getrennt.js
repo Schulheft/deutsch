@@ -1,3 +1,6 @@
+// ═══════════════════════════════════════════════════════════════
+// bbr-extra-getrennt.js  –  Getrennt- und Zusammenschreibung (9. Klasse)
+// ═══════════════════════════════════════════════════════════════
 var BBR_EXTRA_THEMES = [
   {
     id: "bbr_extra_getrennt",
@@ -5,170 +8,143 @@ var BBR_EXTRA_THEMES = [
     emoji: "🧩",
     color: "#ca8a04",
     qs: [
-      // ── Nomen + Verb ───────────────────────────────────────────
-      {
-        sub: "Nomen + Verb",
-        type: "cross",
-        q: "Lena erzählt von ihrem Alltag. Entscheide, ob die Verbindungen aus Nomen und Verb getrennt oder zusammengeschrieben werden.",
-        rows: [
-          "Am Nachmittag geht sie gerne ___ (Rad fahren / Radfahren).",
-          "Sie freut sich auf das ___ (Fahrrad fahren / Fahrradfahren).",
-          "Ihr Bruder übt jeden Tag ___ (Klavier spielen / Klavierspielen).",
-          "Beim ___ (Fußball spielen / Fußballspielen) schreien die Fans."
+      // ── Verb + Verb ───────────────────────────────────────────
+      { sub:"Zwei Verben", type:"cross", isSingle:true,
+        q:"„Am Samstag wollen wir ___.“ – getrennt oder zusammen?\n(schwimmen gehen / schwimmengehen)",
+        rows:["schwimmen gehen / schwimmengehen"], cols:["getrennt","zusammen"], correct:[0],
+        model:"Zwei Verben werden immer getrennt geschrieben: schwimmen gehen.",
+        rule:"<div class=rbox>Zwei Verben im Infinitiv schreibt man immer getrennt: <span class=hl>spazieren gehen, tanzen lernen</span>.</div>" },
+      { sub:"Zwei Verben", type:"cross", isSingle:true,
+        q:"„Sie möchte ___.“ (tanzen lernen / tanzenlernen)",
+        rows:["tanzen lernen / tanzenlernen"], cols:["getrennt","zusammen"], correct:[0],
+        model:"Zwei Verben → immer getrennt: tanzen lernen.",
+        rule:"<div class=rbox>Zwei Verben im Infinitiv schreibt man immer getrennt.</div>" },
+      { sub:"Zwei Verben", type:"cross", isSingle:true,
+        q:"„Wir wollen heute Abend ___.“ (essen gehen / essengehen)",
+        rows:["essen gehen / essengehen"], cols:["getrennt","zusammen"], correct:[0],
+        model:"Zwei Verben → getrennt: essen gehen.",
+        rule:"<div class=rbox>Zwei Verben im Infinitiv: immer getrennt schreiben.</div>" },
+      // ── Adjektiv + Verb: wörtlich vs. übertragen ──────────────
+      { sub:"Wörtlich oder übertragen?", type:"cross", isSingle:true,
+        q:"„Kannst du bitte die Leiter ___?“ (physisch festhalten, damit ich runterklettern kann)\n(fest halten / festhalten)",
+        rows:["fest halten / festhalten"], cols:["getrennt (wörtlich)","zusammen (übertragen)"], correct:[0],
+        model:"wörtliche Bedeutung (Leiter körperlich halten) → getrennt: fest halten.",
+        rule:"<div class=rbox>Wörtliche Bedeutung = getrennt: <span class=hl>fest halten</span> (physisch anfassen).</div>" },
+      { sub:"Wörtlich oder übertragen?", type:"cross", isSingle:true,
+        q:"„Wir sollten die wichtigsten Regeln im Heft ___.“ (notieren)\n(fest halten / festhalten)",
+        rows:["fest halten / festhalten"], cols:["getrennt (wörtlich)","zusammen (übertragen)"], correct:[1],
+        model:"übertragene Bedeutung (notieren/dokumentieren) → zusammen: festhalten.",
+        rule:"<div class=rbox>Übertragene Bedeutung = zusammen: <span class=hl>festhalten</span> (schriftlich notieren).</div>" },
+      { sub:"Wörtlich oder übertragen?", type:"cross", isSingle:true,
+        q:"„Im Diktat ist es wichtig, dass du ___.“ (leserlich schreibst)\n(gut schreibst / gutschreibst)",
+        rows:["gut schreibst / gutschreibst"], cols:["getrennt (wörtlich)","zusammen (übertragen)"], correct:[0],
+        model:"wörtliche Bedeutung (leserlich schreiben) → getrennt: gut schreibst.",
+        rule:"<div class=rbox>Wörtliche Bedeutung = getrennt: <span class=hl>gut schreiben</span>.</div>" },
+      { sub:"Wörtlich oder übertragen?", type:"cross", isSingle:true,
+        q:"„Die Bank will die Zinsen auf mein Konto ___.“ (anrechnen)\n(gut schreiben / gutschreiben)",
+        rows:["gut schreiben / gutschreiben"], cols:["getrennt (wörtlich)","zusammen (übertragen)"], correct:[1],
+        model:"übertragene Bedeutung (anrechnen) → zusammen: gutschreiben.",
+        rule:"<div class=rbox>Übertragene Bedeutung = zusammen: <span class=hl>gutschreiben</span> (anrechnen).</div>" },
+      { sub:"Wörtlich oder übertragen?", type:"cross", isSingle:true,
+        q:"„Mit rutschigen Schuhen kannst du nicht ___.“ (ohne Sturz gehen)\n(sicher gehen / sichergehen)",
+        rows:["sicher gehen / sichergehen"], cols:["getrennt (wörtlich)","zusammen (übertragen)"], correct:[0],
+        model:"wörtliche Bedeutung (ohne Sturz gehen) → getrennt.",
+        rule:"<div class=rbox>Wörtliche Bedeutung = getrennt: <span class=hl>sicher gehen</span>.</div>" },
+      { sub:"Wörtlich oder übertragen?", type:"cross", isSingle:true,
+        q:"„Bevor du losfährst, solltest du ___.“ (sich vergewissern)\n(sicher gehen / sichergehen)",
+        rows:["sicher gehen / sichergehen"], cols:["getrennt (wörtlich)","zusammen (übertragen)"], correct:[1],
+        model:"übertragene Bedeutung (sich vergewissern) → zusammen: sichergehen.",
+        rule:"<div class=rbox>Übertragene Bedeutung = zusammen: <span class=hl>sichergehen</span> (sich vergewissern).</div>" },
+      // ── Nomen + Verb ──────────────────────────────────────────
+      { sub:"Nomen + Verb", type:"cross", isSingle:true,
+        q:"„Am Nachmittag geht sie gerne ___.“ (auf dem Rad)\n(Rad fahren / Radfahren)",
+        rows:["Rad fahren / Radfahren"], cols:["getrennt","zusammen"], correct:[0],
+        model:"Rad fahren (Was fährt sie? → Rad = eigenständiges Objekt) → getrennt.",
+        rule:"<div class=rbox>Wenn das Nomen ein eigenständiges Objekt ist, schreibt man getrennt: <span class=hl>Rad fahren, Klavier spielen</span>.</div>" },
+      { sub:"Nomen + Verb (nominalisiert)", type:"cross", isSingle:true,
+        q:"„Sie freut sich auf das ___.“ (auf dem Fahrrad fahren)\n(Fahrrad fahren / Fahrradfahren)",
+        rows:["Fahrrad fahren / Fahrradfahren"], cols:["getrennt","zusammen"], correct:[1],
+        model:"das Fahrradfahren → nach Artikel ‚das' → Nomen → zusammen.",
+        rule:"<div class=rbox>Wird die Tätigkeit als Nomen verwendet (mit Artikel/Präposition), schreibt man zusammen: <span class=hl>das Radfahren, beim Fußballspielen</span>.</div>" },
+      { sub:"Nomen + Verb", type:"cross", isSingle:true,
+        q:"„Kannst du ___?“ (ein Instrument spielen)\n(Klavier spielen / Klavierspielen)",
+        rows:["Klavier spielen / Klavierspielen"], cols:["getrennt","zusammen"], correct:[0],
+        model:"Klavier spielen → Verb im Infinitiv, Nomen ist Objekt → getrennt.",
+        rule:"<div class=rbox>Nomen als Objekt + Verb → getrennt: <span class=hl>Klavier spielen, Fußball spielen</span>.</div>" },
+      // ── 'zu' als Vorsilbe oder Infinitivzeichen ───────────────
+      { sub:"‚zu' – Vorsilbe oder Infinitiv?", type:"cross", isSingle:true,
+        q:"„Ich muss ___ gestehen, dass ich gelogen habe.“ (eingestehen, zugeben)\n(zugeben / zu geben)",
+        rows:["zugeben / zu geben"], cols:["zusammen (Vorsilbe)","getrennt (Infinitiv)"], correct:[0],
+        model:"zugeben (= eingestehen) → festes Verb mit Vorsilbe zu- → zusammen.",
+        rule:"<div class=rbox>Wenn ‚zu' Vorsilbe des Verbs ist, schreibt man zusammen und betont es: <span class=hl>ZUgeben</span>.</div>" },
+      { sub:"‚zu' – Vorsilbe oder Infinitiv?", type:"cross", isSingle:true,
+        q:"„Er versucht, ihr ___ hören.“ (aufmerksam zuhören)\n(zuzuhören / zu hören)",
+        rows:["zuzuhören / zu hören"], cols:["zusammen (Vorsilbe)","getrennt (Infinitiv)"], correct:[0],
+        model:"zuhören → festes Verb → Infinitiv: zuzuhören → zusammen.",
+        rule:"<div class=rbox>Bei Verben mit Vorsilbe zu- gilt im Infinitiv: <span class=hl>zuzuhören, zuzumachen</span>.</div>" },
+      { sub:"‚zu' – Vorsilbe oder Infinitiv?", type:"cross", isSingle:true,
+        q:"„Sie vergaß, die Tür ___.“ (einfach schließen, kein festes Kompositum)\n(zu schließen / zuschließen)",
+        rows:["zu schließen / zuschließen"], cols:["getrennt (Infinitiv)","zusammen (abschließen)"], correct:[1],
+        model:"zuschließen (= abschließen) → festes Kompositum → zusammen; hier: ‚zuzuschließen' wäre der Infinitiv.",
+        rule:"<div class=rbox>Zuschließen (= abschließen) ist ein festes Verb → Infinitiv: zuzuschließen.</div>" },
+      // ── 'zusammen' ───────────────────────────────────────────
+      { sub:"‚zusammen' – getrennt oder festes Verb?", type:"cross", isSingle:true,
+        q:"„Wir werden die Tische ___, um sie in die Aula zu bringen.“ (gemeinsam tragen)\n(zusammen tragen / zusammentragen)",
+        rows:["zusammen tragen / zusammentragen"], cols:["getrennt (gemeinsam)","zusammen (festes Verb: sammeln)"], correct:[0],
+        model:"zusammen tragen = gemeinsam tragen → ersetzbar durch ‚gemeinsam' → getrennt.",
+        rule:"<div class=rbox>Kannst du ‚zusammen' durch ‚gemeinsam' ersetzen? → getrennt schreiben.</div>" },
+      { sub:"‚zusammen' – getrennt oder festes Verb?", type:"cross", isSingle:true,
+        q:"„Für das Plakat müssen wir viele Bilder ___.“ (sammeln und ordnen)\n(zusammen stellen / zusammenstellen)",
+        rows:["zusammen stellen / zusammenstellen"], cols:["getrennt (gemeinsam)","zusammen (festes Verb: sammeln)"], correct:[1],
+        model:"zusammenstellen (= sammeln/ordnen) → kein Ersatz durch ‚gemeinsam' möglich → zusammen.",
+        rule:"<div class=rbox>Feste Komposita (nicht durch ‚gemeinsam' ersetzbar) werden zusammengeschrieben: <span class=hl>zusammenstellen, zusammenpassen</span>.</div>" },
+      // ── 'wieder' ─────────────────────────────────────────────
+      { sub:"‚wieder' – zurück oder erneut?", type:"cross", isSingle:true,
+        q:"„Er will ihr Vertrauen ___.“ (zurückgewinnen)\n(wieder gewinnen / wiedergewinnen)",
+        rows:["wieder gewinnen / wiedergewinnen"], cols:["getrennt (erneut)","zusammen (zurück)"], correct:[1],
+        model:"wiedergewinnen = zurückgewinnen → festes Verb → zusammen.",
+        rule:"<div class=rbox>‚Wieder' im Sinne von ‚zurück' ergibt meist ein festes Kompositum → zusammen: <span class=hl>wiederbringen, wiedergewinnen</span>.</div>" },
+      { sub:"‚wieder' – zurück oder erneut?", type:"cross", isSingle:true,
+        q:"„Ich werde das Buch nie ___ lesen.“ (nochmals lesen)\n(wieder lesen / wiederlesen)",
+        rows:["wieder lesen / wiederlesen"], cols:["getrennt (erneut)","zusammen (zurück)"], correct:[0],
+        model:"nie wieder lesen → erneut lesen → kein festes Kompositum → getrennt.",
+        rule:"<div class=rbox>‚Wieder' im Sinne von ‚erneut' (locker hinzugefügt) → getrennt schreiben.</div>" },
+      // ── MC-Aufgaben ───────────────────────────────────────────
+      { sub:"Fehler finden", type:"mc",
+        q:"Welcher Satz enthält einen Schreibfehler?",
+        o:["Er möchte spazieren gehen.","Sie kann Klavierspielen.","Wir wollen einkaufen fahren.","Er liebt es, tanzen zu gehen."],
+        c:1, model:"Klavierspielen → als Infinitiv (kein Artikel) → getrennt: Klavier spielen.",
+        rule:"<div class=rbox>Nomen + Verb als Infinitiv → getrennt: Klavier spielen.</div>" },
+      { sub:"Korrekten Satz finden", type:"mc",
+        q:"Welcher Satz ist korrekt?",
+        o:["Sie hat die Nachricht weitergegeben.","Sie hat die Nachricht weiter gegeben.","Sie hat die Nachricht weiter-gegeben.","Sie hat die nachricht weitergegeben."],
+        c:0, model:"weitergeben ist ein festes Kompositum → Partizip: weitergegeben.",
+        rule:"<div class=rbox>Feste Komposita mit ‚weiter-': <span class=hl>weitergeben, weitermachen</span> → zusammen.</div>" },
+      { sub:"Zuordnung", type:"match",
+        q:"Ordne die Verbindung ihrer richtigen Schreibweise zu.",
+        pairs:[
+          ["Die Leiter körperlich halten","fest halten"],
+          ["Ergebnisse notieren",         "festhalten"],
+          ["Geld anrechnen",              "gutschreiben"],
+          ["leserlich schreiben",         "gut schreiben"]
         ],
-        cols: ["getrennt", "zusammen"],
-        correct: [0, 1, 0, 1],
-        model: "Rad fahren (getrennt, Infinitiv ohne Artikel); Fahrradfahren (zusammen, nach 'das'); Klavier spielen (getrennt); Fußballspielen (zusammen, nach 'beim').",
-        rule: "<div class=rbox>Wenn das Nomen ein eigenständiges Objekt ist (Was wird gefahren? Rad), schreibt man getrennt: <span class=hl>Rad fahren</span>.<br>Wird die Tätigkeit als Nomen verwendet (mit Artikel oder Präposition wie <span class=hl>das, beim, zum</span>), schreibt man zusammen: <span class=hl>das Radfahren, beim Fußballspielen</span>.</div>"
-      },
-      // ── Verb + Verb ────────────────────────────────────────────
-      {
-        sub: "Verb + Verb",
-        type: "cross",
-        q: "Tim plant sein Wochenende. Welche Schreibweise ist richtig? (Zwei Verben werden immer getrennt geschrieben.)",
-        rows: [
-          "Am Samstag will er mit Freunden ___ (schwimmen gehen / schwimmengehen).",
-          "Seine Schwester möchte ___ (tanzen lernen / tanzenlernen).",
-          "Die Eltern wollen abends ___ (essen gehen / essengehen).",
-          "Tim überlegt, ob er noch ___ (einkaufen fahren / einkaufenfahren) soll."
-        ],
-        cols: ["getrennt", "zusammen"],
-        correct: [0, 0, 0, 0],
-        model: "Alle Verbindungen aus zwei Verben werden getrennt geschrieben: schwimmen gehen, tanzen lernen, essen gehen, einkaufen fahren.",
-        rule: "<div class=rbox>Zwei Verben im Infinitiv schreibt man immer getrennt: <span class=hl>spazieren gehen, lesen üben, kochen lernen</span>. Nur wenn sie als Nomen gebraucht werden, gibt es Ausnahmen: das Spazierengehen.</div>"
-      },
-      // ── Partizip + Verb ────────────────────────────────────────
-      {
-        sub: "Partizip + Verb",
-        type: "cross",
-        q: "Entscheide, ob die Partizip-Verb-Verbindungen getrennt oder zusammengeschrieben werden.",
-        rows: [
-          "Wir haben die Pizza endlich ___ (geliefert bekommen / geliefertbekommen).",
-          "Der Dieb wurde von der Polizei ___ (gefangen genommen / gefangengenommen).",
-          "Ist dir dein Handy ___ (verloren gegangen / verlorengegangen)?",
-          "Die Klasse soll ___ (getrennt arbeiten / getrenntarbeiten)."
-        ],
-        cols: ["getrennt", "zusammen"],
-        correct: [0, 0, 0, 0],
-        model: "geliefert bekommen, gefangen nehmen, verloren gehen, getrennt arbeiten – alle getrennt.",
-        rule: "<div class=rbox>Verbindungen aus Partizip und Verb werden fast immer getrennt geschrieben, auch bei festen Wendungen: <span class=hl>bekannt geben, gefangen nehmen, getrennt leben</span>.</div>"
-      },
-      // ── Adjektiv + Verb: wörtlich oder übertragen ─────────────
-      {
-        sub: "Adjektiv + Verb (wörtlich oder übertragen?)",
-        type: "cross",
-        q: "Wörtliche Bedeutung = getrennt, übertragene Bedeutung = zusammen.",
-        rows: [
-          "Im Diktat ist es wichtig, dass du ___ (gut schreibst / gutschreibst).",
-          "Die Bank will die Zinsen auf mein Konto ___ (gut schreiben / gutschreiben).",
-          "Kannst du bitte die Leiter ___ (fest halten / festhalten), damit ich runterklettern kann?",
-          "Wir sollten die wichtigsten Regeln im Heft ___ (fest halten / festhalten).",
-          "Mit rutschigen Schuhen kannst du nicht ___ (sicher gehen / sichergehen).",
-          "Bevor du losfährst, solltest du ___ (sicher gehen / sichergehen), dass du genug Benzin hast."
-        ],
-        cols: ["getrennt", "zusammen"],
-        correct: [0, 1, 0, 1, 0, 1],
-        model: "gut schreiben (wörtlich: leserlich) – gutschreiben (übertragen: anrechnen); fest halten (physisch) – festhalten (notieren); sicher gehen (ohne Sturz) – sichergehen (sich vergewissern).",
-        rule: "<div class=rbox>Wörtliche Bedeutung = getrennt: <span class=hl>fest halten</span> (anfassen), <span class=hl>gut schreiben</span> (leserlich).<br>Übertragene Bedeutung = zusammen: <span class=hl>festhalten</span> (notieren), <span class=hl>gutschreiben</span> (anrechnen).</div>"
-      },
-      // ── Verbindungen mit 'zu' ──────────────────────────────────
-      {
-        sub: "Verbindungen mit 'zu'",
-        type: "cross",
-        q: "Entscheide, ob 'zu' als Vorsilbe (zusammen) oder als Teil des Infinitivs (getrennt) geschrieben wird.",
-        rows: [
-          "Kannst du mir bitte dein Heft ___ (zu geben / zugeben)?",
-          "Ich muss ___ (zu geben / zugeben), dass ich keine Ahnung habe.",
-          "Er versucht, seiner Freundin ___ (zu hören / zuzuhören).",
-          "Vergiss nicht, die Tür ___ (zu schließen / zuzuschließen).",
-          "Er hat versucht, die Wahrheit ___ (zu sagen / zuzusagen)."
-        ],
-        cols: ["getrennt", "zusammen"],
-        correct: [0, 1, 1, 1, 0],
-        model: "zu geben (Infinitiv von geben) – zugeben (Verb); zuhören → zuzuhören; zuschließen → zuzuschließen; zu sagen (Infinitiv) – zusagen (eigenständiges Verb).",
-        rule: "<div class=rbox>Wenn 'zu' zum Verb gehört (Vorsilbe), schreibt man zusammen: <span class=hl>zugeben, zuhören, zumachen</span>.<br>Wenn 'zu' nur den Infinitiv einleitet, schreibt man getrennt: <span class=hl>zu geben, zu hören</span>.<br>Die Betonung hilft: Bei Zusammenschreibung liegt sie auf 'zu', bei Getrenntschreibung auf dem Verb.</div>"
-      },
-      // ── Verbindungen mit 'zusammen' ────────────────────────────
-      {
-        sub: "Verbindungen mit 'zusammen'",
-        type: "cross",
-        q: "Entscheide, ob 'zusammen' getrennt (= gemeinsam) oder als Verbzusatz (zusammengeschrieben) steht.",
-        rows: [
-          "Am Ende müssen alle ihre Sachen ___ (zusammen packen / zusammenpacken).",
-          "Wir werden die Tische ___ (zusammen tragen / zusammentragen), um sie in die Aula zu bringen.",
-          "Für das Plakat müssen wir viele Bilder ___ (zusammen stellen / zusammenstellen).",
-          "Die Stühle wurden bereits ___ (zusammen gestellt / zusammengestellt)."
-        ],
-        cols: ["getrennt", "zusammen"],
-        correct: [1, 0, 1, 1],
-        model: "zusammenpacken (festes Verb: einpacken); zusammen tragen (gemeinsam tragen, ersetzbar durch 'gemeinsam'); zusammenstellen (festes Verb: sammeln/ordnen); zusammengestellt (Partizip, festes Verb).",
-        rule: "<div class=rbox>Kannst du 'zusammen' durch 'gemeinsam' ersetzen? Dann getrennt: <span class=hl>zusammen tragen</span> = gemeinsam tragen.<br>Geht das nicht, ist es ein festes Verb: <span class=hl>zusammenpacken, zusammenstellen</span>.</div>"
-      },
-      // ── Verbindungen mit 'sein' ────────────────────────────────
-      {
-        sub: "Verbindungen mit 'sein'",
-        type: "cross",
-        q: "Entscheide, ob die Verbindungen mit 'sein' getrennt (Verb) oder zusammen (Nomen) geschrieben werden.",
-        rows: [
-          "Es ist wichtig, im Leben glücklich ___ (zu sein / zusein).",
-          "Das ___ (Glücklichsein / Glücklich sein) ist das Ziel vieler Menschen.",
-          "Wirst du morgen auch ___ (da sein / dasein)?",
-          "Sein ___ (Da sein / Dasein) auf der Insel war traumhaft."
-        ],
-        cols: ["getrennt", "zusammen"],
-        correct: [0, 1, 0, 1],
-        model: "zu sein (Infinitiv von sein); das Glücklichsein (Nomen); da sein (Verb); das Dasein (Nomen).",
-        rule: "<div class=rbox>Das Verb 'sein' wird immer getrennt geschrieben: <span class=hl>da sein, glücklich sein</span>.<br>Wird die Kombination zum Nomen (mit Artikel), schreibt man zusammen: <span class=hl>das Dasein, das Glücklichsein</span>.</div>"
-      },
-      // ── Substantiv + Verb (Motorrad fahren etc.) ──────────────
-      {
-        sub: "Substantiv + Verb (weitere Beispiele)",
-        type: "cross",
-        q: "Getrennt oder zusammen?",
-        rows: [
-          "Er möchte ___ (Motorrad fahren).",
-          "Wir gehen im Winter gerne ___ (Schlittschuh laufen).",
-          "Kannst du ___ (Klavier spielen)?",
-          "Das Kind lernt ___ (Rad fahren).",
-          "Sie hat starke ___ (Kopfschmerzen)."
-        ],
-        cols: ["getrennt", "zusammen"],
-        correct: [0, 0, 0, 0, 1],
-        model: "Motorrad fahren, Schlittschuh laufen, Klavier spielen, Rad fahren → getrennt; Kopfschmerzen → zusammengesetztes Nomen → zusammen",
-        rule: "<div class=rbox>Substantiv + Verb wird in der Regel getrennt geschrieben (Auto fahren, Rad fahren, Klavier spielen). Zusammengesetzte Nomen (Kopfschmerzen) werden zusammengeschrieben.</div>"
-      },
-      // ── Verbindungen mit 'wieder' ──────────────────────────────
-      {
-        sub: "Verbindungen mit 'wieder'",
-        type: "cross",
-        q: "Getrennt oder zusammen? ('wieder' zurück = zusammen, 'wieder' erneut = oft getrennt)",
-        rows: [
-          "Gleich nach der Tour werde ich dir das Rad wieder ___ (bringen).",
-          "Nach der Trennung wollte er ihr Herz wieder ___ (gewinnen).",
-          "Ich werde den Kandidaten nie wieder ___ (wählen).",
-          "Das dürfen wir nicht wieder ___ (zulassen).",
-          "Herr Grau wollte den ehemaligen Mitarbeiter wieder ___ (einstellen)."
-        ],
-        cols: ["getrennt", "zusammen"],
-        correct: [1, 1, 0, 0, 1],
-        model: "wiederbringen (zurück), wiedergewinnen (zurück), wiedereinstellen (zurück/erneut festes Verb) → zusammen; nie wieder wählen, nicht wieder zulassen (erneut, locker) → getrennt.",
-        rule: "<div class=rbox>Bei 'wieder' im Sinne von 'zurück' meist zusammen: <span class=hl>wiederbringen, wiedergewinnen</span>. Im Sinne von 'erneut' kann es getrennt oder zusammen sein; feste Komposita wie <span class=hl>wiedereinstellen</span> werden zusammengeschrieben.</div>"
-      },
-      // ── Gemischte Übung ────────────────────────────────────────
-      {
-        sub: "Gemischte Übung",
-        type: "mc",
-        q: "Welches Wort wird zusammengeschrieben?",
-        o: [
-          "spazieren gehen",
-          "kennenlernen",
-          "Rad fahren",
-          "schwimmen gehen"
-        ],
-        c: 1,
-        model: "kennenlernen wird nach neuer Rechtschreibung zusammengeschrieben; die anderen getrennt.",
-        rule: "<div class=rbox>Nach neuer Rechtschreibung werden Verbindungen wie <span class=hl>kennenlernen</span> zusammengeschrieben.</div>"
-      }
+        model:"Wörtliche Bedeutung = getrennt; übertragene = zusammen.",
+        rule:"<div class=rbox>Wörtliche Bedeutung → getrennt, übertragene Bedeutung → zusammen.</div>" },
+      { sub:"Fehler finden", type:"mc",
+        q:"Welcher Satz ist korrekt?",
+        o:["Sie will sichergehen, dass alles stimmt.","Sie will sicher gehen, dass alles stimmt.","Sie will Sichergehen, dass alles stimmt.","Sie will sicher-gehen, dass alles stimmt."],
+        c:0, model:"sichergehen = sich vergewissern → übertragene Bedeutung → zusammen, klein.",
+        rule:"<div class=rbox>Übertragene Bedeutung von ‚sicher gehen' = <span class=hl>sichergehen</span> (sich vergewissern) → zusammen.</div>" },
+      { sub:"Regel erklären", type:"mc",
+        q:"Woran erkennst du, ob ‚zusammen' getrennt oder zusammengeschrieben wird?",
+        o:["Ob das folgende Wort ein Verb ist.","Ob man ‚zusammen' durch ‚gemeinsam' ersetzen kann.","Ob das Verb trennbar ist.","Ob ein Komma folgt."],
+        c:1, model:"Ersatzprobe: ‚gemeinsam' möglich → getrennt; nicht möglich → zusammen.",
+        rule:"<div class=rbox>Ersatzprobe mit <span class=hl>gemeinsam</span>: gelingt der Ersatz → getrennt; nicht möglich → festes Verb → zusammen.</div>" },
+      { sub:"Zusatzaufgabe", type:"mc",
+        q:"Welches Wort wird immer zusammengeschrieben?",
+        o:["spazieren gehen","kennenlernen","Rad fahren","schwimmen gehen"],
+        c:1, model:"kennenlernen wird nach neuer Rechtschreibung zusammengeschrieben.",
+        rule:"<div class=rbox>Nach neuer Rechtschreibung werden Verbindungen wie <span class=hl>kennenlernen</span> zusammengeschrieben.</div>" }
     ]
   }
 ];
