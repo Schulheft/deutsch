@@ -46,7 +46,8 @@ var MSA_UEBERARBEITUNG_THEMES = [
     type:"komma",
     sentence:'Die Spargelstange ist der Stängelspross der Spargelpflanze die zur Familie der Liliengewächse gehört.',
     correctPositions:[44],
-    model:'… der Spargelpflanze, die zur Familie …',
+    acceptedAnswers:['Die Spargelstange ist der Stängelspross der Spargelpflanze, die zur Familie der Liliengewächse gehört.'],
+    model:'Die Spargelstange ist der Stängelspross der Spargelpflanze, die zur Familie der Liliengewächse gehört.',
     rule:'<div class=rbox>Vor einleitenden Relativpronomen (die, der, das, welche …) steht immer ein Komma. „die zur Familie …" ist ein Relativsatz, der durch Komma vom Hauptsatz getrennt wird.</div>'
   },
 
@@ -99,7 +100,8 @@ var MSA_UEBERARBEITUNG_THEMES = [
     type:"komma",
     sentence:'Früher wurden die Spargelstangen die noch nicht zerkleinert waren relativ umständlich mit den Fingern gegessen.',
     correctPositions:[33, 55],
-    model:'… die Spargelstangen, die noch nicht zerkleinert waren, relativ …',
+    acceptedAnswers:['Früher wurden die Spargelstangen, die noch nicht zerkleinert waren, relativ umständlich mit den Fingern gegessen.'],
+    model:'Früher wurden die Spargelstangen, die noch nicht zerkleinert waren, relativ umständlich mit den Fingern gegessen.',
     rule:'<div class=rbox>Der Relativsatz „die noch nicht zerkleinert waren" wird <span class=hl>beidseitig</span> durch Kommas vom Hauptsatz abgetrennt: Komma vor dem einleitenden Relativpronomen <span class=hl>und</span> Komma nach dem Ende des Relativsatzes.</div>'
   },
 
@@ -163,7 +165,8 @@ var MSA_UEBERARBEITUNG_THEMES = [
     type:"komma",
     sentence:'Der Traumberuf ist gefunden aber der Ausbildungsplatz fehlt noch.',
     correctPositions:[26],
-    model:'… gefunden, aber der Ausbildungsplatz …',
+    acceptedAnswers:['Der Traumberuf ist gefunden, aber der Ausbildungsplatz fehlt noch.'],
+    model:'Der Traumberuf ist gefunden, aber der Ausbildungsplatz fehlt noch.',
     rule:'<div class=rbox>Vor entgegenstellenden Konjunktionen wie <span class=hl>aber, doch, jedoch, sondern</span> steht ein Komma, wenn zwei Hauptsätze verbunden werden.</div>'
   },
 
@@ -238,7 +241,8 @@ var MSA_UEBERARBEITUNG_THEMES = [
     type:"komma",
     sentence:'Berufsmessen sind eine der besten Möglichkeiten sich einen Überblick über Ausbildungsbetriebe in der Region zu verschaffen.',
     correctPositions:[42],
-    model:'… Möglichkeiten, sich einen Überblick … zu verschaffen.',
+    acceptedAnswers:['Berufsmessen sind eine der besten Möglichkeiten, sich einen Überblick über Ausbildungsbetriebe in der Region zu verschaffen.'],
+    model:'Berufsmessen sind eine der besten Möglichkeiten, sich einen Überblick über Ausbildungsbetriebe in der Region zu verschaffen.',
     rule:'<div class=rbox>Vor einem erweiterten Infinitiv mit „zu" steht ein Komma, wenn er von einem Nomen abhängt (hier: Möglichkeiten, … zu verschaffen).</div>'
   },
 
@@ -302,7 +306,8 @@ var MSA_UEBERARBEITUNG_THEMES = [
     type:"komma",
     sentence:'Der Canal Grande Venedigs großer Kanal durchfließt die Stadt in zwei großen Bogen und ist die wichtigste Verkehrsader.',
     correctPositions:[16, 37],
-    model:'Der Canal Grande, Venedigs großer Kanal, durchfließt …',
+    acceptedAnswers:['Der Canal Grande, Venedigs großer Kanal, durchfließt die Stadt in zwei großen Bogen und ist die wichtigste Verkehrsader.'],
+    model:'Der Canal Grande, Venedigs großer Kanal, durchfließt die Stadt in zwei großen Bogen und ist die wichtigste Verkehrsader.',
     rule:'<div class=rbox>„Venedigs großer Kanal" ist eine erklärende Apposition (Beifügung) zu „Canal Grande". Appositionen werden <span class=hl>beidseitig</span> durch Kommas abgetrennt.</div>'
   },
 
@@ -366,7 +371,8 @@ var MSA_UEBERARBEITUNG_THEMES = [
     type:"komma",
     sentence:'Den Abend lässt man am besten in einem exquisiten Restaurant ausklingen wo man mit regionalen Köstlichkeiten verwöhnt wird.',
     correctPositions:[68],
-    model:'… Restaurant ausklingen, wo man …',
+    acceptedAnswers:['Den Abend lässt man am besten in einem exquisiten Restaurant ausklingen, wo man mit regionalen Köstlichkeiten verwöhnt wird.'],
+    model:'Den Abend lässt man am besten in einem exquisiten Restaurant ausklingen, wo man mit regionalen Köstlichkeiten verwöhnt wird.',
     rule:'<div class=rbox>„wo man … verwöhnt wird" ist ein Relativsatz und wird durch ein <span class=hl>Komma</span> vom Hauptsatz getrennt.</div>'
   },
 
@@ -397,7 +403,8 @@ var MSA_UEBERARBEITUNG_THEMES = [
     type:"komma",
     sentence:'Es ist nicht leicht ein passendes Geschenk für einen Freund zu finden.',
     correctPositions:[18],
-    model:'… nicht leicht, ein passendes Geschenk … zu finden.',
+    acceptedAnswers:['Es ist nicht leicht, ein passendes Geschenk für einen Freund zu finden.'],
+    model:'Es ist nicht leicht, ein passendes Geschenk für einen Freund zu finden.',
     rule:'<div class=rbox>Vor einem Infinitivsatz mit „zu" steht ein Komma, wenn er von einem Adjektiv abhängt (hier: „leicht"): nicht leicht, <span class=hl>etwas zu tun</span>.</div>'
   },
 
@@ -483,6 +490,7 @@ var MSA_UEBERARBEITUNG_THEMES = [
     type:"komma",
     sentence:'Sie wirken unpersönlich bequem und einfallslos.',
     correctPositions:[20],
+    acceptedAnswers:['Sie wirken unpersönlich, bequem und einfallslos.'],
     model:'Sie wirken unpersönlich, bequem und einfallslos.',
     rule:'<div class=rbox>Zwischen gleichrangigen Adjektiven in einer Aufzählung steht ein Komma (wenn kein „und" steht). „unpersönlich" und „bequem" sind gleichrangig; vor dem letzten Glied mit „und" entfällt das Komma.</div>'
   },
@@ -514,7 +522,8 @@ var MSA_UEBERARBEITUNG_THEMES = [
     type:"komma",
     sentence:'Die Firma „Gartenglück" bietet einen Ausbildungsplatz zum Gärtner der Fachrichtung Landschaftsbau.',
     correctPositions:[52],
-    model:'… zum Gärtner, der Fachrichtung Landschaftsbau.',
+    acceptedAnswers:['Die Firma „Gartenglück" bietet einen Ausbildungsplatz zum Gärtner, der Fachrichtung Landschaftsbau.'],
+    model:'Die Firma „Gartenglück" bietet einen Ausbildungsplatz zum Gärtner, der Fachrichtung Landschaftsbau.',
     rule:'<div class=rbox>„der Fachrichtung Landschaftsbau" ist eine Apposition (erklärende Beifügung) zu „Gärtner" und wird durch ein <span class=hl>Komma</span> abgetrennt.</div>'
   },
 
@@ -567,7 +576,8 @@ var MSA_UEBERARBEITUNG_THEMES = [
     type:"komma",
     sentence:'Dazu gehören Kopien der letzten beiden Zeugnisse der Praktikumsnachweise und ein tabellarischer Lebenslauf.',
     correctPositions:[51],
-    model:'… Zeugnisse, der Praktikumsnachweise und …',
+    acceptedAnswers:['Dazu gehören Kopien der letzten beiden Zeugnisse, der Praktikumsnachweise und ein tabellarischer Lebenslauf.'],
+    model:'Dazu gehören Kopien der letzten beiden Zeugnisse, der Praktikumsnachweise und ein tabellarischer Lebenslauf.',
     rule:'<div class=rbox>„der Praktikumsnachweise" und „ein tabellarischer Lebenslauf" sind weitere Aufzählungsglieder. Vor dem nächsten Glied (ohne „und") steht ein <span class=hl>Komma</span>.</div>'
   },
 

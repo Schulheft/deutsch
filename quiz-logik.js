@@ -176,7 +176,7 @@ function renderSatzgliederPanel() {
 function switchAreaTab(area, tab) {
   AppState.currentTab = tab;
   const tabs = area === 'msa'
-    ? ['aufgaben', 'zehn', 'extra', 'satzglieder', 'regeln']
+    ? ['aufgaben', 'zehn', 'extra', 'satzglieder', 'schreibplan', 'regeln']
     : ['aufgaben', 'extra', 'regeln'];
 
   tabs.forEach(t => {
@@ -191,6 +191,14 @@ function switchAreaTab(area, tab) {
   if (tab === 'extra')       renderExtraPanel(area);
   if (tab === 'zehn')        renderZehnPanel();
   if (tab === 'satzglieder') renderSatzgliederPanel();
+  if (tab === 'schreibplan') {
+    setTimeout(function () {
+      if (typeof window._initMsaSchreibplan === 'function') {
+        var grid = document.getElementById('msa-schreibplan-grid');
+        if (grid && !grid.children.length) window._initMsaSchreibplan();
+      }
+    }, 50);
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -384,7 +392,6 @@ function renderQ() {
   else if (cur.type === 'fill')                                   renderFill(cur);
   else if (cur.type === 'komma')                                  renderKomma(cur);
   else if (cur.type === 'satzglied')                              renderSatzglied(cur);
-  else if (cur.type === 'wortart')                                renderWortart(cur);
   else if (cur.type === 'tap')                                    renderTap(cur);
   else if (NEW_TYPES.includes(cur.type) && cur.type !== 'komma') renderWortklick(cur);
   else                                                            renderText(cur);
@@ -911,10 +918,21 @@ function renderWortklick(q) {
   const aw = el('ans-wrap'); if (!aw) return;
   aw.innerHTML = '';
 
+  // Aufgabentext anzeigen (wird in renderQ für NEW_TYPES ausgeblendet)
+  const qp = document.createElement('p');
+  qp.style.cssText = 'font-size:.93rem;margin-bottom:12px;font-weight:600;white-space:pre-line;';
+  // Nur den Aufgabenteil vor dem Satz anzeigen (vor dem \n\n)
+  const qParts = (q.q || '').split('\n\n');
+  qp.textContent = qParts[0] || q.q || '';
+  aw.appendChild(qp);
+
+  // Satz: entweder explizites sentence-Feld oder aus q nach \n\n extrahieren
+  const sentenceText = q.sentence || (qParts.length > 1 ? qParts.slice(1).join('\n\n').trim() : '');
+
   const sentenceEl = document.createElement('div');
   sentenceEl.style.cssText = 'font-size:1rem;line-height:2;margin-bottom:14px;word-break:break-word;';
 
-  const tokens    = (q.sentence || '').split(/(\s+)/);
+  const tokens    = sentenceText.split(/(\s+)/);
   let wordIndex   = 0;
 
   tokens.forEach(tok => {
@@ -984,10 +1002,12 @@ function onWortClick(span, q) {
   const errorWord  = q.errorWord || '';
   let isCorrect    = false;
 
+  // Einfaches Wort: direkt vergleichen
   if (stripPunct(clicked).toLowerCase() === stripPunct(errorWord).toLowerCase()) {
     isCorrect = true;
   }
 
+  // Mehrwortiger Fehler: prüfen ob ab diesem Token die Fehlerphrase beginnt
   if (!isCorrect && errorWord.includes(' ')) {
     const parent      = span.parentNode;
     const spans       = Array.from(parent.querySelectorAll('.wort-btn'));
@@ -997,6 +1017,28 @@ function onWortClick(span, q) {
       spans[idx + i] && stripPunct(spans[idx + i].getAttribute('data-token')).toLowerCase() === stripPunct(et).toLowerCase()
     );
     if (match) isCorrect = true;
+  }
+
+  // Mehrwortiger Fehler: Nutzer klickt auf ein beliebiges Token der Fehlerphrase
+  // (z.B. auf „bekannte" statt auf „alt" bei errorWord „alt bekannte")
+  if (!isCorrect && errorWord.includes(' ')) {
+    const parent      = span.parentNode;
+    const spans       = Array.from(parent.querySelectorAll('.wort-btn'));
+    const clickedIdx  = parseInt(span.getAttribute('data-idx'));
+    const errorTokens = errorWord.split(/\s+/);
+
+    for (let offset = 1; offset < errorTokens.length; offset++) {
+      const startIdx = clickedIdx - offset;
+      if (startIdx < 0) break;
+      const match = errorTokens.every((et, i) =>
+        spans[startIdx + i] && stripPunct(spans[startIdx + i].getAttribute('data-token')).toLowerCase() === stripPunct(et).toLowerCase()
+      );
+      if (match) {
+        errorTokens.forEach((et, j) => { if (spans[startIdx + j]) markWort(spans[startIdx + j], true); });
+        showTippfeld(q, true);
+        return;
+      }
+    }
   }
 
   if (isCorrect) {
@@ -1057,7 +1099,9 @@ function checkWortklick(q) {
   const normalize = s => s.trim().toLowerCase()
     .replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss');
   const v = normalize(val);
-  const ok = accepted.some(a => { const an = normalize(a); return v === an || an.includes(v) || v.includes(an); });
+  // Exakter Vergleich nach Normalisierung; kein includes() mehr, da das zu liberal ist
+  // (z.B. würde "a" in "altbekannte" passen)
+  const ok = accepted.some(a => normalize(a) === v);
 
   inp.style.background  = ok ? '#edfaf4' : '#fdf0f0';
   inp.style.borderColor = ok ? 'var(--green)' : 'var(--red)';
@@ -1291,223 +1335,6 @@ function renderTap(q) {
   setHint('Richtiges Satzglied antippen → sofort Rückmeldung');
 }
 
-/* ── WORTART ─────────────────────────────────────────────────── */
-/*
- * Wortart-Aufgabe: Alle Tokens des Satzes sind anklickbar.
- * Klick auf ein Wort → Dropdown mit Wortarten → sofortiges Feedback.
- * Satzzeichen (correct === "-") werden nicht bewertet.
- *
- * Datenformat:
- *   sentence : "Der alte Mann liest heute ein Buch."
- *   options  : ["Nomen","Verb","Adjektiv","Artikel","Pronomen",
- *               "Numerale","Adverb","Präposition","Konjunktion","Interjektion"]
- *   correct  : { "Der":"Artikel", "alte":"Adjektiv", ..., ".":"-" }
- */
-function renderWortart(q) {
-  const aw = el('ans-wrap'); if (!aw) return;
-  aw.innerHTML = '';
-
-  const hint = document.createElement('p');
-  hint.style.cssText = 'font-size:.83rem;opacity:.6;margin-bottom:12px;';
-  hint.textContent = 'Klicke auf ein Wort → Wortart wählen → sofortiges Feedback.';
-  aw.appendChild(hint);
-
-  const scoreEl = document.createElement('div');
-  scoreEl.id = 'wortart-score';
-  scoreEl.style.cssText = 'font-size:.82rem;opacity:.6;margin-bottom:8px;text-align:right;';
-
-  const sentBox = document.createElement('div');
-  sentBox.id = 'wortart-sent';
-  sentBox.style.cssText = [
-    'font-size:1.05rem','line-height:2.8','word-break:break-word',
-    'background:#f7f9fc','border:1.5px solid var(--border)',
-    'border-radius:10px','padding:12px 16px','margin-bottom:14px',
-  ].join(';');
-
-  const tokens = (q.sentence || '').split(/(\s+)/);
-  let totalRatable = 0;
-  let ratedCorrect = 0;
-  let ratedWrong   = 0;
-
-  function updateScore() {
-    scoreEl.textContent = ratedCorrect + ' richtig · ' + ratedWrong + ' falsch';
-    const remaining = sentBox.querySelectorAll('[data-rated="false"]').length;
-    const ob = el('btn-ok');
-    if (ob) ob.disabled = remaining > 0;
-  }
-
-  function closeAllDropdowns() {
-    sentBox.querySelectorAll('.wortart-dd').forEach(function(d) { d.remove(); });
-  }
-
-  tokens.forEach(function(tok) {
-    if (/^\s+$/.test(tok)) {
-      sentBox.appendChild(document.createTextNode(tok));
-      return;
-    }
-
-    // Korrekte Wortart ermitteln – auch bei Tokens mit Satzzeichen am Ende
-    var correctVal = (q.correct || {})[tok];
-    if (!correctVal) {
-      var stripped = tok.replace(/[,!?.]$/, '');
-      correctVal = (q.correct || {})[stripped];
-    }
-    var isRatable = correctVal && correctVal !== '-';
-    if (isRatable) totalRatable++;
-
-    var span = document.createElement('span');
-    span.textContent = tok;
-    span.setAttribute('data-token', tok);
-    span.setAttribute('data-correct', correctVal || '-');
-    span.setAttribute('data-rated', isRatable ? 'false' : 'skip');
-    span.style.cssText = [
-      'display:inline-block',
-      'cursor:' + (isRatable ? 'pointer' : 'default'),
-      'padding:3px 7px','border-radius:7px',
-      'border:1.5px solid ' + (isRatable ? 'var(--border)' : 'transparent'),
-      'margin:0 1px','transition:background .15s, border-color .15s',
-      'position:relative','vertical-align:middle',
-    ].join(';');
-
-    if (!isRatable) {
-      span.style.opacity = '.4';
-      sentBox.appendChild(span);
-      return;
-    }
-
-    span.addEventListener('mouseenter', function() {
-      if (this.getAttribute('data-rated') === 'false') {
-        this.style.background  = '#eef4ff';
-        this.style.borderColor = 'var(--blue)';
-      }
-    });
-    span.addEventListener('mouseleave', function() {
-      if (this.getAttribute('data-rated') === 'false') {
-        this.style.background  = '';
-        this.style.borderColor = 'var(--border)';
-      }
-    });
-
-    span.addEventListener('click', function(e) {
-      e.stopPropagation();
-      if (AppState.quiz.answered) return;
-      if (this.getAttribute('data-rated') !== 'false') return;
-
-      // Bereits offenes Dropdown auf diesem Span → schließen und abbrechen
-      if (this.querySelector('.wortart-dd')) {
-        closeAllDropdowns();
-        return;
-      }
-      closeAllDropdowns();
-
-      var tokenSpan = this;
-      var dd = document.createElement('select');
-      dd.className = 'wortart-dd';
-      dd.size = (q.options || []).length + 1; // Listbox statt Klapp-Menü → kein Auto-Close
-      dd.style.cssText = [
-        'position:absolute','top:110%','left:50%',
-        'transform:translateX(-50%)',
-        'z-index:999','font-size:.85rem',
-        'border-radius:8px','border:2px solid var(--blue)',
-        'background:#fff','color:var(--ink)',
-        'box-shadow:0 6px 24px rgba(0,0,0,.15)',
-        'min-width:180px','cursor:pointer',
-        'outline:none',
-      ].join(';');
-
-      (q.options || []).forEach(function(opt) {
-        var o = document.createElement('option');
-        o.value = opt; o.textContent = opt;
-        o.style.cssText = 'padding:5px 10px;font-size:.85rem;';
-        dd.appendChild(o);
-      });
-
-      // Auswahl per Klick auf eine Option
-      dd.addEventListener('change', function(ev) {
-        ev.stopPropagation();
-        var chosen  = this.value;
-        var correct = tokenSpan.getAttribute('data-correct');
-        var ok2     = chosen === correct;
-
-        tokenSpan.setAttribute('data-rated', ok2 ? 'correct' : 'wrong');
-        tokenSpan.style.background  = ok2 ? '#d4f7e8' : '#fde8e8';
-        tokenSpan.style.borderColor = ok2 ? 'var(--green)' : 'var(--red)';
-        tokenSpan.style.cursor      = 'default';
-
-        var old = tokenSpan.querySelector('.wortart-label');
-        if (old) old.remove();
-        var label = document.createElement('span');
-        label.className = 'wortart-label';
-        label.style.cssText = [
-          'display:block','font-size:.63rem','font-weight:700',
-          'margin-top:1px','text-align:center','white-space:nowrap',
-          'color:' + (ok2 ? 'var(--green)' : 'var(--red)'),
-        ].join(';');
-        label.textContent = ok2 ? ('✓ ' + chosen) : ('✗ ' + correct);
-        tokenSpan.appendChild(label);
-
-        if (ok2) ratedCorrect++; else ratedWrong++;
-        closeAllDropdowns();
-        updateScore();
-      });
-
-      // Klick außerhalb des Dropdowns schließt es
-      dd.addEventListener('click', function(ev) { ev.stopPropagation(); });
-
-      tokenSpan.appendChild(dd);
-      dd.focus();
-    });
-
-    sentBox.appendChild(span);
-  });
-
-  // Klick irgendwo im sentBox außerhalb eines Spans schließt offene Dropdowns
-  sentBox.addEventListener('click', function() { closeAllDropdowns(); });
-
-  aw.appendChild(scoreEl);
-  aw.appendChild(sentBox);
-  updateScore();
-
-  var ok = el('btn-ok');
-  if (ok) { ok.style.display = ''; ok.disabled = totalRatable > 0; }
-  setHint('Wort anklicken → Wortart wählen → sofortiges Feedback · dann Bestätigen');
-}
-
-function checkWortart(q) {
-  var sentBox = document.getElementById('wortart-sent');
-  var allCorrect = true;
-
-  if (sentBox) {
-    sentBox.querySelectorAll('.wortart-dd').forEach(function(d) { d.remove(); });
-    sentBox.querySelectorAll('[data-rated]').forEach(function(span) {
-      var correctVal = span.getAttribute('data-correct');
-      var rated      = span.getAttribute('data-rated');
-      if (!correctVal || correctVal === '-' || rated === 'skip') return;
-
-      if (rated === 'wrong') {
-        allCorrect = false;
-      } else if (rated === 'false') {
-        allCorrect = false;
-        span.style.background  = '#fde8e8';
-        span.style.borderColor = 'var(--red)';
-        span.setAttribute('data-rated', 'auto-wrong');
-        var old = span.querySelector('.wortart-label');
-        if (old) old.remove();
-        var label = document.createElement('span');
-        label.className = 'wortart-label';
-        label.style.cssText = [
-          'display:block','font-size:.63rem','font-weight:700',
-          'margin-top:1px','text-align:center','white-space:nowrap',
-          'color:var(--green)',
-        ].join(';');
-        label.textContent = '→ ' + correctVal;
-        span.appendChild(label);
-      }
-    });
-  }
-  return allCorrect;
-}
-
 /* ── KOMMA ───────────────────────────────────────────────────── */
 /*
  * Komma-Aufgabe: Der Nutzer tippt Kommas in einen editierbaren Satz.
@@ -1571,6 +1398,11 @@ function renderKomma(q) {
 function _normKomma(s) {
   return s
     .trim()
+    // Alle typografischen Anführungszeichen auf neutrale Form normieren,
+    // damit Browser-contentEditable-Varianten mit den Daten übereinstimmen
+    .replace(/[„""‟]/g, '"')
+    .replace(/[‚''‛]/g, "'")
+    .replace(/[«»]/g, '"')
     .replace(/\s+/g, ' ')           // mehrfache Spaces → einen
     .replace(/\s*,\s*/g, ', ')      // Spaces um Komma normieren: ", "
     .replace(/,\s+/g, ', ')         // doppelte Spaces nach Komma
@@ -1627,14 +1459,6 @@ function doConfirm() {
     const ok2 = checkSatzglied(cur);
     flash(ok2); showFB(ok2, cur);
     q.answers.push({ ok: ok2, q: cur.sub || cur.q });
-    hideActRow(); showNext(); return;
-  }
-
-  if (cur.type === 'wortart') {
-    q.answered = true;
-    const ok2 = checkWortart(cur);
-    flash(ok2); showFB(ok2, cur);
-    q.answers.push({ ok: ok2, q: cur.sentence || cur.sub });
     hideActRow(); showNext(); return;
   }
 
